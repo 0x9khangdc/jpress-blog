@@ -1,87 +1,88 @@
-#@layout()
-
-#define css()
-<link rel="stylesheet" href="#(CPATH)/static/components/jquery-file-upload/css/jquery.fileupload.css">
+#@layout() #define css()
+<link
+  rel="stylesheet"
+  href="#(CPATH)/static/components/jquery-file-upload/css/jquery.fileupload.css"
+/>
 <style>
-    #uploader {
-        height: 230px;
-    }
+  #uploader {
+    height: 230px;
+  }
 
-    .myPanel {
-        font-size: 25px;
-        color: #ccc;
-        text-align: center;
-        padding-top: 60px;
-    }
-
+  .myPanel {
+    font-size: 25px;
+    color: #ccc;
+    text-align: center;
+    padding-top: 60px;
+  }
 </style>
-#end
-
-#define script()
+#end #define script()
 <script src="#(CPATH)/static/components/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
 <script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.fileupload.js"></script>
 <script>
-    $('#cfile').fileupload({
-        dropZone: $('#uploader'),
-        url: '#(CPATH)/admin/setting/tools/wordpress/doWordPressImport',
-        sequentialUploads: true,
-        done: function (e, data) {
-            if (data.result.state == "ok") {
-                toastr.success(" WordPress 导入成功成功，附件本地化需要点时间... ")
-            } else {
-                toastr.error(data.result.message)
-            }
-        }
-    });
+  $("#cfile").fileupload({
+    dropZone: $("#uploader"),
+    url: "#(CPATH)/admin/setting/tools/wordpress/doWordPressImport",
+    sequentialUploads: true,
+    done: function (e, data) {
+      if (data.result.state == "ok") {
+        toastr.success(
+          " WordPress is successfully imported, and the attachment localization takes some time ... "
+        );
+      } else {
+        toastr.error(data.result.message);
+      }
+    },
+  });
 </script>
-#end
+#end #define content()
 
-#define content()
-
-    <section class="content-header">
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-
-                    <div class="row mb-2">
-                        <div class="col-sm-12">
-                            <h1>
-                                WordPress导入
-                                <small data-toggle="tooltip" title="" data-placement="right"
-                                       data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
-                                <small> 首页 / 小工具箱 / WordPress导入</small>
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div><!-- /.container-fluid -->
-
-    </section>
-
-    <section class="content">
-
-        <div class="container-fluid">
-            <div class="card card-outline card-primary">
-                <div class="card-body">
-                    <div id="uploader">
-                            <span class="btn btn-block btn-primary fileinput-button" style="width: 220px">
-                                <i class="fas fa-plus"></i>
-                                <span>请选择导出的WordPress文件</span>
-                                <input id="cfile" type="file" name="files[]" multiple>
-                            </span>
-
-                        <div class="myPanel">
-                            支持WordPress文章和附件导入...
-                        </div>
-                    </div>
-                </div>
-            </div>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1>
+              Wordpress import
+              <small
+                data-toggle="tooltip"
+                title=""
+                data-placement="right"
+                data-trigger="hover"
+                ><i class="nav-icon far fa-question-circle"></i
+              ></small>
+              <small> front page / Small toolbox / Wordpress import</small>
+            </h1>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
 
-    </section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="card card-outline card-primary">
+      <div class="card-body">
+        <div id="uploader">
+          <span
+            class="btn btn-block btn-primary fileinput-button"
+            style="width: 220px"
+          >
+            <i class="fas fa-plus"></i>
+            <span>Please select the exported wordpress file</span>
+            <input id="cfile" type="file" name="files[]" multiple />
+          </span>
+
+          <div class="myPanel">
+            Support WordPress article and attachment import...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 #end

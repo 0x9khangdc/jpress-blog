@@ -16,7 +16,7 @@
         create: true,
         render: {
             option_create: function (data, escape) {
-                return '<div class="create" style="padding-left: 5px"> 添加标签：<strong style="color: #DD1144">' + escape(data.input) + '</strong></div>';
+                return '<div class="create" style="padding-left: 5px"> add tag:<strong style="color: #DD1144">' + escape(data.input) + '</strong></div>';
             }
         }
     });
@@ -40,7 +40,7 @@
     });
 
 
-    // 全局函数,在CKEditor ctrl + s 快捷键处用到,保留article的status
+    // Global function, at the CKEDITOR CTRL + S shortcut key, retain the Status of Article
     window.doSubmit = function (openPreview) {
         if (window.currentCKEditor) {
             $("#content").val(window.currentCKEditor.getData());
@@ -51,12 +51,12 @@
         ajaxSubmit("#form", function (data) {
             $("#articleId").attr("value", data.id);
             window.history.replaceState({}, '', `#(CPATH)/admin/article/write/` + data.id)
-            toastr.success('文章保存成功。')
+            toastr.success('The article is successfully preserved.')
 
-            //设置预览路劲
+            //Set preview road strength
             $("#preview").attr("href", "#(CPATH)/admin/preview?url=#(CPATH)/admin/article/preview/" + data.id);
 
-            //如果是通过预览按钮 来保存 那么打开预览窗口
+            //If it is saved by the preview button, then open the preview window
             if (openPreview === true) {
                 window.open("#(CPATH)/admin/preview?url=#(CPATH)/admin/article/preview/" + data.id);
             }
@@ -65,7 +65,7 @@
     };
 
 
-    //预览点击事件
+    //Preview Clicks
     function previewArticle($this) {
 
         if (!$this.href) {
@@ -77,7 +77,7 @@
     setSaveHotKeyFunction(doSubmit);
 
     /**
-     * 缩略图，移除图片的按钮功能
+     * Shining diagram, remove the picture button function
      */
     $("#removeThumbnail").on("click", function () {
         $("#thumbnail").attr("src", "#(CPATH)/static/commons/img/nothumbnail.jpg");
@@ -86,11 +86,11 @@
 
 
     /**
-     * 切换编辑器的按钮功能
+     * Switch the editor's button function
      * @param id
      */
     function doChangeEditor(id) {
-        if (confirm('确定要切换编辑器吗？切换可能出现前台渲染内容缺失的问题，且只对未发布文章有效')) {
+        if (confirm('Are you sure you want to switch the editor? Switching may occur in the problem of lack of content in the front desk, and it is only valid for not publishing articles')) {
             var changeMode = editMode == "html" ? "markdown" : "html";
             if (id && id !== '0') {
                 ajaxGet('#(CPATH)/admin/article/doChangeEditMode?id=' + id + "&mode=" + changeMode);
@@ -100,7 +100,7 @@
         }
     }
 
-    //通过编辑模式来决定初始化不同的编辑器
+    //Determine different editors by editing mode
     var editMode = "#(editMode ?? 'html')";
     if (editMode === 'html') {
         initCkEdtior('#editor');
@@ -113,12 +113,12 @@
         var $this = $(this);
         layer.open({
             type: 2,
-            title: '选择附件',
+            title: 'Select an attachment',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
             area: ['90%', '90%'],
-            content: jpress.cpath + '/admin/attachment/browse?uititle=附件',
+            content: jpress.cpath + '/admin/attachment/browse?uititle=appendix',
             end: function () {
                 if (layer.data.src != null) {
 
@@ -129,14 +129,14 @@
                         src.endsWith(".ts") || src.endsWith(".vob") || src.endsWith(".m3u8")) {
 
                         if (typeof currentCKEditor != 'undefined' && currentCKEditor) {
-                            var video = document.createElement('video') // 添加的内容可以自定义， 这里以添加图片为例
+                            var video = document.createElement('video') // The content added can be customized. Here is an additional picture as an example
                             video.setAttribute('src', src)
                             video.setAttribute('style', 'max-width:100%;')
                             video.setAttribute('controls', 'controls')
 
                             insertHtmlToEditor(video.outerHTML);
                         } else if (currentVditor) {
-                            currentVditor.insertValue('附件：[' + layer.data.title + '](' + src + ')')
+                            currentVditor.insertValue('appendix:[' + layer.data.title + '](' + src + ')')
                         }
 
 
@@ -147,7 +147,7 @@
                         || src.endsWith(".bmp") || src.endsWith(".gif") || src.endsWith(".webp")) {
 
                         if (typeof currentCKEditor != 'undefined' && currentCKEditor) {
-                            var img = document.createElement('img') // 添加的内容可以自定义， 这里以添加图片为例
+                            var img = document.createElement('img') // The content added can be customized. Here is an additional picture as an example
                             img.setAttribute('src', src)
                             insertHtmlToEditor(img.outerHTML);
                         } else if (currentVditor) {
@@ -158,13 +158,13 @@
                     // other file
                     else {
                         if (typeof currentCKEditor != 'undefined' && currentCKEditor) {
-                            var a = document.createElement('a') // 添加的内容可以自定义， 这里以添加图片为例
+                            var a = document.createElement('a') // The content added can be customized. Here is an additional picture as an example
                             a.setAttribute('href', src)
                             a.setAttribute("target", "_blank")
                             a.innerHTML = layer.data.title;
-                            insertHtmlToEditor('附件：' + a.outerHTML);
+                            insertHtmlToEditor('appendix:' + a.outerHTML);
                         } else if (currentVditor) {
-                            currentVditor.insertValue('附件：[' + layer.data.title + '](' + src + ')')
+                            currentVditor.insertValue('appendix:[' + layer.data.title + '](' + src + ')')
                         }
                     }
                 }
@@ -204,12 +204,12 @@
         var $this = $(this);
         layer.open({
             type: 2,
-            title: '选择视频',
+            title: 'Choose a video',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
             area: ['90%', '90%'],
-            content: jpress.cpath + '/admin/attachment/video/browse?uititle=视频',
+            content: jpress.cpath + '/admin/attachment/video/browse?uititle=video',
             end: function () {
 
                 if (layer.data.uid != null) {
@@ -233,7 +233,7 @@
                         insertHtmlToEditor(video.outerHTML);
 
                     } else if (currentVditor) {
-                        alert("此编辑器暂不支持插入视频！")
+                        alert("This editor does not support inserting videos for the time being!")
                     }
                 }
             }
@@ -248,7 +248,7 @@
 
         layer.open({
             type: 2,
-            title: '选择表单',
+            title: 'Select form',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
@@ -262,12 +262,12 @@
 
                     var formName = layer.data.name;
 
-                    let html = '<div><div class="jpress-form-card" contenteditable="false" data-form-id=' + formUUID + '>' + formName + '（表单）</div></div><br />'
+                    let html = '<div><div class="jpress-form-card" contenteditable="false" data-form-id=' + formUUID + '>' + formName + '(Form)</div></div><br />'
 
                     insertHtmlToEditor(html);
 
                 } else  {
-                    alert("请检查表单")
+                    alert("Please check the form")
                 }
 
             }

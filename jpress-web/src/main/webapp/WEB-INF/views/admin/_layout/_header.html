@@ -1,68 +1,87 @@
 <nav class="main-header navbar navbar-expand navbar-dark navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link d-flex align-items-center" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a
+        class="nav-link d-flex align-items-center"
+        data-widget="pushmenu"
+        href="#"
+        role="button"
+        ><i class="fas fa-bars"></i
+      ></a>
+    </li>
 
-        #@navbarItems?()
+    #@navbarItems?()
+  </ul>
 
+  <!-- Right navbar links -->
+  <ul class="navbar-nav ml-auto">
+    #if(SITES && SITES.size() > 0)
+    <!-- Site Information -->
+    <li class="nav-item dropdown">
+      <button
+        class="btn btn-sm btn-secondary dropdown-toggle"
+        style="background: #464c52"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Current site: #(SITE.name ?? 'Main site')
+      </button>
+      <div
+        class="dropdown-menu"
+        style="margin-top: 8px"
+        aria-labelledby="dropdownMenuButton"
+      >
+        #if(SITE ??)
+        <a class="dropdown-item" href="#(CPATH)/admin/site/change?id=0"
+          >Main site</a
+        >
+        #end #for(site : SITES) #if(site != SITE)
+        <a
+          class="dropdown-item"
+          href="#(CPATH)/admin/site/change?id=#(site.id ??)"
+          >#(site.name ??)</a
+        >
+        #end #end
+      </div>
+    </li>
+    #end
 
+    <!-- 头像信息 -->
+    <li class="nav-item dropdown">
+      <a
+        class="nav-link"
+        data-toggle="dropdown"
+        href="javascript:;"
+        style="display: flex; align-items: center"
+      >
+        <img
+          src="#(USER.avatar ??)"
+          class="img-circle"
+          style="width: 30px; height: 30px"
+        />
+        <i class="fas fa-caret-down"></i>
+      </a>
 
-    </ul>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a href="#(CPATH)/ucenter/index" class="dropdown-item" target="_blank">
+          <i class="fas fa-home"></i> User center
+        </a>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+        <div class="dropdown-divider"></div>
+        <a href="#(CPATH)/admin/user/me" class="dropdown-item">
+          <i class="fas fa-user"></i> My Profile
+        </a>
 
-        #if(SITES && SITES.size() > 0)
-        <!-- 站点信息 -->
-        <li class="nav-item dropdown">
-            <button class="btn btn-sm btn-secondary dropdown-toggle" style="background: #464c52" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                当前站点：#(SITE.name ?? '主站点')
-            </button>
-            <div class="dropdown-menu" style="margin-top: 8px" aria-labelledby="dropdownMenuButton">
-                #if(SITE ??)
-                <a class="dropdown-item" href="#(CPATH)/admin/site/change?id=0">主站点</a>
-                #end
-                #for(site : SITES)
-                    #if(site != SITE)
-                    <a class="dropdown-item" href="#(CPATH)/admin/site/change?id=#(site.id ??)">#(site.name ??)</a>
-                    #end
-                #end
-            </div>
-        </li>
-        #end
-
-        <!-- 头像信息 -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="javascript:;" style="display: flex;align-items: center">
-                <img src="#(USER.avatar ??)" class="img-circle" style="width: 30px;height:30px;">
-                <i class="fas fa-caret-down"></i>
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-right">
-
-                <a href="#(CPATH)/ucenter/index" class="dropdown-item" target="_blank">
-                    <i class="fas fa-home"></i> 用户中心
-                </a>
-
-                <div class="dropdown-divider"></div>
-                <a href="#(CPATH)/admin/user/me" class="dropdown-item">
-                     <i class="fas fa-user"></i>  我的资料
-                </a>
-
-                <div class="dropdown-divider"></div>
-                <a href="#(CPATH)/admin/logout" class="dropdown-item">
-                    <i class="fas fa-sign-out-alt"></i> 退出登录
-                </a>
-
-            </div>
-        </li>
-        <!-- 头像信息结束 -->
-
-
-
-
-    </ul>
+        <div class="dropdown-divider"></div>
+        <a href="#(CPATH)/admin/logout" class="dropdown-item">
+          <i class="fas fa-sign-out-alt"></i> sign out
+        </a>
+      </div>
+    </li>
+    <!-- 头像信息结束 -->
+  </ul>
 </nav>
 <!-- /.navbar -->

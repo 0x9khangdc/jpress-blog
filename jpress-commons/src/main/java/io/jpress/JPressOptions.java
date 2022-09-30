@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author Michael Yang 杨福海 （fuhai999@gmail.com）
- * @Title: JPress 配置
+ * @author Michael Yang （fuhai999@gmail.com）
+ * @Title: JPress Configuration
  */
 public class JPressOptions {
 
@@ -209,22 +209,22 @@ public class JPressOptions {
             indexStyleValue = value;
         }
 
-        //伪静态的是否启用
+        //Whether the pseudo-static ones are enabled
         else if (JPressConsts.OPTION_WEB_FAKE_STATIC_ENABLE.equals(key)) {
             fakeStaticEnable = "true".equalsIgnoreCase(value);
         }
 
-        //伪静态后缀
+        //Pseudo-static
         else if (JPressConsts.OPTION_WEB_FAKE_STATIC_SUFFIX.equals(key)) {
             fakeStaticSuffix = StrUtil.defaultIfBlank(value, ".html");
         }
 
-        //是否启用扁平化的URL
+        //Whether the flat URL is enabled
         else if (JPressConsts.OPTION_WEB_FLAT_URL_ENABLE.equals(key)) {
             flatUrlEnable = "true".equalsIgnoreCase(value);
         }
 
-        //是否开启模板预览功能
+        //Whether to open the template preview function
         else if (JPressConsts.OPTION_WEB_TEMPLATE_PREVIEW_ENABLE.equals(key)) {
             templatePreviewEnable = "true".equalsIgnoreCase(value);
         }

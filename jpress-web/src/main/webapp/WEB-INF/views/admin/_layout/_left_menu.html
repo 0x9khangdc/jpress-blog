@@ -1,86 +1,76 @@
 <aside class="main-sidebar sidebar-dark-primary">
-    <!-- Brand Logo -->
-    <a href="#(CPATH)/" target="_blank" class="brand-link">
-        <img src="#(CPATH)/static/commons/img/logo.png" class="brand-image" style="opacity: .8">
-        <span class="brand-text font-weight-light">JPress</span>
-    </a>
+  <!-- Brand Logo -->
+  <a href="#(CPATH)/" target="_blank" class="brand-link">
+    <img
+      src="#(CPATH)/static/commons/img/logo.png"
+      class="brand-image"
+      style="opacity: 0.8"
+    />
+    <span class="brand-text font-weight-light">JPress</span>
+  </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    #@leftMenuTopPanel?()
 
-        #@leftMenuTopPanel?()
+    <nav class="mt-2" style="padding: 10px 0">
+      <ul
+        class="nav nav-pills nav-sidebar flex-column nav-legacy text-sm"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false"
+        id="sidebar-menu"
+      >
+        <li class="nav-item" id="dashboard">
+          <a href="#(CPATH)/admin/index" class="nav-link">
+            <i class="fas fa-tachometer-alt"></i>
+            <p>panel</p>
+          </a>
+        </li>
 
-        <nav class="mt-2" style="padding: 10px 0">
-            <ul class="nav nav-pills nav-sidebar flex-column nav-legacy text-sm" data-widget="treeview" role="menu"
-                data-accordion="false" id="sidebar-menu">
+        #for(group : moduleMenuGroups) #hasPermission(group.permission)
+        <li class="nav-item" id="group-#(group.id ??)">
+          <a href="#" class="nav-link">
+            #(group.icon ??'<i class="fas fa-tachometer-alt"></i>')
+            <p>#(group.text ??)<i class="right fas fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            #for(item : group.items) #hasPermission(item.permission)
+            <li class="nav-item" id="#(item.id ??)">
+              <a href="#(item.url ??)" class="nav-link">
+                <i class="far fa-circle"></i>
+                <p>#(item.text ??)</p>
+              </a>
+            </li>
+            #end #end
+          </ul>
+        </li>
+        #end #end
 
-                <li class="nav-item" id="dashboard">
-                    <a href="#(CPATH)/admin/index" class="nav-link">
-                        <i class="fas fa-tachometer-alt"></i><p>面板</p>
-                    </a>
-                </li>
+        <li class="nav-header">System Management</li>
 
-
-                #for(group : moduleMenuGroups)
-                #hasPermission(group.permission)
-                <li class="nav-item" id="group-#(group.id ??)">
-                <a href="#" class="nav-link">
-                    #(group.icon ??'<i class="fas fa-tachometer-alt"></i>')<p>#(group.text ??)<i class="right fas fa-angle-left"></i></p>
-                </a>
-                <ul class="nav nav-treeview">
-                    #for(item : group.items)
-                    #hasPermission(item.permission)
-                    <li class="nav-item" id="#(item.id ??)">
-                        <a href="#(item.url ??)" class="nav-link">
-                            <i class="far fa-circle"></i>
-                            <p> #(item.text ??)</p>
-                        </a>
-                    </li>
-                    #end
-                    #end
-                </ul>
-                </li>
-                #end
-                #end
-
-
-
-
-
-                <li class="nav-header">系统管理</li>
-
-
-                #for(group : systemMenuGroups)
-                #hasPermission(group.permission)
-                <li class="nav-item" id="group-#(group.id ??)">
-                <a href="#" class="nav-link">
-                    #(group.icon ??'<i class="fas fa-tachometer-alt"></i>')<p>#(group.text ??)<i class="right fas fa-angle-left"></i></p>
-                </a>
-                <ul class="nav nav-treeview">
-                    #for(item : group.items)
-                    #hasPermission(item.permission)
-                    <li class="nav-item" id="#(item.id ??)">
-                        <a href="#(item.url ??)" class="nav-link">
-                            <i class="far fa-circle"></i>
-                            <p> #(item.text ??)</p>
-                        </a>
-                    </li>
-                    #end
-                    #end
-                </ul>
-                </li>
-                #end
-                #end
-
-
-
-
-                #@leftBottomMenus?()
-
-            </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
+        #for(group : systemMenuGroups) #hasPermission(group.permission)
+        <li class="nav-item" id="group-#(group.id ??)">
+          <a href="#" class="nav-link">
+            #(group.icon ??'<i class="fas fa-tachometer-alt"></i>')
+            <p>#(group.text ??)<i class="right fas fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            #for(item : group.items) #hasPermission(item.permission)
+            <li class="nav-item" id="#(item.id ??)">
+              <a href="#(item.url ??)" class="nav-link">
+                <i class="far fa-circle"></i>
+                <p>#(item.text ??)</p>
+              </a>
+            </li>
+            #end #end
+          </ul>
+        </li>
+        #end #end #@leftBottomMenus?()
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
 </aside>
 <!-- ./ sidebar -->

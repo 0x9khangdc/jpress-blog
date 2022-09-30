@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ public class WordFilterUtil {
     private static DFAFilter dynamicFilter;
 
     /**
-     * 需要在 App 启动的时候调用 init 进行初始化，方可使用
+     * You need to call in init for initialization when the app startup can be used to use
      */
     public static void init() {
         File sysSensitiveWordsFile = new File(PathKit.getWebRootPath(), "WEB-INF/other/sys_sensitive_words.txt");

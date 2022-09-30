@@ -2,13 +2,13 @@
 # ----------------------------------------------------------------------
 # name:         jpress.sh
 # version:      1.0
-# description:  JPress 控制脚本
+# description:  JPress Control script
 # author:       yangfuhai
 # email:        fuhai999@gmail.com
 # use : ./jpress.sh {start, stop, restart}
 # ----------------------------------------------------------------------
 
-# 启动入口类，该脚本文件用于别的项目时要改这里
+# Start the entrance class, the script file is used for other items to be changed here
 MAIN_CLASS=io.jboot.app.JbootApplication
 COMMAND="$1"
 
@@ -17,11 +17,11 @@ if [[ "$COMMAND" != "start" ]] && [[ "$COMMAND" != "stop" ]] && [[ "$COMMAND" !=
 	exit 0
 fi
 
-# Java 命令行参数，根据需要开启下面的配置，改成自己需要的，注意等号前后不能有空格
+# Java The command line parameters, open the following configuration as need
 # JAVA_OPTS="-Xms256m -Xmx1024m -Dundertow.port=80 -Dundertow.host=0.0.0.0"
 # JAVA_OPTS="-Dundertow.port=8080 -Dundertow.host=0.0.0.0"
 
-# 生成 class path 值
+# generate class path value
 APP_BASE_PATH=$(cd `dirname $0`; pwd)
 CP=${APP_BASE_PATH}/config:${APP_BASE_PATH}/lib/*
 

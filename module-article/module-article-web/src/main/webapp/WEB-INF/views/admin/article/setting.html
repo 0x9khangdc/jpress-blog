@@ -20,10 +20,10 @@
                 <div class="row mb-2">
                     <div class="col-sm-12">
                         <h1>
-                            文章设置
+                            Article settings
                             <small data-toggle="tooltip" title="" data-placement="right"
                                    data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
-                            <small> 首页 / 文章 / 文章设置</small>
+                            <small> front page / article / Article settings</small>
                         </h1>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="card-body">
 
 
-                    <h4 class="form-header">评论功能</h4>
+                    <h4 class="form-header">Comment function</h4>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-6">
@@ -50,104 +50,104 @@
                                 <input type="checkbox" class="switchery" data-for="article_comment_enable"
                                        #checkedIf(option("article_comment_enable","true"))>
                                 <input type="hidden" id="article_comment_enable" name="article_comment_enable">
-                                开启评论功能
+                                Open the comment function
                             </div>
                             <div class="switchery-item">
                                 <input type="checkbox" class="switchery"
                                        data-for="article_comment_unlogin_enable" #checkedIf(option("article_comment_unlogin_enable"))>
                                 <input type="hidden" id="article_comment_unlogin_enable"
-                                       name="article_comment_unlogin_enable"> 允许未登录用户发表评论
+                                       name="article_comment_unlogin_enable"> Allowing unless login users to publish comments
                             </div>
                             <div class="switchery-item">
                                 <input type="checkbox" class="switchery"
                                        data-for="article_comment_review_enable" #checkedIf(option("article_comment_review_enable"))>
                                 <input type="hidden" id="article_comment_review_enable"
-                                       name="article_comment_review_enable"> 评论必须经过管理员审核
+                                       name="article_comment_review_enable"> Comments must be reviewed by administrator
                             </div>
                             <div class="switchery-item">
                                 <input type="checkbox" class="switchery" data-for="article_comment_vcode_enable"
                                        #checkedIf(option("article_comment_vcode_enable","true"))>
                                 <input type="hidden" id="article_comment_vcode_enable"
-                                       name="article_comment_vcode_enable"> 启用评论验证码功能
+                                       name="article_comment_vcode_enable"> Enable review verification code function
                             </div>
                         </div>
                     </div>
 
 
-                    <h4 class="form-header">评论邮件通知管理员</h4>
+                    <h4 class="form-header">Comment email notification administrator</h4>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">启用</label>
+                        <label class="col-sm-2 col-form-label">Open up</label>
                         <div class="col-sm-6">
                             <input type="checkbox" class="switchery"
                                    data-for="article_comment_email_notify_enable"
                                    #checkedIf(option("article_comment_email_notify_enable"))>
                             <input type="hidden" id="article_comment_email_notify_enable"
                                    name="article_comment_email_notify_enable">
-                            <p class="text-muted"> 请先在 <a href="#(CPATH)/admin/setting">[常规设置]</a> 开填写管理员邮箱。
+                            <p class="text-muted"> Please first <a href="#(CPATH)/admin/setting">[Conventional settings]</a> Fill in the administrator mailbox.
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">邮件标题</label>
+                        <label class="col-sm-2 col-form-label">mail title</label>
                         <div class="col-sm-6">
                             <input type="input" class="form-control"
-                                   placeholder="例如：你的文章#('#(article.title ??)')中有人发布评论啦~~~"
+                                   placeholder="For example: your article#('#(article.title ??)')Someone published a comment~~~"
                                    name="article_comment_email_notify_title"
                                    value="#option('article_comment_email_notify_title')">
-                            <p class="text-muted">文章标题占位符：#('#(article.title ??)')</p>
+                            <p class="text-muted">Article title occupies:#('#(article.title ??)')</p>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">邮件内容</label>
+                        <label class="col-sm-2 col-form-label">content of email</label>
                         <div class="col-sm-6">
                                     <textarea rows="3" class="form-control"
-                                              placeholder="例如：文章的评论内容是：#('#(comment.content)')"
+                                              placeholder="For example: The content of the article is:#('#(comment.content)')"
                                               name="article_comment_email_notify_template">#option('article_comment_email_notify_template')</textarea>
                             <p class="text-muted">
-                                请先在 <a href="#(CPATH)/admin/setting/connection">[通信]</a> 开启邮件功能后才能使用。
-                                评论内容：#('#(comment.content ??)')
+                                Please first <a href="#(CPATH)/admin/setting/connection">[communication]</a> It can only be used after opening the mail function.
+                                comments:#('#(comment.content ??)')
                             </p>
                         </div>
                     </div>
 
 
-                    <h4 class="form-header">评论短信通知管理员</h4>
+                    <h4 class="form-header">Comment SMS notification administrator</h4>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">启用</label>
+                        <label class="col-sm-2 col-form-label">Open up</label>
                         <div class="col-sm-6">
                             <input type="checkbox" class="switchery"
                                    data-for="article_comment_sms_notify_enable"
                                    #checkedIf(option("article_comment_sms_notify_enable"))>
                             <input type="hidden" id="article_comment_sms_notify_enable"
                                    name="article_comment_sms_notify_enable">
-                            <p class="text-muted"> 请先在 <a href="#(CPATH)/admin/setting">[常规设置]</a> 开填写管理员的手机号。
+                            <p class="text-muted"> Please first <a href="#(CPATH)/admin/setting">[Conventional settings]</a> Fill in the administrator's mobile phone number.
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">通知短信模板</label>
+                        <label class="col-sm-2 col-form-label">Notification SMS template</label>
                         <div class="col-sm-6">
                                     <textarea rows="2" class="form-control" placeholder="..."
                                               name="article_comment_sms_notify_template">#option('article_comment_sms_notify_template')</textarea>
-                            <p class="text-muted"> 请先在 <a href="#(CPATH)/admin/setting/connection">[通信]</a>
-                                开启短信功能，这里填写阿里云或腾讯云的短信模板ID，该短信模板不能带有任何参数。
+                            <p class="text-muted"> Please first <a href="#(CPATH)/admin/setting/connection">[communication]</a>
+                                Turn on the SMS function here. Fill in the SMS template ID of Alibaba Cloud or Tencent Cloud. The SMS template cannot have any parameters.
                             </p>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">短信签名</label>
+                        <label class="col-sm-2 col-form-label">SMS signature</label>
                         <div class="col-sm-6">
-                            <input type="input" class="form-control" placeholder="只有部分服务商需要短信签名"
+                            <input type="input" class="form-control" placeholder="Only some service providers need SMS signatures"
                                    name="article_comment_sms_notify_sign"
                                    value="#option('article_comment_sms_notify_sign')">
-                            <p class="text-muted"> 请填写阿里云或腾讯云的短信签名。</p>
+                            <p class="text-muted"> Please fill in the SMS signature of Alibaba Cloud or Tencent Cloud.</p>
                         </div>
                     </div>
 
 
-                    <h4 class="form-header">文章搜索功能</h4>
+                    <h4 class="form-header">Article search function</h4>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">启用</label>
+                        <label class="col-sm-2 col-form-label">Open up</label>
                         <div class="col-sm-6">
                             <input type="checkbox" class="switchery"
                                    data-for="article_search_enable"
@@ -157,107 +157,107 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">搜索引擎</label>
+                        <label class="col-sm-2 col-form-label">search engine</label>
                         <div class="col-sm-6">
                             <select class="form-control" name="article_search_engine">
                                 <option value="sql" #selectedIf(option(
-                                'article_search_engine') == 'sql')>默认（数据库SQL检索）</option>
+                                'article_search_engine') == 'sql')>Default (database SQL search)</option>
                                 <option value="lucene" #selectedIf(option(
                                 'article_search_engine') == 'lucene')>Lucene</option>
                                 <option value="es" #selectedIf(option(
                                 'article_search_engine') == 'es')>ElasticSearch</option>
                                 <option value="aliopensearch" #selectedIf(option(
-                                'article_search_engine') == 'aliopensearch')>阿里云OpenSearch</option>
+                                'article_search_engine') == 'aliopensearch')>Alibaba Cloud Opensearch</option>
                             </select>
-                            <p class="text-muted"> 注意：选择 ElasticSearch 或 OpenSearch 需要在下方填写对应的服务器配置。</p>
+                            <p class="text-muted">Note: Select Elasticsearch or Opensearch needs to fill in the corresponding server configuration below.</p>
                         </div>
                     </div>
 
-                    <h4 class="form-header">ElasticSearch 服务器配置</h4>
+                    <h4 class="form-header">ElasticSearch server configuration</h4>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">服务器地址</label>
+                        <label class="col-sm-2 col-form-label">server address</label>
                         <div class="col-sm-6">
-                            <input type="input" class="form-control" placeholder="请填写ElasticSearch的IP地址或域名"
+                            <input type="input" class="form-control" placeholder="Please fill in the IP address or domain name of Elasticsearch"
                                    name="article_search_es_host"
                                    value="#option('article_search_es_host')">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">服务器端口号</label>
+                        <label class="col-sm-2 col-form-label">Server port number</label>
                         <div class="col-sm-6">
-                            <input type="input" class="form-control" placeholder="以及端口号（默认值：9200）"
+                            <input type="input" class="form-control" placeholder="And the port number (default value: 9200)"
                                    name="article_search_es_port"
                                    value="#option('article_search_es_port')">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">认证账号</label>
+                        <label class="col-sm-2 col-form-label">Certification account</label>
                         <div class="col-sm-6">
-                            <input type="input" class="form-control" placeholder="ElasticSearch服务器的账号"
+                            <input type="input" class="form-control" placeholder="Elasticsearch server account"
                                    name="article_search_es_username"
                                    value="#option('article_search_es_username')">
-                            <p class="text-muted">若服务器不配置，不要填写任何内容。</p>
+                            <p class="text-muted">If the server is not configured, do not fill in any content.</p>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">密码</label>
+                        <label class="col-sm-2 col-form-label">password</label>
                         <div class="col-sm-6">
-                            <input type="input" class="form-control" placeholder="以及密码"
+                            <input type="input" class="form-control" placeholder="And password"
                                    name="article_search_es_password"
                                    value="#option('article_search_es_password')">
-                            <p class="text-muted">若服务器不配置，不要填写任何内容。</p>
+                            <p class="text-muted">If the server is not configured, do not fill in any content.</p>
                         </div>
                     </div>
 
 
-                    <h4 class="form-header">阿里云 OpenSearch 配置</h4>
+                    <h4 class="form-header">Alibaba Cloud Opensearch configuration</h4>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">accesskey</label>
                         <div class="col-sm-6">
-                            <input type="input" class="form-control" placeholder="您的阿里云的Access Key ID"
+                            <input type="input" class="form-control" placeholder="Your Alibaba Cloud's Access Key ID"
                                    name="article_search_aliopensearch_accesskey"
                                    value="#option('article_search_aliopensearch_accesskey')">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">密钥 Secret</label>
+                        <label class="col-sm-2 col-form-label">Key Secret</label>
                         <div class="col-sm-6">
                             <input type="input" class="form-control"
-                                   placeholder="阿里云 Access Key ID 对应的 Access Key Secret"
+                                   placeholder="Access Key Secret corresponding to Alibaba Cloud Access Key ID"
                                    name="article_search_aliopensearch_secret"
                                    value="#option('article_search_aliopensearch_secret')">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">应用名称 appName</label>
+                        <label class="col-sm-2 col-form-label">Application Name AppName</label>
                         <div class="col-sm-6">
-                            <input type="input" class="form-control" placeholder="您在阿里云创建的 OpenSearch 应用名称"
+                            <input type="input" class="form-control" placeholder="The OPENSEARCH application name created in Alibaba Cloud"
                                    name="article_search_aliopensearch_appname"
                                    value="#option('article_search_aliopensearch_appname')">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">OpenSearch 的 API 域名</label>
+                        <label class="col-sm-2 col-form-label">Opensearch's API domain name</label>
                         <div class="col-sm-6">
                             <input type="input" class="form-control"
-                                   placeholder="例如：http://opensearch-cn-qingdao.aliyuncs.com"
+                                   placeholder="E.g: http://opensearch-cn-qingdao.aliyuncs.com"
                                    name="article_search_aliopensearch_host"
                                    value="#option('article_search_aliopensearch_host')">
-                            <p class="text-muted">若 JPress 运行服务器 和 OpenSearch
-                                都使用阿里云同一区域的服务器，建议填写内网域名（性能更好），否则请填写公网域名。</p>
+                            <p class="text-muted">If JPRESS runs the server and Opensearch
+                                All servers in the same area of Alibaba Cloud are recommended to fill in the inner network domain name (better performance), otherwise please fill in the public network domain name.</p>
 
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">已配置自动同步数据库</label>
+                        <label class="col-sm-2 col-form-label">Automatic synchronous database is configured</label>
                         <div class="col-sm-6">
                             <input type="checkbox" class="switchery"
                                    data-for="article_search_aliopensearch_autosync"
                                    #checkedIf(option("article_search_aliopensearch_autosync"))>
                             <input type="hidden" id="article_search_aliopensearch_autosync"
                                    name="article_search_aliopensearch_autosync">
-                            <p class="text-muted">不会配置请点击 <a href="https://help.aliyun.com/document_detail/29123.html"
-                                                             target="_blank">这里</a> 访问阿里云帮助文档。</p>
+                            <p class="text-muted">Can't configure, please click <a href="https://help.aliyun.com/document_detail/29123.html"
+                                                             target="_blank">here</a> Visit Alibaba Cloud to help documents.</p>
 
                         </div>
                     </div>
@@ -267,7 +267,7 @@
                 <div class="card-footer">
                     <div class="offset-sm-2 col-sm-10 submit-block">
                         <div class="card-submit">
-                            <button type="submit" class="btn btn-primary">提交</button>
+                            <button type="submit" class="btn btn-primary">submit</button>
                         </div>
                     </div>
                 </div>

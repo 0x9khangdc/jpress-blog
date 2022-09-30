@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ public class AliyunOssUtils {
     private static ExecutorService fixedThreadPool = NamedThreadPools.newFixedThreadPool(3,"aliyun-oss-upload");
 
     /**
-     * 同步本地文件到阿里云OSS
+     * Synchronize local files to Alibaba Cloud OSS
      *
      * @param path
      * @param file
@@ -57,7 +57,7 @@ public class AliyunOssUtils {
     }
 
     /**
-     * 同步本地文件到阿里云OSS
+     * Synchronize local files to Alibaba Cloud OSS
      *
      * @param path
      * @param file
@@ -94,7 +94,7 @@ public class AliyunOssUtils {
     }
 
     /**
-     * 如果文件以 / 或者 \ 开头，去除 / 或 \ 符号
+     * If the file starts with / or \, remove / or \ symbol
      */
     private static String removeFileSeparator(String path) {
         while (path.startsWith("/") || path.startsWith("\\")) {
@@ -104,7 +104,7 @@ public class AliyunOssUtils {
     }
 
     /**
-     * 同步 阿里云OSS 到本地
+     * Synchronize Alibaba Cloud OSS to local
      *
      * @param path
      * @param toFile
@@ -149,7 +149,7 @@ public class AliyunOssUtils {
         return new OSSClient(endpoint, new DefaultCredentialProvider(accessId, accessKey), null);
     }
     /**
-     * 删除一个OSS中的文件
+     * Delete a file in OSS
      * @param objectName
      */
     public static void delete(String objectName){

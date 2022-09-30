@@ -2,7 +2,7 @@ import com.jfinal.kit.HashKit;
 import org.junit.Test;
 
 /**
- * @author Michael Yang 杨福海 （fuhai999@gmail.com）
+ * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
  * @Package PACKAGE_NAME
  */

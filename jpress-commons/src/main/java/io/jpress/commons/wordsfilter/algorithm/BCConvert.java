@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ package io.jpress.commons.wordsfilter.algorithm;
 
 public class BCConvert {
 
-    public static final char SBC_SPACE = 12288; // 全角空格 12288
+    public static final char SBC_SPACE = 12288; // Full-angle space 12288
 
-    public static final char DBC_SPACE = 32; //半角空格 32
+    public static final char DBC_SPACE = 32; //Half-angle space 32
 
     // ASCII character 33-126 <-> unicode 65281-65374
     public static final char ASCII_START = 33;
@@ -31,10 +31,10 @@ public class BCConvert {
 
     public static final char UNICODE_END = 65374;
 
-    public static final char DBC_SBC_STEP = 65248; // 全角半角转换间隔
+    public static final char DBC_SBC_STEP = 65248; // Full-angle half-angle conversion interval
 
     /**
-     * 全角转半角
+     * Full-angle turning half-width
      */
     public static char sbc2dbc(char src){
         if (src == SBC_SPACE) {
@@ -48,7 +48,7 @@ public class BCConvert {
         return src;
     }
     /**
-     * 半角转全角
+     * Half-angle to full-angle
      */
     public static char dbc2sbc(char src){
         if (src == DBC_SPACE) {

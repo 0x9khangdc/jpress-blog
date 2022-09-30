@@ -1,7 +1,7 @@
 id=io.jpress.addon.helloworld
 title=hello world
-description=这只是一个插件demo，方便开发者参考开发2222
-author=海哥
+description=This is just a plug-in demo, which is convenient for developers to refer to development 2222
+author=Sea brother
 authorWebsite=
 version=1.0.3
 versionCode=3

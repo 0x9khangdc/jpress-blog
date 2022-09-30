@@ -21,7 +21,7 @@ public class HelloWorldAddonController extends JbootController {
     }
 
     @ActionKey("/admin/addon/test")
-    @AdminMenu(groupId = JPressConsts.SYSTEM_MENU_ADDON, text = "插件测试")
+    @AdminMenu(groupId = JPressConsts.SYSTEM_MENU_ADDON, text = "Plug-in test")
     public void adminmenutest() {
         renderText("addon test abc");
     }

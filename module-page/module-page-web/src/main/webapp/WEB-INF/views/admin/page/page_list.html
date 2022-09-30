@@ -17,7 +17,7 @@
     }
 
     function del(id) {
-        if (confirm("确定要删除该页面吗？删除后不可恢复")) {
+        if (confirm("Are you sure you want to delete this page? Do not recover after deleting")) {
             ajaxGet("#(CPATH)/admin/page/doDel/" + id);
         }
     }
@@ -37,20 +37,20 @@
                     <div class="row mb-2">
                         <div class="col-sm-12">
                             <h1>
-                                页面管理
+                                Page management
                                 <small data-toggle="tooltip" title="" data-placement="right"
                                        data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
-                                <small> 首页 / 页面 / 页面管理</small>
+                                <small> front page / page / Page management</small>
                             </h1>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-12" style="padding-top: 20px">
-                            <a href="#(CPATH)/admin/page/list">全部 (#(totalCount ??))</a> |
-                            <a href="?status=normal">已发布 (#(normalCount ??))</a> |
-                            <a href="?status=draft">草稿 (#(draftCount ?? 0))</a> |
-                            <a href="?status=trash" style="color: #a00">垃圾箱 (#(trashCount ?? 0))</a>
+                            <a href="#(CPATH)/admin/page/list">all (#(totalCount ??))</a> |
+                            <a href="?status=normal">Published (#(normalCount ??))</a> |
+                            <a href="?status=draft">draft (#(draftCount ?? 0))</a> |
+                            <a href="?status=trash" style="color: #a00">Trash (#(trashCount ?? 0))</a>
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
                 <div class="col-sm-6 ">
                     <div class=" float-sm-right" style="padding-top: 45px">
                         <a href="#(CPATH)/admin/page/write" type="button" class="btn btn-primary"><i
-                                class="fas fa-plus"></i>新建</a>
+                                class="fas fa-plus"></i>Newly built</a>
                     </div>
                 </div>
 
@@ -77,12 +77,12 @@
                     <form class=" admin-search-panel" action="" method="get">
                         <div class="row">
                             <div class="form-group col-lg-2">
-                                <input type="text" class="form-control" placeholder="请输入标题" name="title" value="#para('title')">
+                                <input type="text" class="form-control" placeholder="Please enter the title" name="title" value="#para('title')">
                             </div>
 
                             <div class="form-group col-lg-2">
                                 <select class="form-control" name="categoryId">
-                                    <option value="">全部分类</option>
+                                    <option value="">All Categories</option>
                                     #for(category : categories)
                                     <option value="#(category.id ??)" #selectedIf(category.id == numberPara('categoryId'))>#(category.title ??)</option>
                                     #end
@@ -90,8 +90,8 @@
                             </div>
 
                             <div class="form-group col-lg-2">
-                                <button type="submit" class="btn btn-primary ">查询</button>
-                                <button type="reset" class="btn btn-default">重置</button>
+                                <button type="submit" class="btn btn-primary ">submit</button>
+                                <button type="reset" class="btn btn-default">reset</button>
                             </div>
                         </div>
 
@@ -106,11 +106,11 @@
                             <th style="width: 10px">
                                 <input class="tableCheckAll" id="checkall"  type="checkbox">
                             </th>
-                            <th style="width: 450px">标题</th>
-                            <th>分类</th>
-                            <th>固定链接</th>
-                            <th>样式</th>
-                            <th style="width: 100px">发布时间</th>
+                            <th style="width: 450px">title</th>
+                            <th>Classification</th>
+                            <th>Fixed link</th>
+                            <th>style</th>
+                            <th style="width: 100px">release time</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -125,29 +125,29 @@
                                 <strong>
                                     <a href="#(CPATH)/admin/page/write/#(item.id)">#(item.title ??)</a>
                                     #if(item.isDraft())
-                                    （草稿）
+                                    (draft)
                                     #end
                                 </strong>
                                 <div class="jp-action-card">
                                     <div class="jp-action-body">
                                         #if(item.isNormal())
-                                        <a href="#(CPATH)/admin/page/write/#(item.id)" style="color: #006505">编辑</a> |
-                                        <a href="javascript:;" onclick="draft('#(item.id??)')" style="color: #006505">草稿</a> |
-                                        <a href="javascript:;" onclick="trash('#(item.id??)')" style="color: #a00">垃圾箱</a> |
-                                        <a href="#(item.url ??)" target="_blank" style="color: #a00">查看</a>
+                                        <a href="#(CPATH)/admin/page/write/#(item.id)" style="color: #006505">edit</a> |
+                                        <a href="javascript:;" onclick="draft('#(item.id??)')" style="color: #006505">draft</a> |
+                                        <a href="javascript:;" onclick="trash('#(item.id??)')" style="color: #a00">trash</a> |
+                                        <a href="#(item.url ??)" target="_blank" style="color: #a00">Check</a>
                                         #elseif(item.isDraft())
-                                        <a href="#(CPATH)/admin/page/write/#(item.id)" style="color: #006505">编辑</a> |
-                                        <a href="javascript:;" onclick="trash('#(item.id??)')" style="color: #a00">垃圾箱</a>
+                                        <a href="#(CPATH)/admin/page/write/#(item.id)" style="color: #006505">edit</a> |
+                                        <a href="javascript:;" onclick="trash('#(item.id??)')" style="color: #a00">Garbage</a>
                                         #else
-                                        <a href="javascript:;" onclick="draft('#(item.id??)')" style="color: #006505">还原</a> |
-                                        <a href="javascript:;" onclick="del('#(item.id??)')" style="color: #a00">永久删除</a>
+                                        <a href="javascript:;" onclick="draft('#(item.id??)')" style="color: #006505">reduction</a> |
+                                        <a href="javascript:;" onclick="del('#(item.id??)')" style="color: #a00">delete permanently</a>
                                         #end
                                     </div>
                                 </div>
                             </td>
                             <td>#(item.category.title ??)</td>
                             <td>#(item.slug ??)</td>
-                            <td>#(item.style ?? "默认")</td>
+                            <td>#(item.style ?? "default")</td>
                             <td>#date(item.created ??)</td>
                         </tr>
                         #end
@@ -164,20 +164,20 @@
                                     <div class="form-group form-group-check">
                                         <div class="form-check">
                                             <input class="form-check-input tableCheckAll" id="checkall" type="checkbox" >
-                                            <label class="form-check-label" for="checkall">全选</label>
+                                            <label class="form-check-label" for="checkall">select all</label>
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-3">
                                         <select class="form-control" name="action">
-                                            <option value="">请选择...</option>
+                                            <option value="">please choose...</option>
                                             <option value="doDelByIds" open-type="del-confirm">
-                                                批量删除
+                                                batch deletion
                                             </option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-lg-3">
-                                        <button type="button" class="btn btn-outline-primary batchExec">批量操作</button>
+                                        <button type="button" class="btn btn-outline-primary batchExec">Batch operation</button>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import io.jboot.core.listener.JbootAppListener;
 import io.jboot.core.listener.JbootAppListenerBase;
 
 /**
- * @author Michael Yang 杨福海 （fuhai999@gmail.com）
+ * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
  * @Title: JPress 模块监听器，每个模块都应该至少有一个 ModuleBase 的子类
  * @Package io.jpress

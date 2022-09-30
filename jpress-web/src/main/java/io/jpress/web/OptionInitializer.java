@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import io.jpress.service.OptionService;
 import java.util.List;
 
 /**
- * @author Michael Yang 杨福海 （fuhai999@gmail.com）
+ * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
  * @Title: 用于在应用启动的时候，读取数据库的配置信息进行某些配置
  * @Package io.jpress.web

@@ -1,78 +1,105 @@
-#include("layout.html")
-#@layout()
-#define content()
-<form class=" form-setting"
-      action="#(CPATH)/install/install" method="post" id="form">
-    <div class="form-group row">
-        <div class="col-sm-12">
-            您好，您正在安装新的 JPress，这个过程中 JPress 需要对您的数据库进行升级，升级的过程中会有数据丢失的风险，且无法找回，<span style="color: red">请确认已经备份好您的数据。</span>
-        </div>
+#include("layout.html") #@layout() #define content()
+<form
+  class="form-setting"
+  action="#(CPATH)/install/install"
+  method="post"
+  id="form"
+>
+  <div class="form-group row">
+    <div class="col-sm-12">
+      Hello, you are installing a new Jpress. In the process, Jpress needs to
+      upgrade your database. During the upgrade process, there will be a risk of
+      data loss and cannot be retrieved.<span style="color: red"
+        >Please confirm that you have backup your data.</span
+      >
     </div>
-    <h4 class="form-header" style="margin-top: 20px">重置管理员</h4>
+  </div>
+  <h4 class="form-header" style="margin-top: 20px">Reset</h4>
 
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">新账号</label>
-        <div class="col-sm-9">
-            <input type="input" class="form-control" placeholder="新管理员账号"
-                   name="username">
-            <p class="text-muted" style="color: red">若想保留之前的管理员账号，请不要填写任何内容。</p>
-        </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">New account</label>
+    <div class="col-sm-9">
+      <input
+        type="input"
+        class="form-control"
+        placeholder="New administrator account"
+        name="username"
+      />
+      <p class="text-muted" style="color: red">
+        If you want to keep the previous administrator account, please do not
+        fill in any content.
+      </p>
     </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">密码</label>
-        <div class="col-sm-9">
-            <input type="password" class="form-control" placeholder="及密码"
-                   name="pwd">
-        </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">password</label>
+    <div class="col-sm-9">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Password"
+        name="pwd"
+      />
     </div>
+  </div>
 
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">确认密码</label>
-        <div class="col-sm-9">
-            <input type="password" class="form-control" placeholder="..."
-                   name="confirmPwd">
-            <p style="color: red">非常重要！请务必要牢记管理员的账号和密码。</p>
-        </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Confirm Password</label>
+    <div class="col-sm-9">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="..."
+        name="confirmPwd"
+      />
+      <p style="color: red">
+        Very important!Please keep in mind the administrator's account and
+        password.
+      </p>
     </div>
+  </div>
 
-    <div class="row">
-        <div class="col-xs-offset-4 col-xs-4 " style="padding-top: 15px">
-            <button type="button" id="submit" class="btn btn-primary btn-block btn-flat"> 确认升级 </button>
-        </div>
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4" style="padding-top: 15px">
+      <button
+        type="button"
+        id="submit"
+        class="btn btn-primary btn-block btn-flat"
+      >
+        Confirm the upgrade
+      </button>
     </div>
-
+  </div>
 </form>
-#end
-
-#define script()
+#end #define script()
 <script src="#(CPATH)/static/components/jquery/jquery.min.js"></script>
 <script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
 <script src="#(CPATH)/static/components/bootstrap/js/bootstrap.min.js"></script>
 <script>
+  $("#submit").on("click", function () {
+    var btn = $(this);
 
-    $("#submit").on("click", function () {
-        var btn = $(this);
+    btn.attr("disabled", "disabled");
+    btn.text("In the installation ... please wait a moment");
 
-        btn.attr('disabled','disabled');
-        btn.text('正在安装中... 请稍等');
-
-        $("#form").ajaxSubmit({
-            type: "post",
-            success: function (data) {
-                if (data.state == "ok") {
-                    alert("恭喜您，JPress安装成功！登录后台可以进行更多的设置...");
-                    location.href = "#(CPATH)/admin/login";
-                } else {
-                    btn.removeAttr('disabled');
-                    btn.text('确认并安装');
-                    alert(data.message);
-                }
-            },
-            error: function () {
-                alert("系统错误，请联系管理员。");
-            }
-        });
+    $("#form").ajaxSubmit({
+      type: "post",
+      success: function (data) {
+        if (data.state == "ok") {
+          alert(
+            "Congratulations, JPRESS is successfully installed!Log in the background can make more settings ..."
+          );
+          location.href = "#(CPATH)/admin/login";
+        } else {
+          btn.removeAttr("disabled");
+          btn.text("Confirm and install");
+          alert(data.message);
+        }
+      },
+      error: function () {
+        alert("If the system is wrong, please contact the administrator.");
+      },
     });
-
+  });
 </script>
 #end

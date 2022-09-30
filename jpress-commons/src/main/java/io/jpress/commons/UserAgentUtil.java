@@ -26,7 +26,7 @@ public class UserAgentUtil {
 
 
     /**
-     * 浏览器名称
+     * Browser name
      *
      * @return
      */
@@ -36,7 +36,7 @@ public class UserAgentUtil {
 
 
     /**
-     * 获取浏览器版本
+     * Get the browser version
      *
      * @return
      */
@@ -45,7 +45,7 @@ public class UserAgentUtil {
     }
 
     /**
-     * 获取操作系统名称
+     * Get the operating system name
      *
      * @return
      */
@@ -55,7 +55,7 @@ public class UserAgentUtil {
 
 
     /**
-     * 获取设备名称
+     * Get the name of the device
      *
      * @return
      */
@@ -64,7 +64,7 @@ public class UserAgentUtil {
     }
 
     /**
-     * 获取设备厂商
+     * Get equipment manufacturer
      *
      * @return
      */
@@ -74,7 +74,7 @@ public class UserAgentUtil {
 
 
     /**
-     * 获取网络类型
+     * Get the network type
      *
      * @return
      */

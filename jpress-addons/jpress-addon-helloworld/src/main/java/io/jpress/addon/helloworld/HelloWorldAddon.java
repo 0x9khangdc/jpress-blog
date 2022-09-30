@@ -4,9 +4,9 @@ import io.jpress.core.addon.AddonBase;
 import io.jpress.core.addon.AddonInfo;
 
 /**
- * 这是一个 JPress 插件的 hello world 项目，没有具体的功能。
+ * This is the Hello World project of the JPRESS plug-in, without specific functions.
  *
- * 其存在的目的是为了帮助开发者，通过 hello world ，了解如何开发一个 JPress 插件
+ * The purpose of its existence is to help developers understand how to develop a jpress plug-in through Hello World
  *
  */
 public class HelloWorldAddon extends AddonBase {
@@ -15,9 +15,9 @@ public class HelloWorldAddon extends AddonBase {
     public void onInstall(AddonInfo addonInfo) {
 
         /**
-         * 在 onInstall ，我们一般需要 创建自己的数据表
+         * In oninstall, we generally need to create our own data table
          *
-         * onInstall 方法只会执行一次，执行完毕之后不会再执行，除非是用户卸载插件再次安装
+         * onInstall the method will only be executed once, and it will not be executed again after the execution is completed, unless the user uninstall the plug -in installation again
          */
         System.out.println("HelloWorldAddon onInstall");
 
@@ -27,8 +27,8 @@ public class HelloWorldAddon extends AddonBase {
     public void onUninstall(AddonInfo addonInfo) {
 
         /**
-         *  在 onUninstall 中，我们一般需要去删除自己在 onInstall 中创建的表 或者 其他资源文件
-         *  这个方法是用户在 Jpress 后台卸载插件的时候回触发。
+         *  In OnunStall, we generally need to delete the tables or other resource files created in Oninstall
+         *  This method is triggered by the user when uninstalling the plug -in in the JPRESS background.
          */
 
         System.out.println("HelloWorldAddon onUninstall");
@@ -38,11 +38,11 @@ public class HelloWorldAddon extends AddonBase {
     public void onStart(AddonInfo addonInfo) {
 
         /**
-         *  在 onStart 方法中，我们可以做很多事情，例如：创建后台或用户中心的菜单
+         *  exist onStart In the method, we can do a lot of things, for example: create a menu in the background or user center
          *
-         *  此方法是每次项目启动，都会执行。
+         *  This method is executed every time the project is started.
          *
-         *  同时用户也可以在后台触发
+         *  At the same time, users can also trigger in the background
          */
 
         System.out.println("HelloWorldAddon onStart");
@@ -52,9 +52,9 @@ public class HelloWorldAddon extends AddonBase {
     public void onStop(AddonInfo addonInfo) {
 
         /**
-         *  和 onStart 对应，在 onStart 所处理的事情，在 onStop 应该释放
+         *  Corresponding to the onStart, what is processed by OnStart should be released in ONSTOP
          *
-         *  同时用户也可以在后台触发
+         *  At the same time, users can also trigger in the background
          */
 
         System.out.println("HelloWorldAddon onStop");

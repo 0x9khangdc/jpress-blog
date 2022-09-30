@@ -1,0 +1,148 @@
+#@layout() #define content()
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Template settings
+      <small>Template Setting</small>
+    </h1>
+  </section>
+
+  <section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title"></h3>
+          </div>
+
+          <form
+            class="form-horizontal form-setting"
+            autocomplete="off"
+            id="optionForm"
+          >
+            <div class="box-body">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">logo settings</label>
+                <div class="col-sm-6">
+                  <button
+                    type="button"
+                    for-src="calmlog_logo"
+                    for-input="calmlog_logo_input"
+                    class="jp-image-browser btn btn-flat btn-default btn-xs"
+                  >
+                    <i class="fa fa-fw fa-image"></i> Select Image
+                  </button>
+                  <br />
+                  <img
+                    src="#(CPATH)#option('calmlog_logo','/templates/calmlog/img/logo.jpg')"
+                    id="calmlog_logo"
+                  />
+                  <input
+                    type="hidden"
+                    id="calmlog_logo_input"
+                    name="calmlog_logo"
+                    value="#option('calmlog_logo')"
+                  />
+                </div>
+              </div>
+
+              <h4 class="page-header">QR code</h4>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">QR code article</label>
+                <div class="col-sm-6">
+                  <input
+                    type="input"
+                    class="form-control"
+                    placeholder="The text at the bottom of the QR code on the left ..."
+                    name="calmlog_qrcode_text"
+                    value="#option('calmlog_qrcode_text')"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">QR code</label>
+                <div class="col-sm-6">
+                  <button
+                    type="button"
+                    for-src="calmlog_qrcode"
+                    for-input="calmlog_qrcode_input"
+                    class="jp-image-browser btn btn-flat btn-default btn-xs"
+                  >
+                    <i class="fa fa-fw fa-image"></i> Select Image
+                  </button>
+                  <br />
+                  <img
+                    src="#(CPATH)#option('calmlog_qrcode','/templates/calmlog/img/code.jpg')"
+                    id="calmlog_qrcode"
+                  />
+                  <input
+                    type="hidden"
+                    id="calmlog_qrcode_input"
+                    name="calmlog_qrcode"
+                    value="#option('calmlog_qrcode')"
+                  />
+                </div>
+              </div>
+
+              <h4 class="page-header">Advertising position</h4>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label"
+                  >Advertising position on the right column</label
+                >
+                <div class="col-sm-6">
+                  <button
+                    type="button"
+                    for-src="calmlog_ad"
+                    for-input="calmlog_ad_input"
+                    class="jp-image-browser btn btn-flat btn-default btn-xs"
+                  >
+                    <i class="fa fa-fw fa-image"></i> Select Image
+                  </button>
+                  <br />
+                  <img
+                    src="#(CPATH)#option('calmlog_ad','/static/commons/img/avatar.png')"
+                    id="calmlog_ad"
+                  />
+                  <input
+                    type="hidden"
+                    id="calmlog_ad_input"
+                    name="calmlog_ad"
+                    value="#option('calmlog_ad')"
+                  />
+                </div>
+              </div>
+
+              <h4 class="page-header">Slide settings</h4>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Home</label>
+                <div class="col-sm-6">
+                  <textarea
+                    rows="5"
+                    class="form-control"
+                    placeholder="Slideshow address..."
+                    name="calmlog_slides"
+                  >
+#option("calmlog_slides")</textarea
+                  >
+                  <p class="help-block">A line of data.</p>
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="col-sm-offset-2 col-sm-10 submit-block">
+                <div class="box-submit">
+                  <button type="submit" class="btn btn-primary">submit</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+#end

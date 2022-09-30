@@ -1,33 +1,46 @@
-#include("layout.html")
-#@layout()
-#define content()
-<div class=" form-setting" >
-    <div class="form-group row">
+#include("layout.html") #@layout() #define content()
+<div class="form-setting">
+  <div class="form-group row">
+    <div class="col-sm-12">
+      Welcome to JPress. Before starting, Jpress needs you to provide the
+      following information.<br />
+      <br />
+      1. Database name<br />
+      2. Database user name<br />
+      3. Database password<br />
+      4. Database host<br />
+      <br />
 
-        <div class="col-sm-12">
-            欢迎使用JPress。在开始前，JPress需要您提供如下信息。<br/> <br/>
-            1、数据库名<br/>
-            2、数据库用户名<br/>
-            3、数据库密码<br/>
-            4、数据库主机<br/> <br/>
+      We will use this information to create a database information file called
+      jboot.properties. If the automatic creation fails to succeed, don't worry,
+      you can open it in the text editor jboot-sample.properties , Fill in the
+      database information and save it separately as jboot.properties .
+      <br />
+      <br />
+      Most of the time, your website service provider will give you this
+      information. If you have no information, you will need to contact them
+      before continuing to install JPress.
 
-            我们会使用这些信息来创建一个名为 jboot.properties 的数据库信息文件。
-            如果自动创建未能成功，不用担心，您可以在文本编辑器中打开 jboot-sample.properties ，填入数据库信息，并将其另存为 jboot.properties 。 <br/> <br/>
-            绝大多数时候，您的网站服务商会给您这些信息。如果您没有这些信息，在继续安装JPress之前您将需要联系他们。
-
-            <br/> <br/>
-            如果您准备好了，那么，愉快的玩耍吧... 若需要更多帮助，您可以请访问<a href="http://www.jpress.cn" target="_blank">JPress官网</a>获取。
-            <br/> <br/>
-        </div>
-
+      <br />
+      <br />
+      If you are ready, then play happily ... If you need more help, you can
+      visit
+      <a href="http://www.jpress.cn" target="_blank">Jpress official website</a>
+      Obtain.
+      <br />
+      <br />
     </div>
+  </div>
 
-
-    <div class="row">
-        <div class="offset-9 col-xs-3 " style="padding-top: 15px">
-            <a href="#(CPATH)/install/step2" class="btn btn-primary btn-block btn-flat"> 下一步</a>
-        </div>
+  <div class="row">
+    <div class="offset-9 col-xs-3" style="padding-top: 15px">
+      <a
+        href="#(CPATH)/install/step2"
+        class="btn btn-primary btn-block btn-flat"
+      >
+        Next step</a
+      >
     </div>
-
+  </div>
 </div>
 #end

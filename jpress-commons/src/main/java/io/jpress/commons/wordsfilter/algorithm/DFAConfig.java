@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,23 +22,23 @@ import java.util.Set;
 public class DFAConfig {
 
     /**
-     * 是否支持拼音，配置汉字只能识别汉字，不能识别拼音
+     * Whether to support Pinyin, configuration Chinese characters can only identify Chinese characters, and cannot recognize Pinyin
      */
     private boolean supportPinyin = false;
     /**
-     * 忽略大小写，默认大小写敏感
+     * Ignore a lowercase, the default is sensitive
      */
     private boolean ignoreCase = false;
     /**
-     * 支持简体，繁体，默认不支持，配置简体只能识别简体
+     * Support simplified, traditional, default does not support, and simplified configuration can only identify simplified parts
      */
     private boolean supportSimpleTraditional = false;
     /**
-     * 支持半角全角，默认不支持，配置半角只能识别半角
+     * Support the half-angle full-angle, the default does not support it, the configuration can only be recognized by the half -angle
      */
     private boolean supportDbc = false;
     /**
-     * 支持停顿词，默认不支持，字之间使用别的字符隔开不识别
+     * Support pause, do not support the default, use other characters between words to separate and do not recognize
      */
     private boolean supportStopWord = false;
 
@@ -127,7 +127,7 @@ public class DFAConfig {
         }
 
         /**
-         * 是否支持拼音，配置汉字只能识别汉字，不能识别拼音
+         * Whether to support Pinyin, configuration Chinese characters can only identify Chinese characters, and cannot recognize Pinyin
          */
         public Builder setSupportPinyin(boolean support) {
             this.supportPinyin = support;
@@ -135,7 +135,7 @@ public class DFAConfig {
         }
 
         /**
-         * 忽略大小写，默认大小写敏感
+         * Ignore a lowercase, the default is sensitive
          */
         public Builder setIgnoreCase(boolean ignoreCase) {
             this.ignoreCase = ignoreCase;
@@ -143,7 +143,7 @@ public class DFAConfig {
         }
 
         /**
-         * 支持简体，繁体，默认不支持，配置简体只能识别简体
+         * Support simplified, traditional, default does not support, and simplified configuration can only identify simplified parts
          */
         public Builder setSupportSimpleTraditional(boolean supportSimpleTraditional) {
             this.supportSimpleTraditional = supportSimpleTraditional;
@@ -151,7 +151,7 @@ public class DFAConfig {
         }
 
         /**
-         * 支持半角全角，默认不支持，配置半角只能识别半角
+         * Support the half-angle full-angle, the default does not support it, the configuration can only be recognized by the half-angle
          */
         public Builder setSupportDbc(boolean supportDbc) {
             this.supportDbc = supportDbc;
@@ -159,7 +159,7 @@ public class DFAConfig {
         }
 
         /**
-         * 支持停顿词，默认不支持，字之间使用别的字符隔开不识别
+         * Support pause, do not support the default, use other characters between words to separate and do not recognize
          */
         public Builder setSupportStopWord(boolean supportStopWord) {
             this.supportStopWord = supportStopWord;
@@ -167,7 +167,7 @@ public class DFAConfig {
         }
 
         /**
-         * 设置停顿词
+         * Set up pause words
          */
         public Builder setStopWord(String stopWord) {
             this.stopWord = stopWord;

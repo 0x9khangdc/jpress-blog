@@ -1,6 +1,4 @@
-<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
 
     <!--
       assembly 打包配置更多配置可参考官方文档：
@@ -54,7 +52,7 @@
         </fileSet>
     </fileSets>
 
-    <!-- 依赖的 jar 包 copy 到 lib 目录下 -->
+    <!-- The dependent jar package Copy to the lib directory-->
     <dependencySets>
         <dependencySet>
             <outputDirectory>lib</outputDirectory>

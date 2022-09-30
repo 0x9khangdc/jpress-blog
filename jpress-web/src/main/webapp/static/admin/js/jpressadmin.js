@@ -305,7 +305,7 @@ function initValidate() {
             var length = value.length;
             var mobile = /^(((1[3-9]{1}))+\d{9})$/;
             return this.optional(element) || (length == 11 && mobile.test(value));
-        }, "手机号码格式错误");
+        }, "Wrong format of phone number");
 
 
         // 支持多个相同 name 的验证
@@ -424,11 +424,11 @@ function initAjaxSubmitForms() {
                                 return;
                             }
 
-                            showErrorMessage('操作失败。')
+                            showErrorMessage('operation failed.')
                         }
                     },
                     error: function () {
-                        showErrorMessage('系统错误，请稍后重试。');
+                        showErrorMessage('System error, please try again later.');
                     }
                 });
             }
@@ -456,12 +456,12 @@ function initBatchExecBtn() {
     $('.batchExec').on('click', function () {
         var action = $('[name="action"]').val();
         if (!action || action == "") {
-            alert("请先选择操作类型");
+            alert("Please select the operation type first");
             return;
         } else {
             var tableSelectedIds = getTableSelectedIds();
             if (!tableSelectedIds || tableSelectedIds == "") {
-                sweetAlert('您没有选择任何的数据');
+                sweetAlert('You did not choose any data');
                 return;
             } else {
                 var selectedAction = $('[name="action"] option:selected');
@@ -571,7 +571,7 @@ function initAjaxOpenType() {
             if (result.message) {
                 showErrorMessage(result.message);
             } else {
-                showErrorMessage('操作失败。')
+                showErrorMessage('operation failed.')
             }
         };
 
@@ -629,13 +629,13 @@ function initOptionFormSubmit() {
             url: jpress.cpath + "/admin/option/doSave",
             success: function (data) {
                 if (data.state == "ok") {
-                    toastr.success('保存成功。');
+                    toastr.success('Successfully saved.');
                 } else {
-                    toastr.error(data.message, '操作失败');
+                    toastr.error(data.message, 'operation failed');
                 }
             },
             error: function () {
-                alert("信息提交错误");
+                alert("Information submission error");
             }
         });
         return false;
@@ -648,7 +648,7 @@ function initImageBrowserButton() {
         var $this = $(this);
         layer.open({
             type: 2,
-            title: '选择图片',
+            title: 'Select Image',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
@@ -679,7 +679,7 @@ function initImageBrowserButton() {
         var $this = $(this);
         layer.open({
             type: 2,
-            title: '选择图片',
+            title: 'Select Image',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
@@ -854,7 +854,7 @@ function initSlugSpan() {
         var forInput = $(this).attr("for-input");
 
         $(this).editable({
-            emptytext: "点击可编辑"
+            emptytext: "Click to edit"
         });
 
         $(this).on('save', function (e, params) {

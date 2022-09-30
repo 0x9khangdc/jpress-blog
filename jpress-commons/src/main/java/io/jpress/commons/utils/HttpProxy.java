@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015-2022, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2015-2022, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,16 +86,16 @@ public class HttpProxy {
             conn = getConnection(url);
 
             /**
-             * 配置 HttpURLConnection 的 http 请求头
+             * Configuration HttpURLConnection of http Request
              */
             configConnection(conn);
 
 
-            // get 请求
+            // get ask
             if ("GET".equalsIgnoreCase(method)) {
                 conn.connect();
             }
-            // post 请求
+            // post ask
             else {
                 conn.setDoOutput(true);
                 conn.setDoInput(true);
@@ -104,12 +104,12 @@ public class HttpProxy {
 
 
             /**
-             * 配置 HttpServletResponse 的 http 响应头
+             * Configuration HttpServletResponse of http Response header
              */
             configResponse(resp, conn);
 
             /**
-             * 复制链接的 inputStream 流到 Response
+             * Copy link inputStream Flow Response
              */
             copyConnStreamToResponse(conn, resp);
 
@@ -205,7 +205,7 @@ public class HttpProxy {
             }
         }
 
-        //conn 没有 Content-Type，需要设置为手动配置的内容
+        //conn No Content-Type，Need to set the content of manual configuration
         if (!isContentTypeSetted) {
             resp.setContentType(contentType);
         }

@@ -1,84 +1,85 @@
-#@layout()
-
-#define css()
-<link rel="stylesheet" href="#(CPATH)/static/components/jquery-file-upload/css/jquery.fileupload.css">
+#@layout() #define css()
+<link
+  rel="stylesheet"
+  href="#(CPATH)/static/components/jquery-file-upload/css/jquery.fileupload.css"
+/>
 <style>
-    #uploader {
-        height: 230px;
-    }
+  #uploader {
+    height: 230px;
+  }
 
-    .myPanel {
-        font-size: 25px;
-        color: #ccc;
-        text-align: center;
-        padding-top: 60px;
-    }
-
+  .myPanel {
+    font-size: 25px;
+    color: #ccc;
+    text-align: center;
+    padding-top: 60px;
+  }
 </style>
-#end
-
-#define script()
+#end #define script()
 <script src="#(CPATH)/static/components/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
 <script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.fileupload.js"></script>
 <script>
-    $('#cfile').fileupload({
-        dropZone: $('#uploader'),
-        url: '#(CPATH)/admin/setting/tools/markdown/doMarkdownImport',
-        sequentialUploads: true,
-        done: function (e, data) {
-            if (data.result.state == "ok") {
-                toastr.success(" Markdown 文章导入成功")
-            } else {
-                toastr.error(data.result.message)
-            }
-        }
-    });
+  $("#cfile").fileupload({
+    dropZone: $("#uploader"),
+    url: "#(CPATH)/admin/setting/tools/markdown/doMarkdownImport",
+    sequentialUploads: true,
+    done: function (e, data) {
+      if (data.result.state == "ok") {
+        toastr.success(" Markdown Successfully imported article");
+      } else {
+        toastr.error(data.result.message);
+      }
+    },
+  });
 </script>
-#end
-
-#define content()
+#end #define content()
 <section class="content-header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-
-                <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <h1>
-                            Markdown文章导入
-                            <small data-toggle="tooltip" title="" data-placement="right"
-                                   data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
-                            <small> 首页 / 小工具箱 / Markdown文章导入</small>
-                        </h1>
-                    </div>
-                </div>
-            </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1>
+              Markdown article import
+              <small
+                data-toggle="tooltip"
+                title=""
+                data-placement="right"
+                data-trigger="hover"
+                ><i class="nav-icon far fa-question-circle"></i
+              ></small>
+              <small>
+                front page / Small toolbox / Markdown article import</small
+              >
+            </h1>
+          </div>
         </div>
-
-    </div><!-- /.container-fluid -->
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
 </section>
 
 <section class="content">
+  <div class="container-fluid">
+    <div class="card card-outline card-primary">
+      <div class="card-body">
+        <div id="uploader">
+          <span
+            class="btn btn-block btn-primary fileinput-button"
+            style="width: 220px"
+          >
+            <i class="fas fa-plus"></i>
+            <span>Please select Markdown format file</span>
+            <input id="cfile" type="file" name="files[]" multiple />
+          </span>
 
-    <div class="container-fluid">
-        <div class="card card-outline card-primary">
-            <div class="card-body">
-                <div id="uploader">
-                            <span class="btn btn-block btn-primary fileinput-button" style="width: 220px">
-                                <i class="fas fa-plus"></i>
-                                <span>请选择Markdown格式文件</span>
-                                <input id="cfile" type="file" name="files[]" multiple>
-                            </span>
-
-                    <div class="myPanel">
-                        支持 Hexo/Jekyll 文章导入...
-                    </div>
-                </div>
-            </div>
+          <div class="myPanel">support Hexo/Jekyll Article import...</div>
         </div>
+      </div>
     </div>
-
+  </div>
 </section>
 
 #end

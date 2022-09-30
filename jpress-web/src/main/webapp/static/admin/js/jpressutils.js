@@ -1,10 +1,10 @@
 /**
- * 对 Swal 进行全局配置
+ * Perform Swal overall configuration
  * @type {{}}
  */
 var mySwal = typeof (Swal) != "undefined" ? Swal.mixin({
-    title: '您确定如此操作吗？',
-    text: '确定后无法恢复，请谨慎操作！',
+    title: 'Are you sure of this operation?',
+    text: 'Can\'t recover after confirmation, please handle it carefully!',
     showClass: {
         popup: 'animated fadeInDown faster'
     },
@@ -18,9 +18,9 @@ var mySwal = typeof (Swal) != "undefined" ? Swal.mixin({
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    cancelButtonText: ' 取消 ',
+    cancelButtonText: ' Cancel ',
     showLoaderOnConfirm: true,
-    confirmButtonText: ' 确定操作! ',
+    confirmButtonText: ' Determine the operation! ',
 }) : {};
 
 
@@ -99,7 +99,7 @@ function isMobileBrowser() {
  */
 function ajaxGet(url, okFunction, failFunction) {
     if (url == null || "" == url) {
-        alert("url 不能为空 ");
+        alert("url Can not be empty ");
         return
     }
 
@@ -108,7 +108,7 @@ function ajaxGet(url, okFunction, failFunction) {
     };
 
     failFunction = failFunction || function (result) {
-        toastr.error(result.message, '操作失败');
+        toastr.error(result.message, 'operation failed');
     };
 
     $.ajax({
@@ -123,14 +123,14 @@ function ajaxGet(url, okFunction, failFunction) {
             }
         },
         error: function (e) {
-            toastr.error("系统发生错误...", '操作失败');
+            toastr.error("System error ...", 'operation failed');
         }
     });
 
 }
 
 /**
- * 进行 ajax 请求
+ * Ajax request
  * @param url
  * @param data
  * @param okFunction
@@ -138,7 +138,7 @@ function ajaxGet(url, okFunction, failFunction) {
  */
 function ajaxPost(url, data, okFunction, failFunction) {
     if (url == null || "" == url) {
-        alert("url 不能为空 ");
+        alert("url Can not be empty ");
         return
     }
 
@@ -147,7 +147,7 @@ function ajaxPost(url, data, okFunction, failFunction) {
     };
 
     failFunction = failFunction || function (result) {
-        toastr.error(result.message, '操作失败');
+        toastr.error(result.message, 'operation failed');
     };
 
     $.ajax({
@@ -163,13 +163,13 @@ function ajaxPost(url, data, okFunction, failFunction) {
             }
         },
         error: function (arg1) {
-            showErrorMessage("系统发生错误...");
+            showErrorMessage("System error ...");
         }
     });
 }
 
 /**
- * 对某个 form 进行 ajax 提交
+ * Submit AJAX for a Form
  * @param form
  * @param okFunction
  * @param failFunction
@@ -187,7 +187,7 @@ function ajaxSubmit(form, okFunction, failFunction) {
     };
 
     failFunction = failFunction || function (result) {
-        toastr.error(result.message, '操作失败');
+        toastr.error(result.message, 'operation failed');
     };
 
     $(form).ajaxSubmit({
@@ -200,7 +200,7 @@ function ajaxSubmit(form, okFunction, failFunction) {
             }
         },
         error: function () {
-            toastr.error('系统错误，请稍后重试。', '操作失败');
+            toastr.error('System error, please try again later.', 'operation failed');
         }
     });
 }
@@ -232,7 +232,7 @@ function showErrorMessage(msg, url) {
         toastr.options.onHidden = function () {
             reloadOrRedirect(url);
         };
-        toastr.error(msg, '操作失败');
+        toastr.error(msg, 'operation failed');
     } else {
         alert(msg);
         reloadOrRedirect(url);
@@ -294,7 +294,7 @@ function getTableSelectedRowData() {
 function sweetAlert(title, btnText) {
     Swal.fire({
         title: title,
-        confirmButtonText: btnText || '  好的 ',
+        confirmButtonText: btnText || '  OK ',
         showClass: {
             popup: 'animated fadeInDown faster'
         },
@@ -315,10 +315,10 @@ function sweetAlert(title, btnText) {
  */
 function sweetConfirm(title, text, btnText, actionUrl, successTitle, successText, actionComponent) {
     mySwal.fire({
-        title: title || '您确定如此操作吗？',
+        title: title || 'Are you sure of this operation?',
         icon: 'question',
-        text: text || '确定后无法恢复，请谨慎操作！',
-        confirmButtonText: btnText || ' 确定操作! ',
+        text: text || 'Can\'t recover after confirmation, please handle it carefully!',
+        confirmButtonText: btnText || ' Determine the operation! ',
         preConfirm: () => {
 
             var token = getCookie("csrf_token");
@@ -360,12 +360,12 @@ function sweetConfirm(title, text, btnText, actionUrl, successTitle, successText
 
         if (result.value && result.value.state == 'ok') {
             mySwal.fire({
-                title: successTitle || '操作成功!',
+                title: successTitle || 'Successful operation!',
                 text: successText || '',
                 icon: 'success',
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
-                confirmButtonText: '  确定 ',
+                confirmButtonText: '  Sure ',
                 showLoaderOnConfirm: false,
                 timer: 2000,
                 timerProgressBar: true,
@@ -408,7 +408,7 @@ function sweetConfirm(title, text, btnText, actionUrl, successTitle, successText
             if (result.value.message) {
                 showErrorMessage(result.value.message);
             } else {
-                showErrorMessage('操作失败。')
+                showErrorMessage('operation failed.')
             }
 
         }
@@ -426,12 +426,12 @@ function sweetConfirm(title, text, btnText, actionUrl, successTitle, successText
  * @param successText
  */
 function sweetConfirmDel(title, text, btnText, actionUrl, successTitle, successText, actionComponent) {
-    this.sweetConfirm(title || '您确定要删除吗？',
-        text || '删除后无法恢复，请谨慎操作！',
-        btnText || ' 确定删除! ',
+    this.sweetConfirm(title || 'Are you sure you want to delete it?',
+        text || 'Can\'t recover after deleting, please handle it carefully!',
+        btnText || ' confirm delete! ',
         actionUrl,
-        successTitle || '删除成功!',
-        successText || '您已经成功删除该数据！',
+        successTitle || 'successfully deleted!',
+        successText || 'You have successfully deleted the data!',
         actionComponent);
 }
 

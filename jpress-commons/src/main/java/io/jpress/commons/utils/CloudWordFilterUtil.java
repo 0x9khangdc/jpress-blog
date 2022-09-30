@@ -31,7 +31,7 @@ public class CloudWordFilterUtil {
 
 
     /**
-     * 阿里云 文本内容检测
+     * Alibaba Cloud text content detection
      * @param accessKeyId
      * @param secret
      * @param content
@@ -44,29 +44,29 @@ public class CloudWordFilterUtil {
                 .addEndpoint(regionId, "Green", "green.cn-shanghai.aliyuncs.com");
         IAcsClient client = new DefaultAcsClient(profile);
         TextScanRequest textScanRequest = new TextScanRequest();
-        textScanRequest.setAcceptFormat(FormatType.JSON); // 指定API返回格式。
+        textScanRequest.setAcceptFormat(FormatType.JSON); // Specify the API to return format.
         textScanRequest.setHttpContentType(FormatType.JSON);
-        textScanRequest.setMethod(com.aliyuncs.http.MethodType.POST); // 指定请求方法。
+        textScanRequest.setMethod(com.aliyuncs.http.MethodType.POST); // Specify the request method.
         textScanRequest.setEncoding("UTF-8");
         textScanRequest.setRegionId(regionId);
         List<Map<String, Object>> tasks = new ArrayList<Map<String, Object>>();
         Map<String, Object> task1 = new LinkedHashMap<String, Object>();
         task1.put("dataId", UUID.randomUUID().toString());
         /**
-         * 待检测的文本，长度不超过10000个字符。
+         * The text to be tested does not exceed 10,000 characters.
          */
         task1.put("content", content);
         tasks.add(task1);
         JSONObject data = new JSONObject();
 
         /**
-         * 检测场景。文本垃圾检测请传递antispam。
+         * Test the scene.For text garbage detection, please pass Antispam.
          **/
         data.put("scenes", Arrays.asList("antispam"));
         data.put("tasks", tasks);
 
         textScanRequest.setHttpContent(data.toJSONString().getBytes(StandardCharsets.UTF_8), "UTF-8", FormatType.JSON);
-        // 请务必设置超时时间。
+        // Be sure to set timeout.
         textScanRequest.setConnectTimeout(3000);
         textScanRequest.setReadTimeout(6000);
         try {
@@ -85,8 +85,8 @@ public class CloudWordFilterUtil {
                             for (Object sceneResult : sceneResults) {
                                 String scene = ((JSONObject)sceneResult).getString("scene");
                                 String suggestion = ((JSONObject)sceneResult).getString("suggestion");
-                                // 根据scene和suggetion做相关处理。
-                                // suggestion为pass表示未命中垃圾。suggestion为block表示命中了垃圾，可以通过label字段查看命中的垃圾分类。
+                                // Related according to Scene and SuggeTion.
+                                // SUGGGESTION indicates unpopular garbage for PASS.SUGGESTION shows the garbage for Block, and you can check the garbage classification through the Label field.
 
                                 if(("block").equals(suggestion)){
                                     return true;
@@ -111,7 +111,7 @@ public class CloudWordFilterUtil {
 
 
     /**
-     * 小花儿AI 文本内容检测
+     * Xiaohuaer AI text content detection
      * @param appCode
      * @param content
      */
@@ -121,25 +121,25 @@ public class CloudWordFilterUtil {
         String method = "POST";
         String appcode = appCode;
         Map<String, String> headers = new HashMap<String, String>();
-        //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
+        //Finally, the format in the header (the English space in the middle) is Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
-        //根据API的要求，定义相对应的Content-Type
+        //According to the requirements of the API, define the corresponding Content-Type
         headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         Map<String, String> querys = new HashMap<String, String>();
         Map<String, Object> bodys = new HashMap<String, Object>();
         bodys.put("src", content);
         bodys.put("type", "detail");
-        //strict:严格，easy：宽松，detail：详细信息
+        //strict: strict，easy: easy，detail: details
 
 
         try {
             /**
-             * 重要提示如下:
-             * HttpUtils请从
+             * The important tips are as follows:
+             * HttpUtils Invite
              * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/src/main/java/com/aliyun/api/gateway/demo/util/HttpUtils.java
-             * 下载
+             * download
              *
-             * 相应的依赖请参照
+             * Please refer to the corresponding dependence
              * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
              */
 //            HttpResponse response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
@@ -152,7 +152,7 @@ public class CloudWordFilterUtil {
                 JSONObject jsonObject = JSONObject.parseObject(response);
 
                 if(200 == jsonObject.getInteger("status") && ("block").equals(jsonObject.getString("msg"))){
-                    //非法文本
+                    //Illegal text
                     return true;
                 }
             }
@@ -165,7 +165,7 @@ public class CloudWordFilterUtil {
 
 
     /**
-     * 泰岳语义 文本内容检测
+     * Taiyue semantic text content detection
      * @param appCode
      * @param content
      */
@@ -176,9 +176,9 @@ public class CloudWordFilterUtil {
         String method = "POST";
         String appcode = appCode;
         Map<String, String> headers = new HashMap<String, String>();
-        //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
+        //Finally, the format in the header (the English space in the middle) is Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
-        //根据API的要求，定义相对应的Content-Type
+        //According to the requirements of the API, define the corresponding Content-Type
         headers.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         Map<String, Object> bodys = new HashMap<String, Object>();
         bodys.put("in", content);
@@ -198,24 +198,24 @@ public class CloudWordFilterUtil {
 
                     for (Object result : out) {
 
-                        String politics = ((JSONObject)result).getString("政治敏感监测");
+                        String politics = ((JSONObject)result).getString("Political sensitivity monitoring");
                         String politicsStr = politics.substring(politics.indexOf("[") + 1, politics.lastIndexOf("]"));
                         if(StrUtil.isNotBlank(politicsStr)){
                             return true;
                         }
-                        String contraband = ((JSONObject)result).getString("违禁品监测");
+                        String contraband = ((JSONObject)result).getString("Surveillance monitoring");
                         String contrabandStr = contraband.substring(contraband.indexOf("[") + 1, contraband.lastIndexOf("]"));
                         if(StrUtil.isNotBlank(contrabandStr)){
                             return true;
                         }
-                        String flood = ((JSONObject)result).getString("恶意灌水监测");//false
+                        String flood = ((JSONObject)result).getString("Malicious irrigation monitoring");//false
 
-                        String porn = ((JSONObject)result).getString("色情监测");
+                        String porn = ((JSONObject)result).getString("Pornographic monitoring");
                         String pornStr = porn.substring(porn.indexOf("[") + 1, porn.lastIndexOf("]"));
                         if(StrUtil.isNotBlank(pornStr)){
                             return true;
                         }
-                        String abuse = ((JSONObject)result).getString("辱骂监测");
+                        String abuse = ((JSONObject)result).getString("Abuse monitoring");
                         String abuseStr = abuse.substring(abuse.indexOf("[") + 1, abuse.lastIndexOf("]"));
                         if(StrUtil.isNotBlank(abuseStr)){
                             return true;
@@ -232,42 +232,42 @@ public class CloudWordFilterUtil {
 
 
     /**
-     * 腾讯云 文本内容安全
+     * Tencent Cloud text content is safe
      * @param content
      * @return
      */
     public static boolean  qcloudTextScan(String accessKeyId,String secret,String region,String content){
         try{
 
-            // 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey,此处还需注意密钥对的保密
-            // 密钥可前往https://console.cloud.tencent.com/cam/capi网站进行获取
+            // Examination of an authentication object, entering the Tencent Cloud account Secretid, Secretkey, here you need to pay attention to the keys confidentiality
+            // The key can go https://console.cloud.tencent.com/cam/capi Website acquisition
             Credential cred = new Credential(accessKeyId, secret);
 
-            // 实例化一个http选项，可选的，没有特殊需求可以跳过
+            // Examination of an HTTP option, optional, no special needs can skip
             HttpProfile httpProfile = new HttpProfile();
             httpProfile.setEndpoint("tms.tencentcloudapi.com");
 
-            // 实例化一个client选项，可选的，没有特殊需求可以跳过
+            // Examination of a client option, optional, no special needs can skip
             ClientProfile clientProfile = new ClientProfile();
             clientProfile.setHttpProfile(httpProfile);
 
-            // 实例化要请求产品的client对象,clientProfile是可选的
+            // Instance to request the client object of the product, clientprofile is optional
             TmsClient client = new TmsClient(cred, region, clientProfile);
 
-            // 实例化一个请求对象,每个接口都会对应一个request对象
+            // Examine a request object, each interface will correspond to a request object
             TextModerationRequest req = new TextModerationRequest();
 
             String encodeToString =null;
             if(StrUtil.isNotBlank(content)){
-                //Content表示待检测对象的文本内容，文本需要按utf-8格式编码，长度不能超过10000个字符（按unicode编码计算），并进行 Base64加密
+                //Content indicates the text of the object to be detected. The text needs to be encoded in UTF-8 format.
                 encodeToString = Base64.getEncoder().encodeToString(content.getBytes(StandardCharsets.UTF_8));
             }
             req.setContent(encodeToString);
 
-            // 返回的resp是一个TextModerationResponse的实例，与请求对象对应
+            // The returned resp is an instance of TextModeRESPONSE, which corresponds to the request object
             TextModerationResponse resp = client.TextModeration(req);
 
-            // 输出json格式的字符串回包
+            // Output json format string back package
 //            System.out.println(TextModerationResponse.toJsonString(resp));
 
             if(resp != null && ("Block").equals(resp.getSuggestion())){
@@ -280,15 +280,15 @@ public class CloudWordFilterUtil {
     }
 
     /**
-     * 判断文本内容是否 安全
+     * Determine whether the text content is safe
      * @param content
      * @return
      */
     public static boolean isIllegalWords(String content){
-        //开启云过滤功能
+        //Open the cloud filtration function
         String serviceEnable = JPressOptions.get("text_filter_service_enable");
 
-        //云过滤服务商
+        //Cloud filter service provider
         String service = JPressOptions.get("text_filter_service");
 
         String appId = JPressOptions.get("text_filter_appid");
@@ -309,19 +309,19 @@ public class CloudWordFilterUtil {
         }
 
 
-        if(("aliyun").equals(service)){//阿里云
+        if(("aliyun").equals(service)){//Ali Cloud
             return aliyunTextScan(appId, appSecret,regionId, content);
 
         }
-        else if(("qcloud").equals(service)){//腾讯云
+        else if(("qcloud").equals(service)){//Tencent Cloud
             return qcloudTextScan(appId,appSecret,regionId,content);
 
         }
-        else if(("xiaohuaerai").equals(service)){//小花儿AI
+        else if(("xiaohuaerai").equals(service)){//Xiaohuaer AI
             return xiaohuaeraiTextScan(appCode,content);
 
         }
-        else if(("ultrapower").equals(service)){//泰岳语义工厂
+        else if(("ultrapower").equals(service)){//Taiyue Language Volunteer Factory
             return ultrapowerTextScan(appCode,content);
 
         }

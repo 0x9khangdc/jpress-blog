@@ -1,1 +1,0 @@
-jpress.bat stop

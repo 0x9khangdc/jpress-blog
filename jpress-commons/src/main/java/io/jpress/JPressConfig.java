@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,9 @@ import io.jboot.app.config.annotation.ConfigModel;
 import io.jboot.utils.StrUtil;
 
 /**
- * @author Michael Yang 杨福海 （fuhai999@gmail.com）
+ * @author Michael Yang Yang Fuhai （fuhai999@gmail.com）
  * @version V1.0
- * @Title: JPress 环境配置
+ * @Title: JPress Environmental configuration
  * @Package io.jpress
  */
 @ConfigModel(prefix = "jpress")
@@ -32,14 +32,14 @@ public class JPressConfig {
     public static final String DEFAULT_LOGIN_PAGE = "/admin/login";
 
     private String indexAction = "/page";
-    private String defaultTemplate = "cn.jeanstudio.lightlog";
-    private String attachmentRoot; // attachment 目录，在未配置的情况下，在 webapp 目录下
-    private String adminLoginPage = DEFAULT_LOGIN_PAGE;         //登录的页面
-    private String adminLoginAction = "/admin/doLogin";     //登录的方法
-    private boolean adminLoginCaptchValidateEnable = true; //后台登录是否使用验证码进行验证
+    private String defaultTemplate = "vn.moment.pluto"; //default template for panel
+    private String attachmentRoot; // attachment Directory, without configuration, in the webapp directory
+    private String adminLoginPage = DEFAULT_LOGIN_PAGE;         //Login page
+    private String adminLoginAction = "/admin/doLogin";     //Login method
+    private boolean adminLoginCaptchValidateEnable = true; //Whether the background login is used to verify the verification code
 
 
-    private String addonRoot; //插件安装的目录，方便在插件安装后，进行 clear 无效重新安装
+    private String addonRoot; //The plug-in installation directory is convenient for Clear to re-install after the plug-in installation
 
 
     public String getIndexAction() {

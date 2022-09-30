@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import java.util.List;
 public class DFAFilter {
 
     /**
-     * 最大的拼音 chuang
+     * The biggest pinyin chuang
      */
     private static final int PINYIN_SIZE_MAX = 6;
 
@@ -70,7 +70,7 @@ public class DFAFilter {
         final boolean last = idx == word.length() - 1;
         final char ch = word.charAt(idx);
         if (this.config.isSupportStopWord() && this.config.containsStopChar(ch)) {
-            // c 是停顿词
+            // c it's a pause
             if (last && prev != this.root) {
                 prev.leaf = true;
                 if (prev.ext == null) {
@@ -83,9 +83,9 @@ public class DFAFilter {
             putWord(prev, word, idx + 1, ext);
             return;
         }
-        // c 不是停顿词
+        // c not a pause
 
-        //先进行字符操作
+        //Pioneer character operation
         this.putCh(prev, word, idx, ch, last, ext);
         if (this.config.isSupportPinyin() && Pinyin.isChinese(ch)) {
             String pinyin = Pinyin.toPinyin(ch);
@@ -156,7 +156,7 @@ public class DFAFilter {
         char ch = word.charAt(start);
 
         if (this.config.isSupportStopWord() && this.config.containsStopChar(ch)) {
-            //停顿词
+            //Pause
             if (start == originStart) {
                 return;
             }
@@ -164,18 +164,18 @@ public class DFAFilter {
             return;
         }
 
-        // 字符寻找
+        // Character search
         DFANode cNode = prev.getNode(ch);
         if (cNode != null) {
             if (cNode.leaf) {
-                // 叶子节点
+                // Leaf node
                 acc.add(new DFAMatch(originStart, start, cNode));
             }
             matchWord2(cNode, word, originStart, start + 1, acc);
         }
 
         if (this.config.isIgnoreCase()) {
-            // 忽略大小写
+            // Ignore a written manifestation
             char low = Character.toLowerCase(ch);
             char upper = Character.toUpperCase(ch);
             this.matchWordChar(ch, low, prev, word, originStart, start, acc);
@@ -183,7 +183,7 @@ public class DFAFilter {
         }
 
         if (this.config.isSupportDbc()) {
-            // 支持全角半角
+            // Support full-width half-width
             char dbc = BCConvert.sbc2dbc(ch);
             char sbc = BCConvert.dbc2sbc(ch);
             this.matchWordChar(ch, dbc, prev, word, originStart, start, acc);
@@ -191,7 +191,7 @@ public class DFAFilter {
         }
 
         if (this.config.isSupportSimpleTraditional() && Pinyin.isChinese(ch)) {
-            // 支持简体，繁体
+            // Support simplified, traditional
             String simple = ZhConverterUtil.convertToSimple(String.valueOf(ch));
             char simpleChar = simple.charAt(0);
             String trad = ZhConverterUtil.convertToTraditional(String.valueOf(ch));
@@ -201,7 +201,7 @@ public class DFAFilter {
         }
 
         if (this.config.isSupportPinyin() && Character.isLetter(ch)) {
-            // 支持拼音，但是要是 letter
+            // Support pinyin, but if it is letter
             StringBuilder sb = new StringBuilder();
             sb.append(Character.toUpperCase(ch));
             int size = 1;
@@ -209,7 +209,7 @@ public class DFAFilter {
 
             while (pinyinSize <= PINYIN_SIZE_MAX && start + size < word.length()) {
                 char c = word.charAt(start + size);
-                //停顿词
+                //Pause
                 if (config.isSupportStopWord() && config.containsStopChar(c)) {
                     size += 1;
                     continue;

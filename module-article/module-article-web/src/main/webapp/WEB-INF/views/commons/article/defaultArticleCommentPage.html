@@ -1,53 +1,65 @@
 #define defaultArticleCommentPage()
 <div class="comment-default-block">
+  #if(option("article_comment_enable","true") && article.comment_status)
+  <form
+    class="comment-form"
+    action="#(CPATH)#(SPATH)/article/postComment"
+    id="jpress-comment-form"
+    method="post"
+    autocomplete="off"
+  >
+    <input type="hidden" name="articleId" value="#(article.id)" />
+    <input type="hidden" name="render" value="default" />
+    <input type="hidden" name="pid" id="comment-pid" />
 
-    #if(option("article_comment_enable","true") && article.comment_status)
-    <form class="comment-form" action="#(CPATH)#(SPATH)/article/postComment" id="jpress-comment-form" method="post" autocomplete="off">
-        <input type="hidden" name="articleId" value="#(article.id)">
-        <input type="hidden" name="render" value="default">
-        <input type="hidden" name="pid" id="comment-pid">
-
-        <div class="comment-textarea">
-            <textarea placeholder="对此，您有什么看法呢？" rows="4" name="content"></textarea>
-        </div>
-
-        <div class="comment-vcode">
-            #if(option("article_comment_vcode_enable","true"))
-            <input placeholder="请输入验证码" autocomplete="off" name="captcha" id="comment-captcha">
-            <img class="vcode-img" src="#(CPATH)/commons/captcha"
-                 onclick="this.src='#(CPATH)/commons/captcha?d='+Math.random();" cdn-exclude id="comment-vcode">
-            #end
-        </div>
-
-        <button type="submit">提交</button>
-        <span class="clearfix"></span>
-    </form>
-    #end
-
-
-    <h4 class="comment-page-title" id="comments">全部评论</h4>
-
-    <div class="comment-page">
-        #commentPage()
-        #for(comment : commentPage.list ??)
-            #include("defaultArticleCommentItem.html")
-        #end
-        #end
+    <div class="comment-textarea">
+      <textarea
+        placeholder="What do you think about this?"
+        rows="4"
+        name="content"
+      ></textarea>
     </div>
 
+    <div class="comment-vcode">
+      #if(option("article_comment_vcode_enable","true"))
+      <input
+        placeholder="please enter verification code"
+        autocomplete="off"
+        name="captcha"
+        id="comment-captcha"
+      />
+      <img
+        class="vcode-img"
+        src="#(CPATH)/commons/captcha"
+        onclick="this.src='#(CPATH)/commons/captcha?d='+Math.random();"
+        cdn-exclude
+        id="comment-vcode"
+      />
+      #end
+    </div>
 
-    #commentPaginate(anchor="comments")
-    <nav class="commnet-pagination">
-        <ul class="pagination justify-content-center">
-            #for(page : pages)
-            <li class="page-item #(page.style)"><a class="page-link" href="#(page.url ??)">#(page.text)</a></li>
-            #end
-        </ul>
-    </nav>
-    #end
+    <button type="submit">submit</button>
+    <span class="clearfix"></span>
+  </form>
+  #end
 
+  <h4 class="comment-page-title" id="comments">All comments</h4>
 
+  <div class="comment-page">
+    #commentPage() #for(comment : commentPage.list ??)
+    #include("defaultArticleCommentItem.html") #end #end
+  </div>
+
+  #commentPaginate(anchor="comments")
+  <nav class="commnet-pagination">
+    <ul class="pagination justify-content-center">
+      #for(page : pages)
+      <li class="page-item #(page.style)">
+        <a class="page-link" href="#(page.url ??)">#(page.text)</a>
+      </li>
+      #end
+    </ul>
+  </nav>
+  #end
 </div>
 #end
-
-

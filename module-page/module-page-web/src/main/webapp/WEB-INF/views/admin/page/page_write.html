@@ -17,7 +17,7 @@
         create: true,
         render: {
             option_create: function (data, escape) {
-                return '<div class="create" style="padding-left: 5px"> 添加标签：<strong style="color: #DD1144">' + escape(data.input) + '</strong></div>';
+                return '<div class="create" style="padding-left: 5px"> add tag:<strong style="color: #DD1144">' + escape(data.input) + '</strong></div>';
             }
         }
     });
@@ -49,7 +49,7 @@
         ajaxSubmit("#form", function (data) {
             $("#pageId").attr("value", data.id);
             window.history.replaceState({}, '', `#(CPATH)/admin/page/write/` + data.id)
-            toastr.success('页面保存成功。');
+            toastr.success('The page is successfully saved.');
 
             //设置预览路劲
             $("#preview").attr("href","#(CPATH)/admin/preview?url=#(CPATH)/admin/page/preview/"+data.id);
@@ -87,7 +87,7 @@
      * @param id
      */
     function doChangeEditor(id) {
-        if (confirm('确定要切换编辑器吗？切换可能出现前台渲染内容缺失的问题，且只对未发布页面有效')) {
+        if (confirm('Are you sure you want to switch the editor?Switching may occur in the problem of lack of content in the front desk, and it is only valid for the unintelligible page')) {
             var changeMode = editMode == "html" ? "markdown" : "html";
             if (id && id !== '0') {
                 ajaxGet('#(CPATH)/admin/page/doChangeEditMode?id=' + id + "&mode=" + changeMode);
@@ -110,7 +110,7 @@
         var $this = $(this);
         layer.open({
             type: 2,
-            title: '选择附件',
+            title: 'Select an attachment',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
@@ -133,7 +133,7 @@
 
                             insertHtmlToEditor(video.outerHTML);
                         } else if (currentVditor) {
-                            currentVditor.insertValue('附件：[' + layer.data.title + '](' + src + ')')
+                            currentVditor.insertValue('appendix:[' + layer.data.title + '](' + src + ')')
                         }
 
 
@@ -159,9 +159,9 @@
                             a.setAttribute('href', src)
                             a.setAttribute("target", "_blank")
                             a.innerHTML = layer.data.title;
-                            insertHtmlToEditor('附件：' + a.outerHTML);
+                            insertHtmlToEditor('appendix:' + a.outerHTML);
                         } else if (currentVditor) {
-                            currentVditor.insertValue('附件：[' + layer.data.title + '](' + src + ')')
+                            currentVditor.insertValue('appendix:[' + layer.data.title + '](' + src + ')')
                         }
                     }
                 }
@@ -202,12 +202,12 @@
         var $this = $(this);
         layer.open({
             type: 2,
-            title: '选择视频',
+            title: 'Choose a video',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
             area: ['90%', '90%'],
-            content: jpress.cpath + '/admin/attachment/video/browse?uititle=视频',
+            content: jpress.cpath + '/admin/attachment/video/browse?uititle=video',
             end: function () {
 
                 if (layer.data.uid != null) {
@@ -231,7 +231,7 @@
                         insertHtmlToEditor(video.outerHTML);
 
                     } else if (currentVditor) {
-                        alert("此编辑器暂不支持插入视频！")
+                        alert("This editor does not support inserting videos for the time being!")
                     }
                 }
             }
@@ -245,7 +245,7 @@
 
         layer.open({
             type: 2,
-            title: '选择表单',
+            title: 'Select form',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
@@ -264,7 +264,7 @@
                     insertHtmlToEditor(html);
 
                 } else  {
-                    alert("请检查表单")
+                    alert("Please check the form")
                 }
 
             }
@@ -461,9 +461,9 @@
             <div class="d-flex align-items-center justify-content-between" style="width: 40%">
                 <div class="input-group mr-2">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">标题</span>
+                        <span class="input-group-text">title</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="请输入页面标题..." name="page.title"
+                    <input type="text" class="form-control" placeholder="Please enter the page title..." name="page.title"
                            autocomplete="off"
                            id="page-title"
                            value="#(page.title ??)">
@@ -472,26 +472,26 @@
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="insertFile" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                        插入附件
+                        Insert annex
                     </button>
                     <div class="dropdown-menu" aria-labelledby="insertFile">
-                        <a class="dropdown-item chooseAttachment" href="javascript:;">插入附件</a>
-                        <a class="dropdown-item chooseVideo" href="javascript:;">插入视频</a>
-                        <a class="dropdown-item" id="chooseForm">插入表单</a>
+                        <a class="dropdown-item chooseAttachment" href="javascript:;">Insert annex</a>
+                        <a class="dropdown-item chooseVideo" href="javascript:;">Insert video</a>
+                        <a class="dropdown-item" id="chooseForm">Insert form</a>
                     </div>
                 </div>
             </div>
             <div class="d-flex align-items-center justify-content-between">
-                <button type="button" data-status="draft" class="btn btn-secondary mr-2 submitBtn">保存草稿</button>
+                <button type="button" data-status="draft" class="btn btn-secondary mr-2 submitBtn">save draft</button>
                 <a target="_blank" #if(page.id ??) href="#(CPATH)/admin/preview?url=#(CPATH)/admin/page/preview/#(page.id ??)" #else onclick="previewPage(this)" #end
-                   id="preview" class="btn btn-secondary mr-2"><span>预览</span></a>
-                <button type="button" data-status="normal" class="btn btn-primary mr-2 submitBtn">发布</button>
+                   id="preview" class="btn btn-secondary mr-2"><span>Preview</span></a>
+                <button type="button" data-status="normal" class="btn btn-primary mr-2 submitBtn">release</button>
                 <span class="switch-btn" id="rightSwitch"><i class="bi bi-gear" style="font-size:18px"></i></span>
                 <span data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="pl-2"><i
                         class="bi bi-three-dots-vertical"></i></span>
                 <div class="dropdown-menu mr-2">
-                    <a class="dropdown-item" href="javascript:;" onclick="doChangeEditor()">切换编辑器</a>
-                    <a class="dropdown-item submitBtn" data-status="trash" href="javascript:;">移至垃圾箱</a>
+                    <a class="dropdown-item" href="javascript:;" onclick="doChangeEditor()">Switch editor</a>
+                    <a class="dropdown-item submitBtn" data-status="trash" href="javascript:;">Move to a trash can</a>
                 </div>
             </div>
         </section>
@@ -517,11 +517,11 @@
                     <ul class="nav nav-tabs" id="formAttrTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab"
-                               href="#main-tab" role="tab" aria-controls="component" aria-selected="true">页面</a>
+                               href="#main-tab" role="tab" aria-controls="component" aria-selected="true">page</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#template-tab" role="tab"
-                               aria-controls="module" aria-selected="false">模板</a>
+                               aria-controls="module" aria-selected="false">template</a>
                         </li>
 
                     </ul>
@@ -536,7 +536,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#fields-card">
-                                                基础
+                                                Base
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -546,35 +546,35 @@
 
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">摘要</label>
+                                                <label class="col-sm-12">Summary</label>
                                                 <div class="col-sm-12">
                                                     <textarea class="form-control"
                                                               id="summary"
                                                               name="page.summary"
-                                                              placeholder="请输入页面摘要" rows="4">#(page.summary ??)</textarea>
+                                                              placeholder="Please enter the page Abstract" rows="4">#(page.summary ??)</textarea>
                                                     <p class="text-muted"></p>
                                                 </div>
                                             </div>
 
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">外链</label>
+                                                <label class="col-sm-12">External chain</label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control"
                                                            id="link_to"
                                                            name="page.link_to"
-                                                           placeholder="请输入外链地址..." value="#unescape(page.link_to ??)" />
-                                                    <p class="text-muted">填写外链后，浏览页面将会跳转到此链接。</p>
+                                                           placeholder="Please enter the external link address..." value="#unescape(page.link_to ??)" />
+                                                    <p class="text-muted">After filling in the external link, the browse page will jump to this link.</p>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">发布时间</label>
+                                                <label class="col-sm-12">release time</label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control datetime"
                                                            id="created"
                                                            name="page.created"
-                                                           placeholder="请选择发布时间" value="#date(page.created ??)" />
+                                                           placeholder="Please select the release time" value="#date(page.created ??)" />
                                                     <p class="text-muted"></p>
                                                 </div>
                                             </div>
@@ -590,20 +590,20 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link  btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#slug-card">
-                                                固定链接
+                                                Fixed link
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
                                     </div>
                                     <div id="slug-card" class="collapse">
                                         <div class="card-body">
-                                            网址：<span
+                                            URL:<span
                                                 class="domainSpan">#option('web_domain')</span>#(CPATH)/<span
                                                 id="slug"
                                                 class="slugSpan"
                                                 for-input="page-slug">#(page.slug ??)</span>#if(option("web_fake_static_enable"))#option('web_fake_static_suffix')#end
                                             #if(page && page.isNormal())
-                                            （<a href="#(page.url)" target="_blank">访问</a>）
+                                            (<a href="#(page.url)" target="_blank">访问</a>)
                                             #end
                                             <input type="hidden" id="page-slug" name="page.slug"
                                                    value="#(page.slug ??)">
@@ -619,7 +619,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#category-card">
-                                                分类
+                                                Classification
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -636,7 +636,7 @@
                                                     </label>
                                                 </div>
                                                 #else
-                                                暂无分类
+                                                No classification
                                                 #end
                                             </div>
                                         </div>
@@ -650,7 +650,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link  btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#image-card">
-                                                图片
+                                                picture
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -667,10 +667,10 @@
                                         <div class="card-footer">
                                             <button type="button" class="btn-image-browser btn btn-default btn-sm "
                                                     for-src="thumbnail"
-                                                    for-input="pageThumbnail">选择图片
+                                                    for-input="pageThumbnail">Select Image
                                             </button>
                                             <a href="javascript:;" style="padding-left: 15px"
-                                               id="removeThumbnail">移除</a>
+                                               id="removeThumbnail">Remove</a>
                                         </div>
                                     </div>
                                 </div>
@@ -691,9 +691,9 @@
 
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">SEO标题</label>
+                                                <label class="col-sm-12">Seo title</label>
                                                 <div class="col-sm-12">
-                                                    <input type="input" class="form-control" placeholder="SEO标题"
+                                                    <input type="input" class="form-control" placeholder="Seo title"
                                                            name="page.meta_title" id="meta_title"
                                                            value="#(page.meta_title ??)">
                                                     <p class="text-muted"></p>
@@ -701,20 +701,20 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">SEO关键字</label>
+                                                <label class="col-sm-12">SEO keyword</label>
                                                 <div class="col-sm-12">
                                                     <textarea class="form-control" id="meta_keywords"
-                                                              name="page.meta_keywords" placeholder="请输入"
+                                                              name="page.meta_keywords" placeholder="please enter"
                                                               rows="2">#(page.meta_keywords ??)</textarea>
                                                     <p class="text-muted"></p>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">SEO描述</label>
+                                                <label class="col-sm-12">Seo description</label>
                                                 <div class="col-sm-12">
                                                     <textarea class="form-control" id="meta_description"
-                                                              name="page.meta_description" placeholder="请输入"
+                                                              name="page.meta_description" placeholder="please enter"
                                                               rows="2">#(page.meta_description ??)</textarea>
                                                     <p class="text-muted"></p>
                                                 </div>
@@ -724,13 +724,13 @@
                                 </div>
 
 
-                                <!--状态-->
+                                <!--state-->
                                 <div class="card">
                                     <div class="card-header">
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#status-card">
-                                                状态
+                                                state
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -740,7 +740,7 @@
 
                                             <div class="form-group row">
                                                 <label class="col-sm-9"
-                                                       style="padding-top:7.5px;padding-left:15px">允许评论</label>
+                                                       style="padding-top:7.5px;padding-left:15px">Allow comments</label>
                                                 <div class="col-sm-3">
                                                     <input type="checkbox" class="switchery" #checkedIf(page.comment_status ?? true)
                                                            data-for="comment_status">
@@ -767,7 +767,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#template-card">
-                                                模板
+                                                template
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -775,9 +775,9 @@
                                     <div id="template-card" class="collapse show">
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label class="col-sm-12">渲染模板文件</label>
+                                                <label class="col-sm-12">Rendering template file</label>
                                                 <select class="form-control" name="page.style">
-                                                    <option value="">默认（page.html）</option>
+                                                    <option value="">Default (page.html)</option>
                                                     #for(style : styles)
                                                     <option value="#(style)" #selectedIf(page && page.style== style)>
                                                         page_#(style).html
@@ -787,11 +787,11 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-sm-12">页面标识</label>
+                                                <label class="col-sm-12">Page logo</label>
                                                 <input type="text" class="form-control" name="page.flag"
-                                                       placeholder="页面标识" value="#(page.flag ??)" id="flag"/>
+                                                       placeholder="Page logo" value="#(page.flag ??)" id="flag"/>
                                                 #if(flags && flags.size() > 0)
-                                                <p class="text-muted">当前模板支持的展示标识有：</p>
+                                                <p class="text-muted">The display logo supported by the current template is:</p>
                                                 <div class="tags">
                                                     #for(flag : flags ??)
                                                     <a href="javascript:;" class="tflag">#(flag)</a>

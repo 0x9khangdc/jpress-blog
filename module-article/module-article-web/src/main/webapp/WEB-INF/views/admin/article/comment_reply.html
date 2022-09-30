@@ -1,129 +1,161 @@
-#@layout()
-#define script()
+#@layout() #define script()
 <script src="#(CPATH)/static/components/ckeditor5/ckeditor.js"></script>
 <script>
+  function doChangeStatus(id, status) {
+    ajaxGet(
+      "#(CPATH)/admin/article/comment/doChangeStatus?id=" +
+        id +
+        "&status=" +
+        status
+    );
+  }
 
-    function doChangeStatus(id, status) {
-        ajaxGet("#(CPATH)/admin/article/comment/doChangeStatus?id=" + id + "&status=" + status)
-    }
-
-    function doDelComment(id) {
-        if (confirm("确定要删除这条评论吗？删除后不可恢复")) {
-            ajaxGet("#(CPATH)/admin/article/comment/doDel?id=" + id, function () {
-                location.href = "#(CPATH)/admin/article/comment/list";
-            }, function (result) {
-                alert(result.message);
-            })
+  function doDelComment(id) {
+    if (
+      confirm(
+        "Are you sure you want to delete this comment?Do not recover after deleting"
+      )
+    ) {
+      ajaxGet(
+        "#(CPATH)/admin/article/comment/doDel?id=" + id,
+        function () {
+          location.href = "#(CPATH)/admin/article/comment/list";
+        },
+        function (result) {
+          alert(result.message);
         }
+      );
     }
+  }
 
-    function ok() {
-        toastr.options.onHidden = function () {
-            location.href = "#(CPATH)/admin/article/comment/list";
-        }
-        toastr.success('回复成功。');
-    }
-
+  function ok() {
+    toastr.options.onHidden = function () {
+      location.href = "#(CPATH)/admin/article/comment/list";
+    };
+    toastr.success("The reply is successful.");
+  }
 </script>
-#end
-
-#define css()
+#end #define css()
 <style>
+  .post {
+    margin: 20px 10px;
+  }
 
-    .post {
-        margin: 20px 10px;
-    }
+  .comment-content {
+    padding-bottom: 20px;
+  }
 
-    .comment-content {
-        padding-bottom: 20px;
-    }
-
-    .comment-content p {
-        display: inline;
-    }
-    .ck-editor__editable_inline, .ck-source-editing-area {
-        min-height: 300px;
-    }
-
+  .comment-content p {
+    display: inline;
+  }
+  .ck-editor__editable_inline,
+  .ck-source-editing-area {
+    min-height: 300px;
+  }
 </style>
-#end
+#end #define content()
+<section class="content-header">
+  <h1>
+    Comment reply
+    <small>Comment Reply</small>
+  </h1>
+</section>
 
-#define content()
-    <section class="content-header">
-        <h1>
-            评论回复
-            <small>Comment Reply</small>
-        </h1>
-    </section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="card card-outline card-primary">
+      <form
+        class="form-setting autoAjaxSubmit"
+        autocomplete="off"
+        data-ok-function="ok"
+        method="post"
+        action="#(CPATH)/admin/article/comment/doReply"
+      >
+        <input type="hidden" name="pid" value="#(comment.id)" />
+        <input type="hidden" name="articleId" value="#(comment.articleId)" />
+        <input type="hidden" name="pid" value="#(comment.id)" />
 
-    <section class="content">
-
-        <div class="container-fluid">
-                <div class="card card-outline card-primary">
-
-                    <form class=" form-setting autoAjaxSubmit" autocomplete="off"
-                          data-ok-function="ok"
-                          method="post"
-                          action="#(CPATH)/admin/article/comment/doReply">
-
-                        <input type="hidden" name="pid" value="#(comment.id)">
-                        <input type="hidden" name="articleId" value="#(comment.articleId)">
-                        <input type="hidden" name="pid" value="#(comment.id)">
-
-                        <div class="card-body">
-                            <div class="post">
-                                <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="#(comment.user.avatar ??)">
-                                    <span class="username">
-                                      <a href="#(CPATH)/admin/user/detail/#(comment.user.id ??)">#(comment.user.nickname ??)</a>
-                                    </span>
-                                    <span class="description">
-                                        #date(comment.created) -  来至对文章
-                                        <a href="#(comment.article.url ??)" target="_blank">《#(comment.article.title ??)》</a> 的评论
-                                    </span>
-                                </div>
-                                <div class="comment-content">
-                                    #(comment.content ??)
-                                </div>
-                                <ul class="list-inline">
-                                    <li>
-                                        <a href="#(CPATH)/admin/article/comment/edit/#(comment.id)"
-                                           style="color: #006505">编辑</a>
-                                        |
-                                        #if(comment.isNormal())
-                                        <a href="javascript:;" onclick="doChangeStatus('#(comment.id)','unaudited')"
-                                           style="color: #006505">待审核</a> |
-                                        #else
-                                        <a href="javascript:;" onclick="doChangeStatus('#(comment.id)','normal')"
-                                           style="color: #006505">设为正常</a> |
-                                        #end
-                                        <a href="javascript:;" onclick="doChangeStatus('#(comment.id)','trash')"
-                                           style="color: #a00">垃圾箱</a> |
-                                        <a href="javascript:;" onclick="doDelComment('#(comment.id)')"
-                                           style="color: #a00">永久删除</a>
-                                    </li>
-                                </ul>
-
-                                <div class="">
-                                    <textarea id="editor1" name="content" data-render="ckeditor"
-                                              style="height: 200px;width: 100%;background-color: white"></textarea>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <div class="col-sm-11 submit-block" style="padding-left: 20px">
-                                <div class="card-submit">
-                                    <button type="submit" class="btn btn-primary"> 回 复</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-footer -->
-                    </form>
-                </div>
+        <div class="card-body">
+          <div class="post">
+            <div class="user-block">
+              <img
+                class="img-circle img-bordered-sm"
+                src="#(comment.user.avatar ??)"
+              />
+              <span class="username">
+                <a href="#(CPATH)/admin/user/detail/#(comment.user.id ??)"
+                  >#(comment.user.nickname ??)</a
+                >
+              </span>
+              <span class="description">
+                #date(comment.created) - Come to the right article
+                <a href="#(comment.article.url ??)" target="_blank"
+                  >《#(comment.article.title ??)》</a
+                >
+                comment of
+              </span>
             </div>
-    </section>
+            <div class="comment-content">#(comment.content ??)</div>
+            <ul class="list-inline">
+              <li>
+                <a
+                  href="#(CPATH)/admin/article/comment/edit/#(comment.id)"
+                  style="color: #006505"
+                  >edit</a
+                >
+                | #if(comment.isNormal())
+                <a
+                  href="javascript:;"
+                  onclick="doChangeStatus('#(comment.id)','unaudited')"
+                  style="color: #006505"
+                  >To be reviewed</a
+                >
+                | #else
+                <a
+                  href="javascript:;"
+                  onclick="doChangeStatus('#(comment.id)','normal')"
+                  style="color: #006505"
+                  >Set as normal</a
+                >
+                | #end
+                <a
+                  href="javascript:;"
+                  onclick="doChangeStatus('#(comment.id)','trash')"
+                  style="color: #a00"
+                  >Garbage</a
+                >
+                |
+                <a
+                  href="javascript:;"
+                  onclick="doDelComment('#(comment.id)')"
+                  style="color: #a00"
+                  >delete permanently</a
+                >
+              </li>
+            </ul>
+
+            <div class="">
+              <textarea
+                id="editor1"
+                name="content"
+                data-render="ckeditor"
+                style="height: 200px; width: 100%; background-color: white"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <div class="col-sm-11 submit-block" style="padding-left: 20px">
+            <div class="card-submit">
+              <button type="submit" class="btn btn-primary">Reply</button>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-footer -->
+      </form>
+    </div>
+  </div>
+</section>
 
 #end

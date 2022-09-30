@@ -2,7 +2,7 @@
 <nav aria-label="Page Navigation">
     <ul class="pagination float-right m-0">
         #adminPaginate(previousText='<',nextText='>')
-        <li class="pagination-total-text">共 #(page.totalRow ??) 条</li>
+        <li class="pagination-total-text">common #(page.totalRow ??) strip</li>
         #for(page : pages)
         <li class="page-item  #(page.style ??)"><a class="page-link" href="#(page.url??)">#(page.text??)</a></li>
         #end
@@ -11,7 +11,7 @@
             #for(i = 1; i < 20; i++)
             #set(count = _PAGINATE_SPACING * i)
             #if(count > 100) #break #end
-            <option value="#(count)" #selectedIf(pageData && pageData.pageSize == count)>#(count)条/页</option>
+            <option value="#(count)" #selectedIf(pageData && pageData.pageSize == count)>#(count)strip/Page</option>
             #end
         </select>
         #end

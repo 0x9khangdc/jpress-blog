@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2020, Michael Yang 杨福海 (fuhai999@gmail.com).
+ * Copyright (c) 2016-2020, Michael Yang Fuhai (fuhai999@gmail.com).
  * <p>
  * Licensed under the GNU Lesser General Public License (LGPL) ,Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,12 @@ import io.jpress.commons.layer.SortModel;
 public class JPressActiveKit {
 
     /**
-     * 用于标识当前 是否选中
+     * Used to identify whether the current selection
      */
     public static final String ACTIVE_FLAG = "isActive";
 
     /**
-     * 标识当前对象（一般情况下是分类、菜单等）
+     * Identify the current object (generally category, menu, etc.)
      *
      * @param model
      */
@@ -37,8 +37,8 @@ public class JPressActiveKit {
 
         if (model instanceof SortModel) {
             SortModel<?> parent = ((SortModel) model).getParent();
-            //理论上，parent == model 这种情况不可能存在，
-            //目前只是为了防止万一哪个兔崽子的代码有问题，从而会出现死循环
+            //Theoretically, parent == model This situation cannot exist,
+            //At present, just to prevent the code of which rabbit's code is wrong, there will be a dead cycle.
             if (parent != null && parent != model) {
                 makeItActive((Model) parent);
             }

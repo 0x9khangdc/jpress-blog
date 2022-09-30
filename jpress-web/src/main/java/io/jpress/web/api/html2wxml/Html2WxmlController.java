@@ -12,7 +12,7 @@ import io.jpress.web.base.ApiControllerBase;
 import java.util.Collections;
 
 /**
- * @author Michael Yang 杨福海 （fuhai999@gmail.com）
+ * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
  * 把 html 内容转化为 微信的 wxml 用于显示文章详情、产品详情等
  */
