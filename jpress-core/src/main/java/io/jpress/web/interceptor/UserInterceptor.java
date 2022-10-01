@@ -31,7 +31,7 @@ import io.jpress.service.UserService;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 用户信息的拦截器
+ * @Title: Interceptor of user information
  */
 public class UserInterceptor implements Interceptor {
 

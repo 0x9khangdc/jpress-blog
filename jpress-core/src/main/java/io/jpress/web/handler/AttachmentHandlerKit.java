@@ -35,7 +35,7 @@ public class AttachmentHandlerKit {
 
 
 
-        //不处理默认情况，由 web 容器去处理
+        //Do not deal with the default situation, be processed by the web container
         if (StrUtil.isBlank(baseRoot)){
             return;
         }

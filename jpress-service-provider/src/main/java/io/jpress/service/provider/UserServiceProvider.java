@@ -120,11 +120,11 @@ public class UserServiceProvider extends JPressServiceBase<User> implements User
     public Ret doValidateUserPwd(User user, String pwd) {
 
         if (user == null) {
-            return Ret.fail("message", "用户名或密码不正确");
+            return Ret.fail("message", "Username or password is incorrect");
         }
 
         if (user.isStatusLocked()) {
-            return Ret.fail("message", "该账号已被冻结");
+            return Ret.fail("message", "This account has been frozen");
         }
 
         String salt = user.getSalt();
@@ -132,7 +132,7 @@ public class UserServiceProvider extends JPressServiceBase<User> implements User
 
         // 未通过密码验证
         if (!user.getPassword().equals(hashedPass)) {
-            return Ret.fail("message", "用户名或密码不正确");
+            return Ret.fail("message", "Username or password is incorrect");
         }
 
         // 更新用户的登录时间

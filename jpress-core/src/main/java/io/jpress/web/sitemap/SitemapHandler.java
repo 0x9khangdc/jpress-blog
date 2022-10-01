@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: Sitemap 处理器
+ * @Title: Sitemap processor
  * @Package io.jpress.web.sitemap
  */
 public class SitemapHandler extends Handler {

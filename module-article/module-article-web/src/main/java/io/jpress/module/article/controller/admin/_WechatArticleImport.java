@@ -65,14 +65,14 @@ public class _WechatArticleImport extends AdminControllerBase {
 
         ApiResult apiResult = MediaApi.getMaterialCount();
         if (!apiResult.isSucceed()) {
-            renderJson(Ret.fail().set("message", "无法获取公众号文章信息，请查看公众号配置是否正确。"));
+            renderJson(Ret.fail().set("message", "If you cannot obtain the information of the public account, please check whether the public account configuration is correct."));
             return;
         }
 
         int articleCount = apiResult.getInt("news_count");
         doSyncArticles(articleCount);
 
-        renderJson(Ret.ok().set("message", "后台正在为您同步 " + articleCount + " 篇文章及其附件，请稍后查看。"));
+        renderJson(Ret.ok().set("message", "The background is synchronizing for you " + articleCount + " Article and its attachments, please check it later."));
     }
 
 

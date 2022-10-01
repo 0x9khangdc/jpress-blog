@@ -1,160 +1,184 @@
-#@layout()
-
-#define script()
+#@layout() #define script()
 <script src="#(CPATH)/static/components/layer/layer.js"></script>
 <script>
-
-
-    //打开对应的图表信息
-    function chartInfo(field,label){
-
-        layer.open({
-            type: 2,
-            title: '表单图形数据',
-            anim: 2,
-            shadeClose: true,
-            shade: 0.3,
-            area: ['45%', '70%'],
-            content: jpress.cpath + '/admin/form/data/formCharts/#(form.id ??)?field=' + field+"&label=" + label,
-        })
-    }
-
-
+  //打开对应的图表信息
+  function chartInfo(field, label) {
+    layer.open({
+      type: 2,
+      title: "Form graphical data",
+      anim: 2,
+      shadeClose: true,
+      shade: 0.3,
+      area: ["45%", "70%"],
+      content:
+        jpress.cpath +
+        "/admin/form/data/formCharts/#(form.id ??)?field=" +
+        field +
+        "&label=" +
+        label,
+    });
+  }
 </script>
-#end
+#end #define content()
 
-#define content()
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1>
+              Form data
+              <small
+                data-toggle="tooltip"
+                title=""
+                data-placement="right"
+                data-trigger="hover"
+                ><i class="nav-icon far fa-question-circle"></i
+              ></small>
+              <small> front page / Form / Form data</small>
+            </h1>
+          </div>
+        </div>
+      </div>
 
-    <section class="content-header">
-        <div class="container-fluid">
+      <div class="col-sm-6">
+        <div class="float-sm-right" style="padding-top: 15px"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-outline card-primary">
+        <div class="card-header with-border">
+          <form class="admin-search-panel" action="" method="get">
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="row mb-2">
-                        <div class="col-sm-12">
-                            <h1>
-                                表单数据
-                                <small data-toggle="tooltip" title="" data-placement="right"
-                                       data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
-                                <small> 首页 / 表单 / 表单数据</small>
-                            </h1>
+              #for(field : form.fieldInfos) #if(field.isSupportSearch())
+              <div class="form-group col-lg-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="please enter#(field.label ??)"
+                  name="#(field.fieldName ??)"
+                  value="#para(field.fieldName ??'')"
+                />
+              </div>
+              #end #end
 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 ">
-                    <div class=" float-sm-right" style="padding-top: 15px">
-
-                    </div>
-                </div>
-
+              <div class="form-group col-lg-4">
+                <button type="submit" class="btn btn-primary">Inquire</button>
+                <button type="reset" class="btn btn-default">Repossess</button>
+              </div>
             </div>
+          </form>
         </div>
-    </section>
+        <div class="card-body p-0">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th style="width: 10px">
+                  <input class="tableCheckAll" type="checkbox" />
+                </th>
 
-    <section class="content">
+                #for(field : form.fieldInfos) #if(field.showInList)
+                <th style="width: 150px">
+                  #(field.label ??) #if(field.isSupportChat())
+                  <i
+                    onclick="chartInfo('#(field.fieldName ??)','#(field.label ??)')"
+                    class="bi bi-file-text"
+                  ></i>
+                  #end
+                </th>
+                #end #end
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-outline card-primary">
-                    <div class="card-header with-border">
-
-                        <form class=" admin-search-panel" action="" method="get">
-                            <div class="row">
-
-                                #for(field : form.fieldInfos)
-                                #if(field.isSupportSearch())
-                                <div class="form-group col-lg-2">
-                                    <input type="text" class="form-control" placeholder="请输入#(field.label ??)" name="#(field.fieldName ??)" value="#para(field.fieldName ??'')">
-                                </div>
-                                #end
-                                #end
-
-                                <div class="form-group col-lg-4">
-                                    <button type="submit" class="btn btn-primary ">查询</button>
-                                    <button type="reset" class="btn btn-default">重置</button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                    <div class="card-body p-0">
-
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr>
-                                <th style="width: 10px">
-	                                    <input class="tableCheckAll" type="checkbox"/>
-	                                </th>
-
-                                    #for(field : form.fieldInfos)
-                                    #if(field.showInList)
-	                                <th style="width: 150px">#(field.label ??) #if(field.isSupportChat()) <i onclick="chartInfo('#(field.fieldName ??)','#(field.label ??)')" class="bi bi-file-text"></i> #end</th>
-                                     #end
-                                     #end
-
-                                <th style="width: 10px">
-                                   操作
-                                </th>
-                            </tr>
-                            #for(record : page.list)
-                            <tr>
-                                <td><input name="tableItem" type="checkbox" value="#(record.id)" /></td>
-                                #for(field : form.fieldInfos)
-                                #if(field.showInList)
-                                    <td>#(record.get(field.fieldName) ??)</td>
-                                #end
-                                #end
-                                <td>
-                                    <a style="color: #006505" href="#(CPATH)/admin/form/data/detail?formId=#(form.id ??)&dataId=#(record.id ??)">详情</a>
-                                    <a style="color: #a00" href="#(CPATH)/admin/form/data/doDel/#(form.id ??)?id=#(record.id ??)"
-                                       open-type="del-confirm">删除</a>
-                                </td>
-                            </tr>
-                            #end
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="row">
-
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input tableCheckAll" id="checkall" type="checkbox" >
-                                            <label class="form-check-label" for="checkall">全选</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-3">
-                                        <select class="form-control" name="action">
-                                            <option value="">请选择...</option>
-                                            <option value="doDelByIds/#(form.id ??)" open-type="del-confirm">
-                                                批量删除
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <button type="button" class="btn btn-outline-primary batchExec">批量操作</button>
-
-                                        <a href="excelExport/#(form.id ??)" type="button" class="btn btn-outline-primary"><i class="bi bi-caret-down-fill"></i> 导出到 Excel </a>
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                #@_paginate()
-                            </div>
-                        </div>
-                    </div>
+                <th style="width: 10px">operate</th>
+              </tr>
+              #for(record : page.list)
+              <tr>
+                <td>
+                  <input
+                    name="tableItem"
+                    type="checkbox"
+                    value="#(record.id)"
+                  />
+                </td>
+                #for(field : form.fieldInfos) #if(field.showInList)
+                <td>#(record.get(field.fieldName) ??)</td>
+                #end #end
+                <td>
+                  <a
+                    style="color: #006505"
+                    href="#(CPATH)/admin/form/data/detail?formId=#(form.id ??)&dataId=#(record.id ??)"
+                    >Detail</a
+                  >
+                  <a
+                    style="color: #a00"
+                    href="#(CPATH)/admin/form/data/doDel/#(form.id ??)?id=#(record.id ??)"
+                    open-type="del-confirm"
+                    >delete</a
+                  >
+                </td>
+              </tr>
+              #end
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="form-group">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input tableCheckAll"
+                      id="checkall"
+                      type="checkbox"
+                    />
+                    <label class="form-check-label" for="checkall"
+                      >select all</label
+                    >
+                  </div>
                 </div>
-            </div>
-        </div>
+                <div class="form-group col-lg-3">
+                  <select class="form-control" name="action">
+                    <option value="">please choose...</option>
+                    <option
+                      value="doDelByIds/#(form.id ??)"
+                      open-type="del-confirm"
+                    >
+                      batch deletion
+                    </option>
+                  </select>
+                </div>
 
-    </section>
+                <div class="form-group col-lg-4">
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary batchExec"
+                  >
+                    Batch operation
+                  </button>
+
+                  <a
+                    href="excelExport/#(form.id ??)"
+                    type="button"
+                    class="btn btn-outline-primary"
+                    ><i class="bi bi-caret-down-fill"></i> Export Excel
+                  </a>
+                </div>
+
+                <div class="form-group col-lg-3"></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">#@_paginate()</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 #end

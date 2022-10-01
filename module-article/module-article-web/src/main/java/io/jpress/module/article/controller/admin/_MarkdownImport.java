@@ -55,13 +55,13 @@ public class _MarkdownImport extends AdminControllerBase {
 
         UploadFile ufile = getFile();
         if (ufile == null) {
-            renderJson(Ret.fail("message", "您还未选择Markdown文件"));
+            renderJson(Ret.fail("message", "You haven't chosen the Markdown file yet"));
             return;
         }
 
         if (!".md".equals(FileUtil.getSuffix(ufile.getFileName()))) {
             AttachmentUtils.delete(ufile.getFile());
-            renderJson(Ret.fail("message", "请选择Markdown格式的文件"));
+            renderJson(Ret.fail("message", "Please select the file in the Markdown format"));
             return;
         }
 
@@ -79,7 +79,7 @@ public class _MarkdownImport extends AdminControllerBase {
             categoryNames = markdownParser.getCategories();
         } catch (ParseException e) {
             LogKit.error(e.toString(), e);
-            renderJson(Ret.fail("message", "导入失败，可能markdown文件格式错误"));
+            renderJson(Ret.fail("message", "Introduction failure, maybe Markdown file format error"));
         } finally {
             mdFile.delete();
         }

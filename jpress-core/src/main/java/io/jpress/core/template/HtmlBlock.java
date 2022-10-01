@@ -9,40 +9,40 @@ import java.util.Objects;
 
 
 /**
- * html 块，或者说是一个 html 片段
- * 一个 HtmlBlock 可以转换为 bsFormComponent
+ * html Block, or a html fragment
+ * One HtmlBlock Can be converted to bsFormComponent
  */
 public class HtmlBlock {
 
-    //模板组件
+    //Template component
     public static final String DRAG_TYPE_TEMPLATE = "template";
 
-    //系统内置组件
+    //System built -in component
     public static final String DRAG_TYPE_SYSTEM = "system";
 
-    //布局组件
+    //Layout component
     public static final String DRAG_TYPE_LAYOUT = "layout";
 
 
     // id
     protected String id;
 
-    //类型
+    //type
     protected String type = DRAG_TYPE_TEMPLATE;
 
-    //组件名称
+    //Component name
     protected String name;
 
     //icon
     protected String icon;
 
-    //排序
+    //Sort
     protected String index;
 
-    //模板内容
+    //Template content
     protected String template;
 
-    //支持的配置内容
+    //Support configuration content
     protected List<HtmlBlockOptionDef> optionDefs;
 
     public String getId() {
@@ -97,7 +97,7 @@ public class HtmlBlock {
     }
 
     /**
-     * 合并新的 option 到已经存在的 options
+     * Merged option To exist options
      *
      * @param newOptionDef
      * @param existOptionDef

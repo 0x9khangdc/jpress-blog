@@ -1,11 +1,11 @@
-# 插件
+# Plug-in
 
 
 [[toc]]
 
-## 阐述
+## Explain
 
-插件是网站功能的延伸，比如：用户关注公众号登录网站的功能，就可通过插件实现，
-另外还有任务宝插件，活码插件等。
+The plug-in is an extension of the website function. For example, if the user pays attention to the function of the public account login, it can be implemented through the plug-in.
+In addition, there are task treasure plugins, live code plug-ins.
 
 ![](./admin-doc/plugin.jpg)

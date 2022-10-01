@@ -23,7 +23,7 @@ import io.jboot.utils.RequestUtil;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 要求用户必须登陆，拦截器必须放在 UserInterceptor 之后执行
+ * @Title: The user must log in, the interceptor must be placed in UserInterceptor Then execute
  */
 public class UserMustLoginedInterceptor implements Interceptor {
 
@@ -32,7 +32,7 @@ public class UserMustLoginedInterceptor implements Interceptor {
 
         if (UserInterceptor.getThreadLocalUser() == null) {
             if (RequestUtil.isAjaxRequest(inv.getController().getRequest())) {
-                inv.getController().renderJson(Ret.fail("message", "用户未登录"));
+                inv.getController().renderJson(Ret.fail("message", "User not logging in"));
             } else {
                 inv.getController().redirect("/user/login");
             }

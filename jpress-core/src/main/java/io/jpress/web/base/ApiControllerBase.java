@@ -53,7 +53,7 @@ public abstract class ApiControllerBase extends ControllerBase {
 
 
     /**
-     * 获取当前微信用户的 OpenId
+     * Get the current WeChat user OpenId
      * @return
      */
     @NotAction
@@ -62,7 +62,7 @@ public abstract class ApiControllerBase extends ControllerBase {
     }
 
     /**
-     * 获取当前用户的 unionId
+     * Get the current user unionId
      * @return
      */
     @NotAction
@@ -71,7 +71,7 @@ public abstract class ApiControllerBase extends ControllerBase {
     }
 
     /**
-     * 获取当前用户的 unionId
+     * Get the current user unionId
      * @return
      */
     @NotAction
@@ -96,7 +96,7 @@ public abstract class ApiControllerBase extends ControllerBase {
     }
 
     /**
-     * 需要前端重新登录
+     * Need to register the front end
      */
     @NotAction
     public void renderRelogin() {
@@ -105,7 +105,7 @@ public abstract class ApiControllerBase extends ControllerBase {
 
 
     /**
-     * 用于在某些情况，用户已经被删除了，但是前端 JWT 未过期的情况
+     * For some cases, the user has been deleted, but the front -end JWT has not expired
      */
     @NotAction
     public void renderJwtLogicalInvalid() {

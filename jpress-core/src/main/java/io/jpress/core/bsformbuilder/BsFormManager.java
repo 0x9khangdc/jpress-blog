@@ -129,8 +129,8 @@ public class BsFormManager {
             if (component != null) {
                 template = component.template();
             } else {
-                LogKit.error("未表单找到组件：" + tag);
-                template = "<div class=\"none-component\">没有找到相关组件</div>";
+                LogKit.error("Found components without form:" + tag);
+                template = "<div class=\"none-component\">No related components were found</div>";
             }
 
             String htmlResult = renderTemplate(template, datas);
@@ -166,7 +166,7 @@ public class BsFormManager {
         } catch (Exception ex) {
             LogKit.error(htmlString);
             LogKit.error(ex.toString(), ex);
-            return "<div> 渲染错误 </div>";
+            return "<div> Rendering error </div>";
         }
     }
 

@@ -1,3 +1,3 @@
-# IDEA 开发环境准备
+# IDEA Development environment preparation
 
-点击查看 IDEA 开发环境准备相关文档:[IDEA 开发环境准备相关文档](/manual/idea_environment_config.md)
+Click to view the IDEA development environment to prepare related documents:[IDEA Related documents for development environment preparation](/manual/idea_environment_config.md)

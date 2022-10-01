@@ -29,7 +29,7 @@ import java.util.Set;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 根据数据库信息，生成 JPress 系统代码
+ * @Title: According to the database information, generate JPress system code
  * @Package io.jpress.core.code
  */
 public class SystemGenerator {

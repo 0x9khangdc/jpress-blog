@@ -104,7 +104,7 @@ public class Attachment extends BaseAttachment<Attachment> {
     }
 
     /**
-     * 是否是本地附件
+     * Is it a local attachment
      *
      * @return
      */

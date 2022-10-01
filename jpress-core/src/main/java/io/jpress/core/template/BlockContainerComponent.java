@@ -6,14 +6,14 @@ public class BlockContainerComponent extends BsFormComponent {
 
     public BlockContainerComponent() {
         setTag("container");
-        setName("板块");
+        setName("Section");
         setDisableTools(true);
         setDragType("container");
 
 
         BsFormComponent.Prop idProp = new BsFormComponent.Prop("id");
         idProp.setDisabled("ture");
-        idProp.setLabel("板块容器");
+        idProp.setLabel("Sector container");
 
         addProp(idProp);
 

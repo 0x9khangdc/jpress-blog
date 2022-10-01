@@ -35,13 +35,13 @@ public class AttachmentVideo extends BaseAttachmentVideo<AttachmentVideo> {
         if(getVideoType() != null  &&  !getVideoType().equals("")){
             switch (getVideoType()) {
                 case VIDEO_TYPE_VIDEO:
-                    return "视频";
+                    return "video";
                 case VIDEO_TYPE_LIVE:
-                    return "直播";
+                    return "live streaming";
                 case VIDEO_TYPE_CODE:
-                    return "代码";
+                    return "code";
                 case VIDEO_TYPE_LOCAL:
-                    return "本地";
+                    return "local";
                 default:
                     return "--";
             }

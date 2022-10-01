@@ -142,27 +142,27 @@ public class FormInfoServiceProvider extends JPressServiceBase<FormInfo> impleme
 
             if (year > 0) {
 
-                return year + "年";
+                return year + "year";
 
             } else if (mouths > 0) {
 
-                return mouths + "个月";
+                return mouths + "month";
 
             } else if (dates > 0) {
 
-                return dates + "天";
+                return dates + "day";
 
             } else if (hours > 0) {
 
-                return hours + "小时";
+                return hours + "Hour";
 
             } else if (minutes > 0) {
 
-                return minutes + "分钟";
+                return minutes + "minute";
 
             } else {
 
-                return "0分钟";
+                return "0 minutes";
             }
 
 

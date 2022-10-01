@@ -51,13 +51,13 @@ public class _WordpressImport extends AdminControllerBase {
 
         UploadFile ufile = getFile();
         if (ufile == null) {
-            renderJson(Ret.fail("message", "您还未选择WordPress文件"));
+            renderJson(Ret.fail("message", "You haven't chosen WordPress files"));
             return;
         }
 
         if (!".xml".equals(FileUtil.getSuffix(ufile.getFileName()))) {
             AttachmentUtils.delete(ufile.getFile());
-            renderJson(Ret.fail("message", "请选择从WordPress导出的XML文件"));
+            renderJson(Ret.fail("message", "Please select the XML file exported from WordPress"));
             return;
         }
 

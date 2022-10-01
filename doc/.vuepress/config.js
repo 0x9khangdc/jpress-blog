@@ -1,16 +1,16 @@
-//参考：
+//reference:
 // https://github.com/vuejs/vuepress/blob/master/packages/docs/docs/.vuepress/config.js
 // https://vuepress-theme-reco.recoluan.com/views/1.x/
 module.exports = {
-    title: 'JPress 官方文档',
-    description: 'JPress，一个专业的建站神器，已有超过10万+网站使用 JPress 搭建',
+    title: 'JPress Official documentation',
+    description: 'JPress, A professional station building artifact, more than 100,000+ websites have been built in Jpress',
     // base:'/docs/',
     markdown: {
         lineNumbers: true
     },
     theme: 'vuepress-theme-reco',
     themeConfig: {
-        //腾讯 404 公益配置
+        //Tencent 404 Public welfare configuration
         noFoundPageByTencent: false,
 
         mode: 'light', // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
@@ -29,7 +29,7 @@ module.exports = {
         // defaults to false, set to true to enable
         editLinks: true,
         // custom text for edit link. Defaults to "Edit this page"
-        editLinkText: '编辑此页面',
+        editLinkText: 'Edit this page',
 
         /**
          * support for
@@ -41,17 +41,15 @@ module.exports = {
          */
         codeTheme: 'tomorrow',
 
-
-
-        lastUpdated: '更新时间', // string | boolean
+        lastUpdated: 'Update time', // string | boolean
 
         nav: [
-            {text: '首页', link: '/'},
-            {text: '用户手册', link: '/manual/'},
-            {text: '开发文档', link: '/development/'},
-            {text: '提问', link: 'https://gitee.com/JPressProjects/jpress/issues'},
+            {text: 'Home', link: '/'},
+            {text: 'Manual', link: '/manual/'},
+            {text: 'Development', link: '/development/'},
+            {text: 'Question', link: 'https://gitee.com/JPressProjects/jpress/issues'},
             {
-                text: '源码下载', items: [
+                text: 'Source', items: [
                     {text: 'Gitee', link: 'https://gitee.com/JPressProjects/jpress'},
                     {text: 'Github', link: 'https://github.com/JPressProjects/jpress'}
                 ]
@@ -59,63 +57,62 @@ module.exports = {
         ],
 
         sidebar: {
-
             '/manual/': [{
-                    title: '快速入门',
+                    title: 'Get started quickly',
                     collapsable: false,
                     children: [
-                        {title: 'JPress 简介', path: '/manual/'},
-                        {title: '快速开始', path: '/manual/start'}
+                        {title: 'JPress Brief introduction', path: '/manual/'},
+                        {title: 'Start quickly', path: '/manual/start'}
                     ],
                 },
                 {
-                    title: '安装启动',
+                    title: 'Installation',
                     collapsable: false,
                     children: [
-                        {title: 'JAVA环境配置', path: '/manual/jdk_config'},
-                        {title: 'Maven环境配置', path: '/manual/maven_config'},
-                        {title: 'IDEA开发环境准备', path: '/manual/idea_environment_config'},
-                        {title: 'JPress源码获取', path: '/manual/jpress_download_source'},
-                        {title: '导入JPress源码到编辑器', path: '/manual/jpress_open_compiler'},
-                        {title: '编译并运行JPress', path: '/manual/jpress_compile_with_run'},
-                        {title: '在Windows上安装JPress(tomcat部署)', path: '/manual/windows-tomcat-deploy'},
-                        {title: '在Windows上安装JPress(undertow部署)', path: '/manual/windows_undertow_deploy'},
-                        {title: '在Linux上安装JPress(tomcat部署)', path: '/manual/linux-tomcat-deploy'},
-                        {title: '在Linux上安装JPress(undertow部署)', path: '/manual/linux_undertow_deploy'},
-                        {title: '在宝塔上安装JPress', path: '/manual/ces_bt_config'},
-                        {title: '在 Docker 上安装JPress', path: '/manual/install_docker'},
-                        {title: '一键安装', path: '/manual/install_oneclick'},
-                        {title: '如何迁移', path: '/manual/project_transfer'},
-                        {title: '如何升级', path: '/manual/project_upgrade'}
+                        {title: 'Java environment configuration', path: '/manual/jdk_config'},
+                        {title: 'Maven environment configuration', path: '/manual/maven_config'},
+                        {title: 'Idea development environment preparation', path: '/manual/idea_environment_config'},
+                        {title: 'JPress source code acquisition', path: '/manual/jpress_download_source'},
+                        {title: 'Import jpress source code to editor', path: '/manual/jpress_open_compiler'},
+                        {title: 'Compile and run JPress', path: '/manual/jpress_compile_with_run'},
+                        {title: 'Install JPress (Tomcat deployment) on Windows)', path: '/manual/windows-tomcat-deploy'},
+                        {title: 'Install JPress (UNDERTOW deployment) on Windows', path: '/manual/windows_undertow_deploy'},
+                        {title: 'Install JPress (Tomcat deployment) on Linux)', path: '/manual/linux-tomcat-deploy'},
+                        {title: 'Install JPress (Undertow deployment) on Linux', path: '/manual/linux_undertow_deploy'},
+                        {title: 'Install jpress on the pagoda', path: '/manual/ces_bt_config'},
+                        {title: 'Install jpress on docker', path: '/manual/install_docker'},
+                        {title: 'A key installation', path: '/manual/install_oneclick'},
+                        {title: 'How to migrate', path: '/manual/project_transfer'},
+                        {title: 'How to upgrade', path: '/manual/project_upgrade'}
                     ],
                 },
                 {
-                    title: '产品手册',
+                    title: 'Product manual',
                     collapsable: false,
                     children: [
-                        {title: '文章', path: '/manual/article'},
-                        {title: '产品', path: '/manual/product'},
-                        {title: '招聘', path: '/manual/job'},
-                        {title: '页面', path: '/manual/page'},
-                        {title: '附件', path: '/manual/attachment'},
-                        {title: '模板', path: '/manual/template'},
-                        {title: '插件', path: '/manual/addon'},
-                        {title: '用户', path: '/manual/user'},
-                        {title: '微信', path: '/manual/wechat'},
-                        {title: '设置相关', path: '/manual/setting'},
-                        {title: '小工具箱', path: '/manual/kits'},
-                        {title: '常见问题', path: '/manual/faq'},
+                        {title: 'Article', path: '/manual/article'},
+                        {title: 'Product', path: '/manual/product'},
+                        {title: 'Recruitment', path: '/manual/job'},
+                        {title: 'Page', path: '/manual/page'},
+                        {title: 'Attachment', path: '/manual/attachment'},
+                        {title: 'Template', path: '/manual/template'},
+                        {title: 'Addon', path: '/manual/addon'},
+                        {title: 'User', path: '/manual/user'},
+                        {title: 'WeChat', path: '/manual/wechat'},
+                        {title: 'Setting', path: '/manual/setting'},
+                        {title: 'Toolbox', path: '/manual/kits'},
+                        {title: 'Common problem', path: '/manual/faq'},
                     ],
                 }
             ],
 
 
             '/development/': [{
-                    title: '概述',
+                    title: 'Overview',
                     path: '/development/',
                 },
                 {
-                    title: '模板开发',
+                    title: 'Template development',
                     collapsable: true,
                     children: [
                         {title: '模板简介', path: '/development/template/template_introduce'},
@@ -130,7 +127,7 @@ module.exports = {
                     ],
                 },
                 {
-                    title: '插件开发',
+                    title: 'Plug-in development',
                     collapsable: true,
                     children: [
                         {title: '插件简介', path: '/development/addon/start'},
@@ -144,7 +141,7 @@ module.exports = {
                     ],
                 },
                 {
-                    title: '模块开发',
+                    title: 'Module development',
                     collapsable: true,
                     children: [
                         {title: 'JPress源码获取', path: '/development/jpress_download_source'},
@@ -164,7 +161,7 @@ module.exports = {
                     ],
                 },
                 {
-                    title: 'API 接口',
+                    title: 'API interface',
                     collapsable: true,
                     children: [
                         {title: '概述', path: '/development/api/start'},

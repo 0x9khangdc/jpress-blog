@@ -805,20 +805,20 @@ public class AddonManager implements JbootEventListener {
     public Ret upgrade(File newAddonFile, String oldAddonId) {
         AddonInfo oldAddon = AddonManager.me().getAddonInfo(oldAddonId);
         if (oldAddon == null) {
-            return failRet("升级失败：无法读取旧的插件信息，可能该插件不存在。");
+            return failRet("Upgrade: Unable to read the old addon information, the addon may not exist.");
         }
 
         AddonInfo addon = AddonUtil.readSimpleAddonInfo(newAddonFile);
         if (addon == null || StrUtil.isBlank(addon.getId())) {
-            return failRet("升级失败：无法读取新插件配置文件。");
+            return failRet("Upgrade: Unable to read a new addon configuration file.");
         }
 
         if (!addon.getId().equals(oldAddonId)) {
-            return failRet("升级失败：新插件的ID和旧插件不一致。");
+            return failRet("Upgrading failure: The ID of the new addon is inconsistent with the old addon.");
         }
 
         if (addon.getVersionCode() <= oldAddon.getVersionCode()) {
-            return failRet("升级失败：新插件的版本号必须大于已安装插件的版本号。");
+            return failRet("Upgrading failure: The version number of the new addon must be greater than the version number of the installed addon.");
         }
 
         boolean upgradeSuccess = false;
@@ -833,7 +833,7 @@ public class AddonManager implements JbootEventListener {
             }
         }
 
-        return upgradeSuccess ? Ret.ok() : failRet("插件升级失败，请联系管理员。");
+        return upgradeSuccess ? Ret.ok() : failRet("The addon upgrade failed, please contact the administrator.");
     }
 
     /**

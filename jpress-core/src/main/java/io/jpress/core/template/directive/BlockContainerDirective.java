@@ -56,7 +56,7 @@ public class BlockContainerDirective extends JbootDirectiveBase {
             return;
         }
 
-        //每个 container 容器的数据
+        //Every container Container data
         JSONArray containerDatas = blockOption.getJsonArrayByContainerId(containerId);
         if (containerDatas == null || containerDatas.isEmpty()) {
             renderBody(env, scope, writer);

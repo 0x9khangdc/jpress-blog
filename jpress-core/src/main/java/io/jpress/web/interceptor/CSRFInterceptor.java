@@ -30,9 +30,9 @@ import io.jpress.commons.utils.SessionUtils;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 用于预防 csrf 攻击的拦截器
+ * @Title: For prevention csrf Insertor interceptor
  * <p>
- * 备注：此拦截器只对 do 开头的方法进行拦截。例如：127.0.0.1/user/doDel?id=xxx
+ * Remarks: This interceptor only intercepts the way to start with Do.E.g: 127.0.0.1/user/doDel?id=xxx
  */
 public class CSRFInterceptor implements Interceptor {
 
@@ -48,35 +48,35 @@ public class CSRFInterceptor implements Interceptor {
 
         String uid = CookieUtil.get(inv.getController(), JPressConsts.COOKIE_UID);
         if (StrUtil.isBlank(uid) || !SessionUtils.isLoginedOk(uid)) {
-            // 不用管用户未登录的情况
+            // No need to control the user's not logging in
             inv.invoke();
             return;
         }
 
 
-        //不是 do 开头的，让其通过
-        //在JPress里有一个共识：只要是 增、删、改的操作，都会用do开头对方法进行命名
+        //It's not from the beginning, let it pass
+        //There is a consensus in JPRESS: as long as it is an increase, delete, and modified operation, the method will be named by Do to start
         String methodName = inv.getMethodName();
         if (!methodName.startsWith(CSRF_METHOD_PREFIX)) {
             renderNormal(inv);
             return;
         }
 
-        //是小写字母 或者 数字、中文等非大写字母，这个时候可能是个单词 比如：download
+        //It is a lowercase letter or number, Chinese and other non -uppercase letters. At this time, it may be a word such
         if (!Character.isUpperCase(methodName.charAt(2))) {
             renderNormal(inv);
             return;
         }
 
-        //从cookie中读取token，因为 第三方网站 无法修改 和 获得 cookie
-        //所以从cookie获取存储的token是安全的
+        //Read from cookies, because third -party websites cannot modify and obtain cookies
+        //So it is safe to obtain the stored token from cookie
         String cookieToken = inv.getController().getCookie(CSRF_KEY);
         if (StrUtil.isBlank(cookieToken)) {
             renderBad(inv);
             return;
         }
 
-        //url参数里的csrf_token
+        //csrf_token in the url parameter
         String paraToken = inv.getController().getPara(CSRF_KEY);
         if (StrUtil.isBlank(paraToken)) {
             renderBad(inv);
@@ -93,8 +93,8 @@ public class CSRFInterceptor implements Interceptor {
 
 
     private void renderNormal(Invocation inv) {
-        // 若不是 ajax 请求，才需要重置本地的 token
-        // ajax 请求，需要保证之前的token可以继续使用
+        // If it is not AJAX request, you need to reset the local token
+        // AJAX request, you need to ensure that the previous Token can continue to use
         if (!RequestUtil.isAjaxRequest(inv.getController().getRequest())) {
             String scrfToken = createSCRFToken(inv);
             inv.getController().setCookie(CSRF_KEY, scrfToken, -1);
@@ -116,7 +116,7 @@ public class CSRFInterceptor implements Interceptor {
     }
 
 
-    private static final Ret FAIL_RET = Ret.fail().set("message", "token失效，为了安全起见，请刷新后重试。");
+    private static final Ret FAIL_RET = Ret.fail().set("message", "Token is invalid, for safety reasons, please refresh it and try it out.");
 
     private void renderBad(Invocation inv) {
         if (RequestUtil.isAjaxRequest(inv.getController().getRequest())) {

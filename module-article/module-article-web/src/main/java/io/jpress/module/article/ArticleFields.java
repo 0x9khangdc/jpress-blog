@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 文章字段
+ * @Title: Article field
  */
 public class ArticleFields {
 

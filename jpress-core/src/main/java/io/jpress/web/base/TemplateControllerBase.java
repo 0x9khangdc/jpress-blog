@@ -55,7 +55,7 @@ public abstract class TemplateControllerBase extends ControllerBase {
 
     @NotAction
     public void render(String view, String defaultView) {
-        //如果是 / 开头的文件，就不通过模板文件去渲染。而是去根目录去查找。
+        //If it is a file at the beginning, it will not be rendered through the template file.Instead, go to the root directory to find.
         if (view != null && view.startsWith("/")) {
             super.render(view);
             return;
@@ -79,10 +79,10 @@ public abstract class TemplateControllerBase extends ControllerBase {
 
         boolean isMobile = isMobileBrowser();
 
-        //匹配到可以用的 view
+        //Match to the available view
         view = template.matchView(view, isMobile);
 
-        //匹配不到渲染的模板，尝试使用 default 去匹配
+        //If you can't match the rendering template, try to match with default
         if (view == null && defaultView != null && !defaultView.startsWith("/")) {
             view = template.matchView(defaultView, isMobile);
         }
@@ -146,7 +146,7 @@ public abstract class TemplateControllerBase extends ControllerBase {
 
 
     /**
-     * 在当前页面，对菜单选中进行判断
+     * On the current page, judge the menu selection
      *
      * @param checker
      */

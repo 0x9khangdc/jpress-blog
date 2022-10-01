@@ -112,7 +112,7 @@ public class FormInfo extends BaseFormInfo<FormInfo> {
         if (errorLabels.isEmpty()) {
             return Ret.ok();
         } else {
-            return Ret.fail().set("message", CollectionUtil.toString(errorLabels, ",") + "的字段名不能为空，或者不能为纯数字。");
+            return Ret.fail().set("message", CollectionUtil.toString(errorLabels, ",") + "The field name cannot be empty or pure figures.");
         }
     }
 
@@ -135,17 +135,17 @@ public class FormInfo extends BaseFormInfo<FormInfo> {
             sqlBuilder.append(fieldInfo.toFieldSql()).append(",");
         }
 
-        sqlBuilder.append("  `user_ip` varchar(64) DEFAULT NULL COMMENT '用户IP',\n" +
-                "  `user_agent` varchar(512) DEFAULT NULL COMMENT '用户浏览器agent',\n" +
-                "  `user_browser` varchar(64) DEFAULT NULL COMMENT '用户浏览器',\n" +
-                "  `user_browser_version` varchar(64) DEFAULT NULL COMMENT '用户浏览器版本',\n" +
-                "  `user_os` varchar(128) DEFAULT NULL COMMENT '用户操作系统',\n" +
-                "  `user_device` varchar(128) DEFAULT NULL COMMENT '用户设备',\n" +
-                "  `user_device_brand` varchar(128) DEFAULT NULL COMMENT '用户设备品牌',\n" +
-                "  `user_network` varchar(32) DEFAULT NULL COMMENT '用户网络类型',\n" +
-                "  `user_with_mobile` tinyint(1) DEFAULT NULL COMMENT '是否是手机',\n" +
-                "  `user_start_time` datetime DEFAULT NULL COMMENT '用户开始时间',\n" +
-                "  `user_submit_time` datetime DEFAULT NULL COMMENT '用户提交时间',\n");
+        sqlBuilder.append("  `user_ip` varchar(64) DEFAULT NULL COMMENT 'User IP',\n" +
+                "  `user_agent` varchar(512) DEFAULT NULL COMMENT 'User browser agent',\n" +
+                "  `user_browser` varchar(64) DEFAULT NULL COMMENT 'User browser',\n" +
+                "  `user_browser_version` varchar(64) DEFAULT NULL COMMENT 'User browser version',\n" +
+                "  `user_os` varchar(128) DEFAULT NULL COMMENT 'User operating system',\n" +
+                "  `user_device` varchar(128) DEFAULT NULL COMMENT 'User device',\n" +
+                "  `user_device_brand` varchar(128) DEFAULT NULL COMMENT 'User device brand',\n" +
+                "  `user_network` varchar(32) DEFAULT NULL COMMENT 'User network type',\n" +
+                "  `user_with_mobile` tinyint(1) DEFAULT NULL COMMENT 'Whether it is a mobile phone',\n" +
+                "  `user_start_time` datetime DEFAULT NULL COMMENT 'User start time',\n" +
+                "  `user_submit_time` datetime DEFAULT NULL COMMENT 'User submission time',\n");
         sqlBuilder.append("PRIMARY KEY (`id`)");
         sqlBuilder.append(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
@@ -164,14 +164,14 @@ public class FormInfo extends BaseFormInfo<FormInfo> {
                 String paraValue = ArrayUtil.toString(values, ",");
                 if (StrUtil.isBlank(paraValue)) {
                     if (fieldInfo.isRequired()) {
-                        throw new IllegalArgumentException(fieldInfo.getLabel() + "数据不能为空！");
+                        throw new IllegalArgumentException(fieldInfo.getLabel() + "The data cannot be empty!");
                     }
                     continue;
                 }
 
                 //检查数据长度
                 if (!fieldInfo.checkValueLen(paraValue)) {
-                    throw new IllegalArgumentException(fieldInfo.getLabel() + "数据长度过长！");
+                    throw new IllegalArgumentException(fieldInfo.getLabel() + "The data length is too long!");
                 }
 
                 Object value;

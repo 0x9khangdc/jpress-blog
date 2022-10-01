@@ -52,8 +52,8 @@ public class TemplateManager {
 
 
     /**
-     * 获取所有已经成功安装的模板
-     * @return 模板列表
+     * Get all the templates that have been successfully installed
+     * @return Template list
      */
     public List<Template> getInstalledTemplates() {
         String basePath = PathKit.getWebRootPath() + "/templates";
@@ -73,7 +73,7 @@ public class TemplateManager {
 
 
     /**
-     * 扫码 templateDir 目录下的所有模板，填充到 list 对象里
+     * Scan code templateDir All the templates in the directory are filled in the list object
      * @param templateDir
      * @param list
      */
@@ -97,7 +97,7 @@ public class TemplateManager {
 
 
     /**
-     * 根据模板的 id 获取某个模板
+     * Get a template based on the ID of the template
      * @param id
      * @return
      */
@@ -116,7 +116,7 @@ public class TemplateManager {
 
 
     /**
-     * 设置当前网站的默认模板
+     * Set the default template of the current website
      * @param templateId
      */
     private void initDefaultTemplate(String templateId) {
@@ -136,9 +136,9 @@ public class TemplateManager {
 
 
     /**
-     * 获取网站的当前模板
-     * 如果当前网站开启了 "模板预览" 功能，则优先通过 url 获取 "预览模板"
-     * @return 当前的模板
+     * Get the current template of the website
+     * If the current website opens the "template preview" function, priority can be given to the "preview template" through the URL
+     * @return Current template
      */
     public Template getCurrentTemplate() {
         Template previewTemplate = getPreviewTemplate();
@@ -160,7 +160,7 @@ public class TemplateManager {
 
 
     /**
-     * 获取预览的模板
+     * Get preview template
      * @return
      */
     public Template getPreviewTemplate() {
@@ -183,7 +183,7 @@ public class TemplateManager {
 
 
     /**
-     * 设置网站当前的默认模板
+     * Set the current default template of the website
      * @param templateId
      */
     public void setCurrentTemplate(String templateId) {
@@ -197,8 +197,8 @@ public class TemplateManager {
 
 
     /**
-     * 由于 JFinal 会进行模板缓存，当后台动态编辑模板内容的时候
-     * 需要调用此方法清除模板缓存，才能 "实时生效"
+     * Since JFinal will have a template cache, when the background dynamic edit template content
+     * You need to call this method to remove the template cache to "take effect in real time"
      */
     public void clearCache() {
         RenderManager.me().getEngine().removeAllTemplateCache();

@@ -83,7 +83,7 @@ public class MenuManager implements JbootEventListener {
         if (JPressMenuConfig.me.isUserEnable()) {
             MenuGroup userMenuGroup = new MenuGroup();
             userMenuGroup.setId(JPressConsts.SYSTEM_MENU_USER);
-            userMenuGroup.setText("用户");
+            userMenuGroup.setText("Ucenter");
             userMenuGroup.setIcon("<i class=\"fas fa-user\"></i>");
             userMenuGroup.setOrder(200);
             systemMenus.add(userMenuGroup);
@@ -92,7 +92,7 @@ public class MenuManager implements JbootEventListener {
         if (JPressMenuConfig.me.isWechatEnable()) {
             MenuGroup wechatMenuGroup = new MenuGroup();
             wechatMenuGroup.setId(JPressConsts.SYSTEM_MENU_WECHAT_PUBULIC_ACCOUNT);
-            wechatMenuGroup.setText("微信");
+            wechatMenuGroup.setText("WeChat");
             wechatMenuGroup.setIcon("<i class=\"fab fa-weixin\"></i>");
             wechatMenuGroup.setOrder(300);
             systemMenus.add(wechatMenuGroup);
@@ -102,7 +102,7 @@ public class MenuManager implements JbootEventListener {
         if (JPressMenuConfig.me.isTemplateEnable()) {
             MenuGroup templateMenuGroup = new MenuGroup();
             templateMenuGroup.setId(JPressConsts.SYSTEM_MENU_TEMPLATE);
-            templateMenuGroup.setText("模板");
+            templateMenuGroup.setText("Template");
             templateMenuGroup.setIcon("<i class=\"fas fa-magic\"></i>");
             templateMenuGroup.setOrder(400);
             systemMenus.add(templateMenuGroup);
@@ -112,7 +112,7 @@ public class MenuManager implements JbootEventListener {
         if (JPressMenuConfig.me.isAddonEnable()) {
             MenuGroup addonMenuGroup = new MenuGroup();
             addonMenuGroup.setId(JPressConsts.SYSTEM_MENU_ADDON);
-            addonMenuGroup.setText("插件");
+            addonMenuGroup.setText("Addon");
             addonMenuGroup.setIcon("<i class=\"fas fa-plug\"></i>");
             addonMenuGroup.setOrder(500);
             systemMenus.add(addonMenuGroup);
@@ -121,7 +121,7 @@ public class MenuManager implements JbootEventListener {
 
         MenuGroup settingMenuGroup = new MenuGroup();
         settingMenuGroup.setId(JPressConsts.SYSTEM_MENU_SYSTEM);
-        settingMenuGroup.setText("设置");
+        settingMenuGroup.setText("System");
         settingMenuGroup.setIcon("<i class=\"fas fa-cog\"></i>");
         settingMenuGroup.setOrder(600);
         systemMenus.add(settingMenuGroup);
@@ -140,7 +140,7 @@ public class MenuManager implements JbootEventListener {
 
         MenuGroup attachmentMenuGroup = new MenuGroup();
         attachmentMenuGroup.setId(JPressConsts.SYSTEM_MENU_ATTACHMENT);
-        attachmentMenuGroup.setText("附件");
+        attachmentMenuGroup.setText("Attachment");
         attachmentMenuGroup.setIcon("<i class=\"fas fa-folder\"></i>");
         moduleMenus.add(attachmentMenuGroup);
 

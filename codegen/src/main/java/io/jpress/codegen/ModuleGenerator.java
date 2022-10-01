@@ -30,7 +30,7 @@ import java.util.*;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 根据数据库信息，生成 maven module
+ * @Title: According to the database information, generate maven module
  * @Package io.jpress.core.code
  */
 public class ModuleGenerator {
@@ -144,7 +144,7 @@ public class ModuleGenerator {
         Map map = new HashMap();
         map.put("moduleName", moduleName);
         Engine engine = new Engine();
-        engine.setToClassPathSourceFactory();    // 从 class path 内读模板文件
+        engine.setToClassPathSourceFactory();    // Read the template file from class Path
         engine.addSharedMethod(new StrKit());
 
         File modulePomXmlFile = new File(modulePath, "pom.xml");

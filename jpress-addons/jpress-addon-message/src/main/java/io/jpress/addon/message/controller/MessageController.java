@@ -25,24 +25,24 @@ public class MessageController extends JbootController{
         CommonsUtils.escapeModel(entry);
 
         if(StrUtil.isBlank(entry.getName())){
-            renderJson(Ret.fail().set("msg","对不起名字不能是空"));
+            renderJson(Ret.fail().set("msg","I'm sorry for the name, can't be empty"));
             return;
         }
 
         if(StrUtil.isBlank(entry.getPhone())){
-            renderJson(Ret.fail().set("msg","对不起电话不能是空"));
+            renderJson(Ret.fail().set("msg","I'm sorry for the phone, can't be empty"));
             return;
         }
 
 
         if(StrUtil.isBlank(entry.getTitle())){
-            renderJson(Ret.fail().set("msg","对不起标题不能是空"));
+            renderJson(Ret.fail().set("msg","Sorry the title cannot be empty"));
             return;
         }
 
 
         if(StrUtil.isBlank(entry.getContent())){
-            renderJson(Ret.fail().set("msg","对不起留言不能是空"));
+            renderJson(Ret.fail().set("msg","Sorry to leave a message, you can't be empty"));
             return;
         }
 

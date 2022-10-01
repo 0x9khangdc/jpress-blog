@@ -47,12 +47,12 @@ public class WechatAddonManager implements JbootEventListener {
     }
 
     /**
-     * 所有插件
+     * All plug -in
      */
     private Map<String, WechatAddonInfo> allWechatAddons = new ConcurrentHashMap();
 
     /**
-     * 已经启用的插件
+     * Plug -in that has been enabled
      */
     private Map<String, WechatAddonInfo> enableWechatAddons = new ConcurrentHashMap<>();
 
@@ -60,10 +60,10 @@ public class WechatAddonManager implements JbootEventListener {
     private OptionService optionService;
 
     /**
-     * 初始化的主要逻辑
+     * The main logic of initialization
      * <p>
-     * 1. 扫描当前所有的微信插件
-     * 2. 查看该微信插件是否开启
+     * 1. Scan all the current WeChat plug-in
+     * 2. Check whether the WeChat plug-in is turned on
      */
     public void init() {
 

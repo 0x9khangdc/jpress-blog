@@ -26,7 +26,7 @@ import com.jfinal.weixin.sdk.msg.in.InMsg;
 public interface WechatAddon {
 
     /**
-     * 用来匹配是否由该插件执行
+     * Used to match whether it is executed by the plugin
      *
      * @param inMsg
      * @param msgController
@@ -36,7 +36,7 @@ public interface WechatAddon {
 
 
     /**
-     * 执行回复逻辑
+     * Execute the reply logic
      *
      * @param inMsg
      * @param msgController

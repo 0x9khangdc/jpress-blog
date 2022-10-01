@@ -55,7 +55,7 @@ public class _ArticleController extends AdminControllerBase {
     @Inject
     private MenuService menuService;
 
-    @AdminMenu(text = "文章管理", groupId = "article", order = 0)
+    @AdminMenu(text = "Article management", groupId = "article", order = 0)
     public void list() {
 
         String status = getPara("status");
@@ -89,7 +89,7 @@ public class _ArticleController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "写文章", groupId = "article", order = 1)
+    @AdminMenu(text = "write an essay", groupId = "article", order = 1)
     public void write() {
 
         List<ArticleCategory> categories = categoryService.findListByType(ArticleCategory.TYPE_CATEGORY);
@@ -120,8 +120,8 @@ public class _ArticleController extends AdminControllerBase {
     }
 
     @EmptyValidate({
-            @Form(name = "id", message = "文章ID不能为空"),
-            @Form(name = "mode", message = "文章编辑模式不能为空")
+            @Form(name = "id", message = "Article ID cannot be empty"),
+            @Form(name = "mode", message = "Article editing mode cannot be empty")
     })
     public void doChangeEditMode() {
         Long id = getParaToLong("id");
@@ -165,8 +165,8 @@ public class _ArticleController extends AdminControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "article.title", message = "标题不能为空"),
-            @Form(name = "article.content", message = "文章内容不能为空")
+            @Form(name = "article.title", message = "The title can not be blank"),
+            @Form(name = "article.content", message = "The content of the article cannot be empty")
     })
     public void doWriteSave() {
 
@@ -295,8 +295,8 @@ public class _ArticleController extends AdminControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "category.title", message = "分类名称不能为空"),
-            @Form(name = "category.slug", message = "slug 不能为空")
+            @Form(name = "category.title", message = "Classified names cannot be empty"),
+            @Form(name = "category.slug", message = "slug Can not be empty")
     })
     public void doCategorySave() {
         ArticleCategory category = getModel(ArticleCategory.class, "category");
@@ -305,13 +305,13 @@ public class _ArticleController extends AdminControllerBase {
 
     private void saveCategory(ArticleCategory category) {
         if (!validateSlug(category)) {
-            renderJson(Ret.fail("message", "固定连接不能以数字结尾"));
+            renderJson(Ret.fail("message", "Fixed connection cannot end with numbers"));
             return;
         }
 
         ArticleCategory existModel = categoryService.findFirstByTypeAndSlug(category.getType(), category.getSlug());
         if (existModel != null && !Objects.equals(existModel.getId(), category.getId())) {
-            renderJson(Ret.fail("message", "该分类的固定连接以及被占用"));
+            renderJson(Ret.fail("message", "The fixed connection and occupation of this classification"));
             return;
         }
 
@@ -350,7 +350,7 @@ public class _ArticleController extends AdminControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "category.title", message = "标签名称不能为空"),
+            @Form(name = "category.title", message = "The label name cannot be empty"),
     })
     public void doTagSave() {
 
@@ -364,7 +364,7 @@ public class _ArticleController extends AdminControllerBase {
         if (tag.getId() == null) {
             ArticleCategory indbTag = categoryService.findFirstByTypeAndSlug(ArticleCategory.TYPE_TAG, slug);
             if (indbTag != null) {
-                renderJson(Ret.fail().set("message", "该标签已经存在，不能新增。"));
+                renderJson(Ret.fail().set("message", "The label already exists and cannot be added."));
                 return;
             }
         }
@@ -380,7 +380,7 @@ public class _ArticleController extends AdminControllerBase {
 
 
 
-    @AdminMenu(text = "设置", groupId = "article", order = 6)
+    @AdminMenu(text = "set up", groupId = "article", order = 6)
     public void setting() {
         render("article/setting.html");
     }

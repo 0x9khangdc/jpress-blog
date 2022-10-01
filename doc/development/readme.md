@@ -1,7 +1,7 @@
-# 概述
+# Overview
 
-欢迎使用，在开始开发 JPress 之前，你应该对 html、JavaScript、Java、MySql 数据库、服务器等有基本的认识。本文档是建立在这些基础知识之上的。
+Welcome to use, start development JPress Before, you should be right html、JavaScript、Java、MySql Databases, servers, etc. have basic understanding.This document is based on these basic knowledge.
 
-> 但如果你只需要开发 JPress 模板，只需要对 html、JavaScript 了解即可，不需要任何后端知识基础。
+> But if you only need to develop JPress Template, just need to be right html、JavaScript Just understand, no back-end knowledge foundation is required.
 
 

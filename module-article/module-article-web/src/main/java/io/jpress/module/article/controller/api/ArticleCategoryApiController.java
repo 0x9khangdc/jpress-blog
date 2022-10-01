@@ -42,20 +42,20 @@ import java.util.stream.Collectors;
  * @Title: 文章分类、tag 相关 api
  */
 @RequestMapping("/api/article/category")
-@Api("文章分类相关API文档")
+@Api("Article classification related API documentation")
 public class ArticleCategoryApiController extends ApiControllerBase {
 
     @Inject
     private ArticleCategoryService categoryService;
 
 
-    @ApiOper(value = "文章分类详情", paraNotes = "id 或者 slug 必须有一个不能为空")
-    @ApiResp(field = "detail", dataType = ArticleCategory.class, notes = "文章分类详情")
-    public Ret detail(@ApiPara("分类ID") Long id
-            , @ApiPara("分类固定连接") String slug
+    @ApiOper(value = "Article classification details", paraNotes = "ID or slug must have one cannot be empty")
+    @ApiResp(field = "detail", dataType = ArticleCategory.class, notes = "Article classification details")
+    public Ret detail(@ApiPara("Classification ID") Long id
+            , @ApiPara("Category fixed connection") String slug
     ) {
         if (id == null && slug == null) {
-            return Ret.fail().set("message", "id 或者 slug 必须有一个不能为空");
+            return Ret.fail().set("message", "ID or slug must have one cannot be empty");
         }
 
         if (id != null) {
@@ -68,9 +68,9 @@ public class ArticleCategoryApiController extends ApiControllerBase {
     }
 
 
-    @ApiOper("根据文章分类的type查询文章分类")
-    @ApiResp(field = "list", notes = "文章分类列表", dataType = List.class, genericTypes = ArticleCategory.class)
-    public Ret listByType(@ApiPara("分类type") @NotEmpty String type, @ApiPara("上级分类ID") Long pid) {
+    @ApiOper("Type query article classification according to the article classification")
+    @ApiResp(field = "list", notes = "Article classification list", dataType = List.class, genericTypes = ArticleCategory.class)
+    public Ret listByType(@ApiPara("Category Type") @NotEmpty String type, @ApiPara("Superior classification ID") Long pid) {
 
         List<ArticleCategory> categories = categoryService.findListByType(type);
         if (categories == null || categories.isEmpty()) {
@@ -89,21 +89,21 @@ public class ArticleCategoryApiController extends ApiControllerBase {
     }
 
 
-    @ApiOper("删除文章分类（Tag）")
-    public Ret doDelete(@ApiPara("分类ID") @NotNull Long id) {
+    @ApiOper("Delete the article classification (tag)")
+    public Ret doDelete(@ApiPara("Classification ID") @NotNull Long id) {
         categoryService.deleteById(id);
         return Rets.OK;
     }
 
-    @ApiOper(value = "创建新的文章分类",contentType = ContentType.JSON)
-    @ApiResp(field = "id", notes = "文章分类D", dataType = Long.class, mock = "123")
-    public Ret doCreate(@ApiPara("文章分类json") @JsonBody ArticleCategory articleCategory) {
+    @ApiOper(value = "Create a new article classification",contentType = ContentType.JSON)
+    @ApiResp(field = "id", notes = "Article Classification D", dataType = Long.class, mock = "123")
+    public Ret doCreate(@ApiPara("Article classification JSON") @JsonBody ArticleCategory articleCategory) {
         Object id = categoryService.save(articleCategory);
         return Ret.ok().set("id", id);
     }
 
-    @ApiOper(value = "更新文章分类",contentType = ContentType.JSON)
-    public Ret doUpdate(@ApiPara("文章分类json") @JsonBody ArticleCategory articleCategory) {
+    @ApiOper(value = "Update article classification",contentType = ContentType.JSON)
+    public Ret doUpdate(@ApiPara("Article classification JSON") @JsonBody ArticleCategory articleCategory) {
         categoryService.update(articleCategory);
         return Rets.OK;
     }

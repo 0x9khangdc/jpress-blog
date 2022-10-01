@@ -24,43 +24,43 @@ import java.util.List;
  * @Title: 岗位相关的 API
  */
 @RequestMapping("/api/job")
-@Api("招聘相关API文档")
+@Api("Recruitment related API documents")
 public class JobApiController extends ApiControllerBase {
 
     @Inject
     private JobService jobService;
 
 
-    @ApiOper(value = "岗位详情", paraNotes = "ID必须传入一个值")
-    @ApiResp(field = "jobDetail", dataType = Job.class, notes = "岗位详情")
-    public Ret detail(@ApiPara("岗位ID") Long id) {
+    @ApiOper(value = "Job details", paraNotes = "ID must be passed into a value")
+    @ApiResp(field = "jobDetail", dataType = Job.class, notes = "Job details")
+    public Ret detail(@ApiPara("Post ID") Long id) {
 
         if (id == null) {
-            return Ret.fail().set("message", "id必须有一个值");
+            return Ret.fail().set("message", "ID must have a value");
         }
 
         Job job = jobService.findByIdWithInfo(id);
 
         if (job == null) {
-            return Ret.fail().set("message", "该岗位不存在");
+            return Ret.fail().set("message", "The post does not exist");
         }
 
         return Ret.ok().set("jobDetail", job);
     }
 
 
-    @ApiOper("岗位分页读取")
-    @ApiResp(field = "page", notes = "岗位分页数据", dataType = Page.class, genericTypes = Job.class)
-    public Ret paginate(@ApiPara("排序方式") String orderBy,
-                        @ApiPara("岗位需要学历") Integer education,
-                        @ApiPara("岗位分类ID") Long categoryId,
-                        @ApiPara("岗位部门ID") Long deptId,
-                        @ApiPara("岗位地区ID") Long addressId,
-                        @ApiPara("岗位工作年限") Integer workYear,
-                        @ApiPara("岗位工作类型") Integer workType,
-                        @ApiPara("岗位招聘类型") Integer recruitmentType,
-                        @ApiPara("分页的页码") @DefaultValue("1") int pageNumber,
-                        @ApiPara("每页的数据数量") @DefaultValue("10") int pageSize) {
+    @ApiOper("Job paging reading")
+    @ApiResp(field = "page", notes = "Job paging data", dataType = Page.class, genericTypes = Job.class)
+    public Ret paginate(@ApiPara("sort by") String orderBy,
+                        @ApiPara("Job requires academic qualifications") Integer education,
+                        @ApiPara("Job classification ID") Long categoryId,
+                        @ApiPara("Job department ID") Long deptId,
+                        @ApiPara("Position area ID") Long addressId,
+                        @ApiPara("Job working life") Integer workYear,
+                        @ApiPara("Job type") Integer workType,
+                        @ApiPara("Job recruitment type") Integer recruitmentType,
+                        @ApiPara("Pagling page number") @DefaultValue("1") int pageNumber,
+                        @ApiPara("The number of data per page") @DefaultValue("10") int pageSize) {
 
         Columns columns = new Columns();
         columns.eq("education", education);
@@ -78,17 +78,17 @@ public class JobApiController extends ApiControllerBase {
     }
 
 
-    @ApiOper("根据自定义条件查找岗位列表")
-    @ApiResp(field = "list", notes = "岗位列表", dataType = List.class, genericTypes = Job.class)
-    public Ret listByColumns(@ApiPara("排序方式") String orderBy,
-                             @ApiPara("岗位需要学历") Integer education,
-                             @ApiPara("岗位分类ID") Long categoryId,
-                             @ApiPara("岗位部门ID") Long deptId,
-                             @ApiPara("岗位地区ID") Long addressId,
-                             @ApiPara("岗位工作年限") Integer workYear,
-                             @ApiPara("岗位工作类型") Integer workType,
-                             @ApiPara("岗位招聘类型") Integer recruitmentType,
-                             @ApiPara("需要查询的数量") Integer count) {
+    @ApiOper("Find the list of posts according to custom conditions")
+    @ApiResp(field = "list", notes = "Position list", dataType = List.class, genericTypes = Job.class)
+    public Ret listByColumns(@ApiPara("sort by") String orderBy,
+                             @ApiPara("Job requires academic qualifications") Integer education,
+                             @ApiPara("Job classification ID") Long categoryId,
+                             @ApiPara("Job department ID") Long deptId,
+                             @ApiPara("Position area ID") Long addressId,
+                             @ApiPara("Job working life") Integer workYear,
+                             @ApiPara("Job type") Integer workType,
+                             @ApiPara("Job recruitment type") Integer recruitmentType,
+                             @ApiPara("Number of query") Integer count) {
 
         Columns columns = new Columns();
         columns.eq("category_id", categoryId);
@@ -104,21 +104,21 @@ public class JobApiController extends ApiControllerBase {
     }
 
 
-    @ApiOper("删除岗位")
-    public Ret doDelete(@ApiPara("岗位ID") @NotNull Long id) {
+    @ApiOper("Delete post")
+    public Ret doDelete(@ApiPara("Post ID") @NotNull Long id) {
         jobService.deleteById(id);
         return Rets.OK;
     }
 
-    @ApiOper(value = "创建新岗位", contentType = ContentType.JSON)
-    @ApiResp(field = "id", notes = "岗位ID", dataType = Long.class, mock = "123")
-    public Ret doCreate(@ApiPara("岗位的 JSON 信息") @JsonBody Job job) {
+    @ApiOper(value = "Create a new post", contentType = ContentType.JSON)
+    @ApiResp(field = "id", notes = "Post ID", dataType = Long.class, mock = "123")
+    public Ret doCreate(@ApiPara("Job JSON information") @JsonBody Job job) {
         Object id = jobService.save(job);
         return Ret.ok().set("id", id);
     }
 
-    @ApiOper(value = "更新岗位", contentType = ContentType.JSON)
-    public Ret doUpdate(@ApiPara("岗位的 JSON 信息") @JsonBody Job job) {
+    @ApiOper(value = "Update post", contentType = ContentType.JSON)
+    public Ret doUpdate(@ApiPara("Job JSON information") @JsonBody Job job) {
         jobService.update(job);
         return Rets.OK;
     }

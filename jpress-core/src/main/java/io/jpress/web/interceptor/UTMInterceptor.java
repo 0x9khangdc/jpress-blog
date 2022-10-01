@@ -32,7 +32,7 @@ import io.jpress.web.base.ApiControllerBase;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: utm拦截器
+ * @Title: UTM interceptor
  */
 public class UTMInterceptor implements Interceptor {
 
@@ -73,7 +73,7 @@ public class UTMInterceptor implements Interceptor {
         }
 
         /**
-         * 可能是API的用户，API 通过 jwt 获取用户信息
+         * It may be the user of API, the API obtains user information through JWT
          */
         else {
             Long userId = getUserIdInJwt(controller);
@@ -81,7 +81,7 @@ public class UTMInterceptor implements Interceptor {
                 utm.setUserId(userId.longValue());
             }
             /**
-             * 当用户未登录的情况下，创建匿名记录
+             * When the user fails to log in, create an anonymous record
              */
             else {
                 //anonym

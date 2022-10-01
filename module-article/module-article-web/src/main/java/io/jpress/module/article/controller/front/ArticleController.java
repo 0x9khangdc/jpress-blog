@@ -156,7 +156,7 @@ public class ArticleController extends TemplateControllerBase {
         }
 
         if (StrUtil.isBlank(content)) {
-            renderJson(Ret.fail().set("message", "评论内容不能为空"));
+            renderJson(Ret.fail().set("message", "Comment content cannot be empty"));
             return;
         } else {
             content = StrUtil.escapeHtml(content);
@@ -166,18 +166,18 @@ public class ArticleController extends TemplateControllerBase {
         Boolean vCodeEnable = JPressOptions.isTrueOrEmpty("article_comment_vcode_enable");
         if (vCodeEnable != null && vCodeEnable == true) {
             if (validateCaptcha("captcha") == false) {
-                renderJson(Ret.fail().set("message", "验证码错误").set("errorCode", 2));
+                renderJson(Ret.fail().set("message", "Verification code error").set("errorCode", 2));
                 return;
             }
         }
 
         if (WordFilterUtil.isMatchedFilterWords(content)) {
-            renderJson(Ret.fail().set("message", "非法内容，无法发布评论信息"));
+            renderJson(Ret.fail().set("message", "Illegal content, cannot publish comment information"));
             return;
         }
 
         if (CloudWordFilterUtil.isIllegalWords(content)) {
-            renderJson(Ret.fail().set("message", "非法内容，无法发布评论"));
+            renderJson(Ret.fail().set("message", "Illegal content, cannot publish comments"));
             return;
         }
 
@@ -190,14 +190,14 @@ public class ArticleController extends TemplateControllerBase {
 
         // 文章关闭了评论的功能
         if (!article.isCommentEnable()) {
-            renderJson(Ret.fail().set("message", "该文章的评论功能已关闭"));
+            renderJson(Ret.fail().set("message", "The comment function of this article has been closed"));
             return;
         }
 
         //是否开启评论功能
         Boolean commentEnable = JPressOptions.isTrueOrEmpty("article_comment_enable");
         if (commentEnable == null || !commentEnable) {
-            renderJson(Ret.fail().set("message", "评论功能已关闭"));
+            renderJson(Ret.fail().set("message", "Comments are closed"));
             return;
         }
 
@@ -206,7 +206,7 @@ public class ArticleController extends TemplateControllerBase {
         Boolean unLoginEnable = optionService.findAsBoolByKey("article_comment_unlogin_enable");
         if (unLoginEnable == null || !unLoginEnable) {
             if (getLoginedUser() == null) {
-                renderJson(Ret.fail().set("message", "未登录用户不能评论").set("errorCode", 9));
+                renderJson(Ret.fail().set("message", "Unexpected users cannot comment").set("errorCode", 9));
                 return;
             }
         }

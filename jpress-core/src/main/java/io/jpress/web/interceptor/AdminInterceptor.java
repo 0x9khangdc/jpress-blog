@@ -100,7 +100,7 @@ public class AdminInterceptor implements Interceptor {
         List<SiteInfo> allSites = siteInfoService.findAll();
         inv.getController().setAttr("SITES",allSites);
 
-        //设置分页下拉菜单的间隔数据
+        //Set the interval data of the pagination drop -down menu
         inv.getController().setAttr(ATTR_PAGINATE_SPACING,10);
 
         inv.invoke();
@@ -108,12 +108,12 @@ public class AdminInterceptor implements Interceptor {
 
 
     private void redirectLoginPage(Invocation inv){
-        //当用户未配置自定义登录页面，直接跳转到登录页面
+        //When the user is not configured to customize the login page, jump directly to the login page
         if (JPressConfig.DEFAULT_LOGIN_PAGE.equals(JPressConfig.me.getAdminLoginPage())) {
             inv.getController().redirect(JPressConfig.DEFAULT_LOGIN_PAGE);
         }
-        //如果用户配置了自定义的登录页面，则直接渲染404，否则会暴露用户配置的登录页面
-        //这样一来，用户配置的后台登录页面就没有意义了
+        //If the user configures the custom login page, it will directly render 404, otherwise it will expose the login page of the user configuration
+        //In this way, the background login page of the user configuration is meaningless
         else {
             inv.getController().renderError(404);
         }

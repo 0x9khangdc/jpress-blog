@@ -46,7 +46,7 @@ import io.jpress.web.sitemap.SitemapManager;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: JPress 初始化工具
+ * @Title: JPress Initialization tool
  * @Package io.jpress
  */
 @Weight(100)

@@ -23,7 +23,7 @@ import io.jpress.JPressOptions;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: Api的拦截器
+ * @Title: API's interceptor
  */
 public class JPressInterceptor implements Interceptor {
 
@@ -34,7 +34,7 @@ public class JPressInterceptor implements Interceptor {
 
         Controller controller = inv.getController();
 
-        //方便模板开发者直接在模板里接收参数
+        //Convenient template developer directly receive parameters in the template
         controller.setAttr("C", controller);
         controller.setAttr("CDN", JPressOptions.getCDNDomain());
         controller.setAttr(ADDON_PATH_KEY, "");

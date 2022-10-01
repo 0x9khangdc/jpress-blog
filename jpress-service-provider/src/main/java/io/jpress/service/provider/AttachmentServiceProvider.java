@@ -83,13 +83,13 @@ public class AttachmentServiceProvider extends JPressServiceBase<Attachment> imp
 
         String waterImage = JPressOptions.get("attachment_watermark_img");
         if (StrUtil.isBlank(waterImage)) {
-            LOG.warn("水印功能已经启用，但是水印图片未配置。");
+            LOG.warn("The watermark function has been enabled, but the watermark picture is not configured.");
             return;
         }
 
         File waterImageFile = new File(PathKit.getWebRootPath(), waterImage);
         if (!waterImageFile.exists()) {
-            LOG.warn("水印功能已经启用，但是水印图片不存在。");
+            LOG.warn("The watermark function has been enabled, but the watermark picture does not exist.");
             return;
         }
 
@@ -106,7 +106,7 @@ public class AttachmentServiceProvider extends JPressServiceBase<Attachment> imp
                     waterMarkPosition,
                     alpha);
         } catch (Exception ex) {
-            LOG.error("水印处理失败：" + model.getPath());
+            LOG.error("Watermark treatment failed:" + model.getPath());
             LOG.error(ex.toString(), ex);
         }
     }

@@ -27,7 +27,7 @@ import io.jpress.service.PermissionService;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 管理后台的拦截器
+ * @Title: Management background interceptor
  */
 public class PermissionInterceptor implements Interceptor {
 
@@ -56,7 +56,7 @@ public class PermissionInterceptor implements Interceptor {
 
     public void render(Invocation inv) {
         if (RequestUtil.isAjaxRequest(inv.getController().getRequest())) {
-            inv.getController().renderJson(Ret.fail().set("message", "您没有权限操作此功能。"));
+            inv.getController().renderJson(Ret.fail().set("message", "You have no permission to operate this function."));
         } else {
             inv.getController().render(NO_PERMISSION_VIEW);
         }

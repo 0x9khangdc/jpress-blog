@@ -51,7 +51,7 @@ public class ArticleCrumbDirective extends JbootDirectiveBase {
         String indexUrl = getParaToString("indexUrl", scope, "/");
 
         //首页的文字内容
-        String indexText = getParaToString("indexText", scope, "首页");
+        String indexText = getParaToString("indexText", scope, "front page");
 
         Multimap<Integer, ArticleCategory> crumbCategories = HashMultimap.create();
 

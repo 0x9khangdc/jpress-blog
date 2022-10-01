@@ -77,7 +77,7 @@ public class JobApplyController extends TemplateControllerBase {
         List<UploadFile> uploadFiles = getFiles();
 
         if (uploadFiles == null || uploadFiles.size() == 0) {
-            renderFailJson("请上传简历或者附件");
+            renderFailJson("Please upload your resume or attachment");
             return;
         }
 
@@ -86,7 +86,7 @@ public class JobApplyController extends TemplateControllerBase {
         //进行前端滑块 参数验证
         if (captchaVO == null || captchaVO.getCaptchaVerification() == null) {
             deleteFiles(uploadFiles);
-            renderFailJson("验证失败");
+            renderFailJson("verification failed");
             return;
         }
 
@@ -95,7 +95,7 @@ public class JobApplyController extends TemplateControllerBase {
 
         if (validResult == null || !validResult.isSuccess()) {
             deleteFiles(uploadFiles);
-            renderFailJson("验证失败");
+            renderFailJson("verification failed");
             return;
         }
 
@@ -132,14 +132,14 @@ public class JobApplyController extends TemplateControllerBase {
         //填写必填信息
         if (StrUtil.isBlank(apply.getUserName()) || apply.getWorkYears() == null || apply.getEducation() == null) {
             deleteFiles(uploadFiles);
-            renderFailJson("请填写重要信息");
+            renderFailJson("Please fill in important information");
             return;
         }
 
         //手机号和邮箱填写判断
         if (StrUtil.isAnyBlank(apply.getMobile(), apply.getEmail())) {
             deleteFiles(uploadFiles);
-            renderFailJson("请填写手机号或者邮箱");
+            renderFailJson("Please fill in the mobile phone number or mailbox");
             return;
         }
 
@@ -148,7 +148,7 @@ public class JobApplyController extends TemplateControllerBase {
 
         if (!matchesByMobile) {
             deleteFiles(uploadFiles);
-            renderFailJson("请正确输入手机号");
+            renderFailJson("Please enter the phone number correctly");
             return;
         }
 
@@ -158,7 +158,7 @@ public class JobApplyController extends TemplateControllerBase {
 
         if (!matchesByEmail) {
             deleteFiles(uploadFiles);
-            renderFailJson("邮箱不正确");
+            renderFailJson("Email is incorrect");
             return;
         }
 
@@ -171,7 +171,7 @@ public class JobApplyController extends TemplateControllerBase {
 
                 if (!JobApply.isResumeFile(uploadFile)) {
                     deleteFiles(uploadFiles);
-                    renderFailJson("简历仅支持图片或者文档");
+                    renderFailJson("Resume only supports pictures or documents");
                     return;
                 }
 
@@ -183,7 +183,7 @@ public class JobApplyController extends TemplateControllerBase {
 
                 if (!JobApply.isAttachmentFile(uploadFile)) {
                     deleteFiles(uploadFiles);
-                    renderFailJson("附件仅支持压缩包格式");
+                    renderFailJson("Attachment only supports compression package format");
                     return;
                 }
 
@@ -199,7 +199,7 @@ public class JobApplyController extends TemplateControllerBase {
 
         if (StrUtil.isBlank(apply.getCvPath())) {
             deleteFiles(uploadFiles);
-            renderFailJson("请上传简历信息");
+            renderFailJson("Please upload your resume information");
             return;
         }
 
@@ -234,7 +234,7 @@ public class JobApplyController extends TemplateControllerBase {
         }
 
         if (!ses.isConfigOk()) {
-            LogKit.error("未配置正确，smtp 或 用户名 或 密码 为空。");
+            LogKit.error("Unconfigured is correct, SMTP or user name or password is empty.");
             return;
         }
 

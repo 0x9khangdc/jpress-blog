@@ -1,4 +1,4 @@
-# 模板开发
+# Template development
 
 在开发JPress模板之前，先做好JPress的环境搭建，前端开发人员建议用 Docker 的方式，可以免除 Java 等环境的安装和配置。
 

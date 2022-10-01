@@ -32,7 +32,7 @@ public class ArticleInterceptor implements Interceptor {
 
         if (article == null || !article.isNormal()) {
             if (RequestUtil.isAjaxRequest(c.getRequest())) {
-                c.renderJson(Ret.fail().set("code", "2").set("message", "文章不存在或已删除。"));
+                c.renderJson(Ret.fail().set("code", "2").set("message", "The article does not exist or has been deleted."));
             } else {
                 c.renderError(404);
             }
@@ -45,7 +45,7 @@ public class ArticleInterceptor implements Interceptor {
             if (RequestUtil.isAjaxRequest(c.getRequest())) {
                 c.renderJson(Ret.fail()
                         .set("code", 1)
-                        .set("message", "用户未登录")
+                        .set("message", "User not logging in")
                         .set("gotoUrl", JFinal.me().getContextPath() + "/user/login?gotoUrl=" + article.getUrl()));
             } else {
                 c.redirect("/user/login?gotoUrl=" + article.getUrl());

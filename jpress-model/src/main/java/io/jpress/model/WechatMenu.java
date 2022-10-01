@@ -30,24 +30,24 @@ public class WechatMenu extends BaseWechatMenu<WechatMenu> {
     private static final Map<String, String> typeStrs = new HashMap<>();
 
     static {
-        typeStrs.put("click", "触发关键字");
-        typeStrs.put("view", "链接到网页");
-        typeStrs.put("miniprogram", "跳转微信小程序");
-        typeStrs.put("scancode_push", "扫码推事件");
-        typeStrs.put("scancode_waitmsg", "扫码推事件且弹出“消息接收中”提示框");
-        typeStrs.put("pic_sysphoto", "系统拍照发图");
-        typeStrs.put("pic_photo_or_album", "拍照或者相册发图");
-        typeStrs.put("pic_weixin", "微信相册发图");
-        typeStrs.put("location_select", "地理位置选择");
+        typeStrs.put("click", "Trigger keyword");
+        typeStrs.put("view", "Link to webpage");
+        typeStrs.put("miniprogram", "Jump WeChat Mini Program");
+        typeStrs.put("scancode_push", "Scanning incident");
+        typeStrs.put("scancode_waitmsg", "Scan the code and push the incident and pop up the \"Message Receive\" prompt box");
+        typeStrs.put("pic_sysphoto", "System take pictures");
+        typeStrs.put("pic_photo_or_album", "Photo or album to send pictures");
+        typeStrs.put("pic_weixin", "WeChat album post map");
+        typeStrs.put("location_select", "Geographical selection");
     }
 
 
     public String getTypeStr() {
         if (hasChild()) {
-            return "一级菜单";
+            return "A menu";
         }
         String str = typeStrs.get(getType());
-        return str != null ? str : "未知类型";
+        return str != null ? str : "Unknown type";
     }
 
 

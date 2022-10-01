@@ -3,17 +3,17 @@ package io.jpress.core.template;
 import java.util.*;
 
 /**
- * 模板的板块容器定义
+ * Foreocal container definition of template
  */
 public class BlockContainerDef {
 
-    // 容器 ID
+    // container ID
     private String id;
 
-    // 所在的模板文件
+    // The template file is located
     private String templateFile;
 
-    // 支持存放的板块 ID 列表
+    // Support stored sector ID List
     private Set<String> supportBlocks;
 
 

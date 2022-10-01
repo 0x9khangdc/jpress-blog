@@ -6,7 +6,7 @@ import com.jfinal.kit.LogKit;
 import io.jboot.utils.HttpUtil;
 
 /**
- * 文档：https://ziyuan.baidu.com/linksubmit/index
+ * Document: https://ziyuan.baidu.com/linksubmit/index
  */
 public class BaiduSeoProcesser {
 
@@ -32,7 +32,7 @@ public class BaiduSeoProcesser {
 
         /**
          * response
-         * 成功：
+         * success:
          * {
          *     "remain":4999998,
          *     "success":2,
@@ -40,7 +40,7 @@ public class BaiduSeoProcesser {
          *     "not_valid":[]
          * }
          *
-         * 失败：
+         * fail:
          * {
          *     "error":401,
          *     "message":"token is not valid"

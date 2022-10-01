@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @Title: 岗位分类相关的 API
  */
 @RequestMapping("/api/job/category")
-@Api("岗位分类相关API文档")
+@Api("Job classification related API documentation")
 public class JobCategoryApiController extends ApiControllerBase {
 
 
@@ -34,18 +34,18 @@ public class JobCategoryApiController extends ApiControllerBase {
     private JobCategoryService jobCategoryService;
 
 
-    @ApiOper(value = "岗位分类详情", paraNotes = "id不能为空")
-    @ApiResp(field = "detail", dataType = JobCategory.class, notes = "岗位分类详情")
-    public Ret detail(@ApiPara("岗位分类ID") Long id){
+    @ApiOper(value = "Division classification details", paraNotes = "ID cannot be empty")
+    @ApiResp(field = "detail", dataType = JobCategory.class, notes = "Division classification details")
+    public Ret detail(@ApiPara("Job classification ID") Long id){
 
         if (id == null ) {
-            return Ret.fail().set("message", "id 不能为空");
+            return Ret.fail().set("message", "id Can not be empty");
         }
 
         JobCategory category = jobCategoryService.findById(id);
 
         if(category == null){
-            return Ret.fail().set("message", "当前分类不存在");
+            return Ret.fail().set("message", "The current classification does not exist");
         }
 
 
@@ -54,11 +54,11 @@ public class JobCategoryApiController extends ApiControllerBase {
     }
 
 
-    @ApiOper("根据自定义条件查找岗位分类列表")
-    @ApiResp(field = "list", notes = "岗位分类列表", dataType = List.class, genericTypes = JobCategory.class)
-    public Ret listByColumns(@ApiPara("分类父ID") Long pid,
-                             @ApiPara("分类创建用户ID") Long userId,
-                             @ApiPara("排序属性") @DefaultValue("order_number asc") String orderBy){
+    @ApiOper("Find the list classification list according to custom conditions")
+    @ApiResp(field = "list", notes = "List of job classification", dataType = List.class, genericTypes = JobCategory.class)
+    public Ret listByColumns(@ApiPara("Category father ID") Long pid,
+                             @ApiPara("Category Create User ID") Long userId,
+                             @ApiPara("Sort attribute") @DefaultValue("order_number asc") String orderBy){
 
         List<JobCategory> categories = jobCategoryService.findListByColumns(Columns.create().eq("user_id",userId),orderBy);
         if (categories == null || categories.isEmpty()) {
@@ -78,23 +78,23 @@ public class JobCategoryApiController extends ApiControllerBase {
 
 
 
-    @ApiOper("删除岗位分类")
-    public Ret doDelete(@ApiPara("岗位分类ID") @NotNull Long id) {
+    @ApiOper("Delete job classification")
+    public Ret doDelete(@ApiPara("Job classification ID") @NotNull Long id) {
         jobCategoryService.deleteById(id);
         return Rets.OK;
     }
 
 
-    @ApiOper(value = "创建新的岗位分类",contentType = ContentType.JSON)
-    @ApiResp(field = "id", notes = "岗位分类ID", dataType = Long.class, mock = "123")
-    public Ret doCreate(@ApiPara("岗位分类json") @JsonBody JobCategory jobCategory) {
+    @ApiOper(value = "Create a new job classification",contentType = ContentType.JSON)
+    @ApiResp(field = "id", notes = "Job classification ID", dataType = Long.class, mock = "123")
+    public Ret doCreate(@ApiPara("Job classification JSON") @JsonBody JobCategory jobCategory) {
         Object id = jobCategoryService.save(jobCategory);
         return Ret.ok().set("id", id);
     }
 
 
-    @ApiOper(value = "更新岗位分类",contentType = ContentType.JSON)
-    public Ret doUpdate(@ApiPara("岗位分类json") @JsonBody JobCategory jobCategory) {
+    @ApiOper(value = "Update post classification",contentType = ContentType.JSON)
+    public Ret doUpdate(@ApiPara("Job classification JSON") @JsonBody JobCategory jobCategory) {
         jobCategoryService.update(jobCategory);
         return Rets.OK;
     }

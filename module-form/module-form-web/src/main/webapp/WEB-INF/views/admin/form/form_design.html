@@ -1,213 +1,233 @@
-#@layout()
-
-#define css()
-<link rel="stylesheet" href="#(CPATH)/static/components/bootstrap-slider/css/bootstrap-slider.min.css">
-<link rel="stylesheet" href="#(CPATH)/static/components/bs-form-builder/bs-form-builder.min.css">
-<link rel="stylesheet" href="#(CPATH)/static/admin/css/block.css">
+#@layout() #define css()
+<link
+  rel="stylesheet"
+  href="#(CPATH)/static/components/bootstrap-slider/css/bootstrap-slider.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="#(CPATH)/static/components/bs-form-builder/bs-form-builder.min.css"
+/>
+<link rel="stylesheet" href="#(CPATH)/static/admin/css/block.css" />
 <style>
-    .content-wrapper {
-        position: relative;
-        min-height: calc(100vh - calc(3.5rem + 1px));
-        overflow: hidden;
-    }
+  .content-wrapper {
+    position: relative;
+    min-height: calc(100vh - calc(3.5rem + 1px));
+    overflow: hidden;
+  }
 
-    .tool-content {
-        position: absolute;
-        width: 100%;
-        height: 100%;
+  .tool-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
 
-    }
-
-    .main-footer.text-sm {
-        display: none !important;
-    }
+  .main-footer.text-sm {
+    display: none !important;
+  }
 </style>
-#end
-
-#define script()
+#end #define script()
 <script src="#(CPATH)/static/components/bootstrap-slider/bootstrap-slider.js"></script>
 <script src="#(CPATH)/static/components/sortable/sortable.min.js"></script>
 <script src="#(CPATH)/static/components/fasty/fasty.min.js"></script>
 <script src="#(CPATH)/static/components/bs-form-builder/bs-form-builder-components.js"></script>
 <script src="#(CPATH)/static/components/bs-form-builder/bs-form-builder.js"></script>
 <script>
-    $(function () {
-        $('.slider').bootstrapSlider();
+  $(function () {
+    $(".slider").bootstrapSlider();
 
-        $("#toggleBtn").click(function () {
-            $(this).toggleClass(" bi-chevron-down bi-chevron-up")
-            $("#superContent").toggle();
-        })
+    $("#toggleBtn").click(function () {
+      $(this).toggleClass(" bi-chevron-down bi-chevron-up");
+      $("#superContent").toggle();
+    });
 
-        $(".right-switch").click(function () {
-            $(".rightContent").toggle();
-            $(".middleContent").toggleClass("col-md-9  col-sm-8", "col-md-6  col-sm-4");
-        })
+    $(".right-switch").click(function () {
+      $(".rightContent").toggle();
+      $(".middleContent").toggleClass(
+        "col-md-9  col-sm-8",
+        "col-md-6  col-sm-4"
+      );
+    });
 
-        $(".js-more").click(function () {
+    $(".js-more").click(function () {});
 
-        })
+    $("#builder").bsFormBuilder({
+      customBuilderStructure: true,
+      datas: JSON.parse("#(form.builderJson ??)"),
+      optionsDatasources: "#(CPATH)/admin/form/datasource/queryDatasources",
 
-
-        $('#builder').bsFormBuilder({
-            customBuilderStructure: true,
-            datas: JSON.parse('#(form.builderJson ??)'),
-            optionsDatasources: '#(CPATH)/admin/form/datasource/queryDatasources',
-
-            //属性过滤器，过滤掉非基础组件的数据库相关属性设置
-            bsFormPropsFilter: function (allprops, data, bsFromBuilder) {
-                if (data.component.drag.type !== 'base') {
-                    var i = allprops.length;
-                    while (i--) {
-                        if (["field", "field_type", "field_lenth", "show_list"].indexOf(allprops[i].name) >= 0) {
-                            allprops.splice(i, 1);
-                        }
-                    }
-                }
-
-                //删除图片上传的自定义字段类型属性，因为其默认使用 text 类型了
-                if (data.component.tag === "image-upload"){
-                    var i = allprops.length;
-                    while (i--) {
-                        if (["field_type", "field_lenth"].indexOf(allprops[i].name) >= 0) {
-                            allprops.splice(i, 1);
-                        }
-                    }
-                }
-            },
-            unUseComponents: ["tab"], //不使用组件 tab
-            defaultProps: [
-                {
-                    name: 'field',
-                    type: 'input',
-                    label: '字段名',
-                    index: 100,
-                    required:true,
-                    placeholder: "不能为空，请输入字段名...",
-                },
-                {
-                    name: 'field_type',
-                    type: 'select',
-                    label: '字段类型',
-                    defaultValue: 'varchar',
-                    index: 101,
-                    options: [
-                        {
-                            value: "varchar",
-                            text: '字符（varchar）'
-                        },
-                        {
-                            value: 'text',
-                            text: '文本（text）'
-                        },
-                        {
-                            value: 'int',
-                            text: '数字（int）',
-                        },
-                        {
-                            value: 'boolean',
-                            text: '布尔型（boolean）'
-                        },
-                        {
-                            value: 'datetime',
-                            text: '时间/日期（datetime）'
-                        }
-                    ],
-                },
-                {
-                    name: 'field_lenth',
-                    type: 'number',
-                    label: '字段长度',
-                    defaultValue: 11,
-                    index: 102,
-                },
-                {
-                    name: 'show_list',
-                    type: 'switch',
-                    label: '列表显示',
-                    defaultValue: true,
-                    index: 103,
-                },
-                {
-                    name: 'with_search',
-                    type: 'switch',
-                    label: '支持搜索',
-                    defaultValue: false,
-                    index: 104,
-                },
-            ],
-
-
-        });
-
-
-        var saveFromDesignData = function (){
-            var datas = $('#builder').bsFormBuilder().data("bsFormBuilder").exportToJson();
-            ajaxPost('#(CPATH)/admin/form/design/save?id=#(form.id ??)', datas, function () {
-                showMessage("保存成功！")
-            })
+      //属性过滤器，过滤掉非基础组件的数据库相关属性设置
+      bsFormPropsFilter: function (allprops, data, bsFromBuilder) {
+        if (data.component.drag.type !== "base") {
+          var i = allprops.length;
+          while (i--) {
+            if (
+              ["field", "field_type", "field_lenth", "show_list"].indexOf(
+                allprops[i].name
+              ) >= 0
+            ) {
+              allprops.splice(i, 1);
+            }
+          }
         }
 
-        $('.update').on('click', saveFromDesignData);
-        setSaveHotKeyFunction(saveFromDesignData);
-
-
+        //删除图片上传的自定义字段类型属性，因为其默认使用 text 类型了
+        if (data.component.tag === "image-upload") {
+          var i = allprops.length;
+          while (i--) {
+            if (["field_type", "field_lenth"].indexOf(allprops[i].name) >= 0) {
+              allprops.splice(i, 1);
+            }
+          }
+        }
+      },
+      unUseComponents: ["tab"], //不使用组件 tab
+      defaultProps: [
+        {
+          name: "field",
+          type: "input",
+          label: "Field name",
+          index: 100,
+          required: true,
+          placeholder: "Can't be empty, please enter the field name ...",
+        },
+        {
+          name: "field_type",
+          type: "select",
+          label: "Field Type",
+          defaultValue: "varchar",
+          index: 101,
+          options: [
+            {
+              value: "varchar",
+              text: "Character (varchar)",
+            },
+            {
+              value: "text",
+              text: "Text (text)",
+            },
+            {
+              value: "int",
+              text: "Number (int)",
+            },
+            {
+              value: "boolean",
+              text: "Boolean (boolean)",
+            },
+            {
+              value: "datetime",
+              text: "Time/Date (dateTime)",
+            },
+          ],
+        },
+        {
+          name: "field_lenth",
+          type: "number",
+          label: "Field length",
+          defaultValue: 11,
+          index: 102,
+        },
+        {
+          name: "show_list",
+          type: "switch",
+          label: "List display",
+          defaultValue: true,
+          index: 103,
+        },
+        {
+          name: "with_search",
+          type: "switch",
+          label: "Support search",
+          defaultValue: false,
+          index: 104,
+        },
+      ],
     });
+
+    var saveFromDesignData = function () {
+      var datas = $("#builder")
+        .bsFormBuilder()
+        .data("bsFormBuilder")
+        .exportToJson();
+      ajaxPost(
+        "#(CPATH)/admin/form/design/save?id=#(form.id ??)",
+        datas,
+        function () {
+          showMessage("Successfully saved!");
+        }
+      );
+    };
+
+    $(".update").on("click", saveFromDesignData);
+    setSaveHotKeyFunction(saveFromDesignData);
+  });
 </script>
-#end
-
-#define content()
+#end #define content()
 <section class="content tool-content" id="builder" style="padding: 0">
-    <div class="card tool-container">
-        <div class="tool-header d-flex justify-content-between align-items-center">
-            <div>
-                <strong class="pr-3">表单设计（#(form.name ??)）</strong>
-                <!--                <span class="tool-btn"><i class="bi bi-x-square-fill"></i></span>-->
-                <!--                <span class="tool-btn"><i class="bi bi-arrow-90deg-left"></i></span>-->
-                <!--                <span class="tool-btn disabled"><i class="bi bi-arrow-90deg-right"></i></span>-->
-                <!--                <span class="tool-btn"><i class="bi bi-list-nested"></i></span>-->
-            </div>
-            <div>
-                #if(form.isPublished()) <span style="color: #666">(当前表单已发布，无法更新)</span> #end
-                <button class="btn btn-primary btn-sm mr-3 update" #if(form.isPublished()) disabled #end>更新（Ctrl+S）</button>
-                <span class="tool-btn right-switch"><i class="bi bi-gear"></i></span>
-            </div>
-        </div>
-        <!--***********************************-->
-        <div class="row jpress-row-container">
-            <!-- 左侧 -->
-            <div class="col-md-3 col-sm-4 leftContent border-right pd10">
-                <div class="component-title">
-                    表单组件
-                </div>
-                <div class="component-group d-flex align-items-center bsFormDrags" data-type="base"></div>
-
-                <div class="component-title">
-                    辅助
-                </div>
-                <div class="component-group d-flex align-items-center bsFormDrags" data-type="assist">
-                </div>
-                <div class="component-title">
-                    布局
-                </div>
-                <div class="component-group d-flex align-items-center bsFormDrags" data-type="container">
-                </div>
-            </div>
-            <!-- 中间内容 -->
-            <div class="col-md-6  col-sm-4 middleContent bsFormContainer"
-                 style="overflow-y:scroll;min-height: auto !important; ">
-                <div class="bsFormContainer-placeholder">从左侧拖动到此处开始设计~~~</div>
-            </div>
-            <!--右侧内容-->
-            <div class="col-md-3  col-sm-4 mb-3 rightContent border-left">
-                <div class="pd10 tab-content pt-3 bsFormPropsTitle">
-                    <span class="icon"></span>
-                    <span class="text"></span>
-                </div>
-                <div class="pd10 tab-content pt-3 bsFormProps">
-                </div>
-            </div>
-        </div>
+  <div class="card tool-container">
+    <div class="tool-header d-flex justify-content-between align-items-center">
+      <div>
+        <strong class="pr-3">Form design (#(form.name ??)）</strong>
+        <!--                <span class="tool-btn"><i class="bi bi-x-square-fill"></i></span>-->
+        <!--                <span class="tool-btn"><i class="bi bi-arrow-90deg-left"></i></span>-->
+        <!--                <span class="tool-btn disabled"><i class="bi bi-arrow-90deg-right"></i></span>-->
+        <!--                <span class="tool-btn"><i class="bi bi-list-nested"></i></span>-->
+      </div>
+      <div>
+        #if(form.isPublished())
+        <span style="color: #666"
+          >(The current form has been released and cannot be updated)</span
+        >
+        #end
+        <button
+          class="btn btn-primary btn-sm mr-3 update"
+          #if(form.isPublished())
+          disabled
+          #end
+        >
+          Update (ctrl+s)
+        </button>
+        <span class="tool-btn right-switch"><i class="bi bi-gear"></i></span>
+      </div>
     </div>
+    <!--***********************************-->
+    <div class="row jpress-row-container">
+      <!-- 左侧 -->
+      <div class="col-md-3 col-sm-4 leftContent border-right pd10">
+        <div class="component-title">Form component</div>
+        <div
+          class="component-group d-flex align-items-center bsFormDrags"
+          data-type="base"
+        ></div>
+
+        <div class="component-title">Assist</div>
+        <div
+          class="component-group d-flex align-items-center bsFormDrags"
+          data-type="assist"
+        ></div>
+        <div class="component-title">layout</div>
+        <div
+          class="component-group d-flex align-items-center bsFormDrags"
+          data-type="container"
+        ></div>
+      </div>
+      <!-- 中间内容 -->
+      <div
+        class="col-md-6 col-sm-4 middleContent bsFormContainer"
+        style="overflow-y: scroll; min-height: auto !important"
+      >
+        <div class="bsFormContainer-placeholder">
+          Drag from the left to the design here ~~~
+        </div>
+      </div>
+      <!--右侧内容-->
+      <div class="col-md-3 col-sm-4 mb-3 rightContent border-left">
+        <div class="pd10 tab-content pt-3 bsFormPropsTitle">
+          <span class="icon"></span>
+          <span class="text"></span>
+        </div>
+        <div class="pd10 tab-content pt-3 bsFormProps"></div>
+      </div>
+    </div>
+  </div>
 </section>
 #end

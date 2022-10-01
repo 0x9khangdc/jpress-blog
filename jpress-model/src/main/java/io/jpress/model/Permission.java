@@ -59,9 +59,9 @@ public class Permission extends BasePermission<Permission> {
             case TYPE_ACTION:
                 return "URL";
             case TYPE_MENU:
-                return "菜单";
+                return "menu";
         }
-        return "未知类型";
+        return "Unknown type";
     }
 
     public boolean isActionPermission() {

@@ -73,7 +73,7 @@ public class ServiceProviderGenerator extends BaseModelGenerator {
     }
 
     /**
-     * base model 覆盖写入
+     * base model Cover
      */
     @Override
     protected void writeToFile(TableMeta tableMeta) throws IOException {

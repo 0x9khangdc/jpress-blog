@@ -31,10 +31,10 @@ public class WechatReply extends BaseWechatReply<WechatReply> {
     private static final Map<String, String> rtypeStrings = new HashMap<>();
 
     static {
-        rtypeStrings.put("text", "文字");
-        rtypeStrings.put("image", "图片");
-        rtypeStrings.put("textAndImage", "文字和图片");
-        rtypeStrings.put("miniprogram", "微信小程序");
+        rtypeStrings.put("text", "letter");
+        rtypeStrings.put("image", "picture");
+        rtypeStrings.put("textAndImage", "Text and pictures");
+        rtypeStrings.put("miniprogram", "WeChat Mini Program");
     }
 
     private Map<String, String> optionMap;

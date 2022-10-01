@@ -40,13 +40,13 @@ public class Template {
 
     private String relativePath;
 
-    //模板文件列表
+    //Template file list
     private Set<String> htmls = new HashSet<>();
 
-    //板块文件列表
+    //List of plate files
     private Set<String> blocks = new HashSet<>();
 
-    //模板支持的 flag 配置
+    //Flag configuration supported by the template
     private List<String> flags = new ArrayList<>();
 
 
@@ -110,7 +110,7 @@ public class Template {
     private static final String TEMPLATE_H5_SUFFIX = "_h5.html";
 
     /**
-     * 找出可以用来渲染的 html 模板
+     * Find out the HTML template that can be used to render
      *
      * @param template
      * @return
@@ -131,7 +131,7 @@ public class Template {
             return null;
         }
 
-        //手机浏览器，优先去找_h5的模板进行渲染
+        //Mobile browser, prefer to find _H5 templates for rendering
         if (isMobileBrowser) {
             String h5Template = matchH5Template(template);
             if (h5Template != null) {
@@ -154,7 +154,7 @@ public class Template {
     private List<BlockContainerDef> containerDefs;
 
     /**
-     * 获取模板支持设计的板块容器
+     * Get the template support design plate container
      *
      * @return
      */
@@ -182,7 +182,7 @@ public class Template {
     private List<HtmlBlock> blockHtmls;
 
     /**
-     * 获取版本自带的 板块 信息
+     * Get the plate information that comes with the version
      *
      * @return
      */
@@ -217,11 +217,11 @@ public class Template {
 
 
     /**
-     * 只匹配 h5 的模板 ，如果匹配不到 h5 ，返回 null
+     * Only matching H5 templates, if not matching H5, return NULL
      * <p>
-     * 例如：
-     * 需要 aa_bb_cc_dd_h5.html
-     * 寻找的顺序是：aa_bb_cc_h5.html  ->   aa_bb_h5.html  ->   aa_h5.html
+     * E.g:
+     * need aa_bb_cc_dd_h5.html
+     * The order of searching is: aa_bb_cc_h5.html  ->   aa_bb_h5.html  ->   aa_h5.html
      *
      * @param template
      * @return
@@ -335,8 +335,8 @@ public class Template {
     }
 
     /**
-     * 获得某个模块下支持的样式
-     * 一般用于在后台设置
+     * Get the style supported in a module
+     * Generally used to set up in the background
      *
      * @param prefix
      * @return
@@ -349,7 +349,7 @@ public class Template {
 
         List<String> styles = new ArrayList<>();
         for (String html : htmls) {
-            //xxx_h5.html 不算独立样式
+            //xxx_h5.html Not independent style
             if (html.startsWith(prefix) && !html.contains("_h5.")) {
                 styles.add(html.substring(prefix.length(), html.length() - 5));
             }
@@ -359,7 +359,7 @@ public class Template {
     }
 
     /**
-     * 卸载模板
+     * Uninstall template
      */
     public void uninstall() {
         StringBuilder newFileName = new StringBuilder(PathKit.getWebRootPath());

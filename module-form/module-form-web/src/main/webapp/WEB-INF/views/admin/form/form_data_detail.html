@@ -1,85 +1,79 @@
-#@layout()
-
-
-#define css()
-<link rel="stylesheet" href="#(CPATH)/static/front/jpressfront.css">
+#@layout() #define css()
+<link rel="stylesheet" href="#(CPATH)/static/front/jpressfront.css" />
 <style>
-    .jpress-form-item{
-        min-height:100px;
-        height:auto;
-    }
+  .jpress-form-item {
+    min-height: 100px;
+    height: auto;
+  }
 </style>
-#end
-
-
-#define content()
+#end #define content()
 
 <section class="content-header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <h1>
-                            数据详情
-                            <small data-toggle="tooltip" title="" data-placement="right"
-                                   data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
-                            <small> 首页 / 表单 / 表单数据 / 数据详情</small>
-                        </h1>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 ">
-                <div class=" float-sm-right" style="padding-top: 15px">
-                </div>
-            </div>
-
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1>
+              Data details
+              <small
+                data-toggle="tooltip"
+                title=""
+                data-placement="right"
+                data-trigger="hover"
+                ><i class="nav-icon far fa-question-circle"></i
+              ></small>
+              <small> front page / Form / Form data / Data details</small>
+            </h1>
+          </div>
         </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="float-sm-right" style="padding-top: 15px"></div>
+      </div>
     </div>
+  </div>
 </section>
 
 <section class="content">
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-outline card-primary">
-                <div class="card-header with-border">
-                    <div class="row invoice-info">
-
-                        <div class="col-sm-3 invoice-col">
-                            <p>表单名称 ： #(form.name ??)</p>
-                            <p>数 据 ID &nbsp; ：#(record.id ??)</p>
-                            <p>用 户 IP &nbsp; ：#(record.user_ip ??)</p>
-                            <p>是否手机 ：#(record.user_with_mobile ??)</p>
-                        </div>
-
-                        <div class="col-sm-3 invoice-col">
-                            <p>用 户 浏 览 器：#(record.user_browser ??)</p>
-                            <p>浏 览 器 版 本：#(record.user_browser_version ??)</p>
-                            <p>用户操作系统：#(record.user_os ??)</p>
-                            <p>用户网络类型：#(record.user_network ??)</p>
-                        </div>
-
-                        <div class="col-sm-3 invoice-col">
-                            <p>用 户 设 备 &nbsp;&nbsp; ：#(record.user_device ??)</p>
-                            <p>设 备 品 牌 &nbsp;&nbsp; ：#(record.user_device_brand ??)</p>
-                            <p>用户开始时间：#(record.user_start_time ??)</p>
-                            <p>用户提交时间：#date(record.user_submit_time ??,"yyyy-MM-dd")</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="card-body">
-                    #formInfo(values=record?.toMap(), withForm=false)
-                </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-outline card-primary">
+        <div class="card-header with-border">
+          <div class="row invoice-info">
+            <div class="col-sm-3 invoice-col">
+              <p>Form name: #(form.name ??)</p>
+              <p>Data ID &nbsp; :#(record.id ??)</p>
+              <p>House IP &nbsp; :#(record.user_ip ??)</p>
+              <p>Mobile phone: #(record.user_with_mobile ??)</p>
             </div>
-        </div>
-    </div>
 
+            <div class="col-sm-3 invoice-col">
+              <p>Use household browser:#(record.user_browser ??)</p>
+              <p>Browse device version:#(record.user_browser_version ??)</p>
+              <p>User operating system:#(record.user_os ??)</p>
+              <p>User network type:#(record.user_network ??)</p>
+            </div>
+
+            <div class="col-sm-3 invoice-col">
+              <p>Household &nbsp;&nbsp; :#(record.user_device ??)</p>
+              <p>Device brand &nbsp;&nbsp; :#(record.user_device_brand ??)</p>
+              <p>User start time: #(record.user_start_time ??)</p>
+              <p>
+                User submission time: #date(record.user_submit_time
+                ??,"yyyy-MM-dd")
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          #formInfo(values=record?.toMap(), withForm=false)
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-#end
-#define script()
-<script  src="#(CPATH)/static/front/jpressfront.js"></script>
+#end #define script()
+<script src="#(CPATH)/static/front/jpressfront.js"></script>
 #end

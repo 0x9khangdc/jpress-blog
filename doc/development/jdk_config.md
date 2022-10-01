@@ -1,3 +1,3 @@
-# JDK 环境配置
+# JDK Environmental configuration
 
-点击查看 JDK 环境配置相关文档:[ JDK 环境配置相关文档](/manual/jdk_config.md)
+Click to view the JDK environment configuration related documents:[ JDK Environmental configuration related documentation](/manual/jdk_config.md)

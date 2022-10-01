@@ -463,9 +463,9 @@
             <div class="d-flex align-items-center justify-content-between" style="width: 40%">
                 <div class="input-group mr-2">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">标题</span>
+                        <span class="input-group-text">title</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="请输入文章标题..." name="article.title"
+                    <input type="text" class="form-control" placeholder="Please enter the article title..." name="article.title"
                            autocomplete="off"
                            id="article-title"
                            value="#(article.title ??)">
@@ -474,28 +474,28 @@
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="insertFile" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                        插入...
+                        insert...
                     </button>
                     <div class="dropdown-menu" aria-labelledby="insertFile">
-                        <a class="dropdown-item chooseAttachment" href="#">插入附件</a>
-                        <a class="dropdown-item chooseVideo" href="#">插入视频</a>
-                        <a class="dropdown-item chooseForm" href="#">插入表单</a>
+                        <a class="dropdown-item chooseAttachment" href="#">Insert annex</a>
+                        <a class="dropdown-item chooseVideo" href="#">Insert video</a>
+                        <a class="dropdown-item chooseForm" href="#">Insert form</a>
                     </div>
                 </div>
             </div>
             <div class="d-flex align-items-center justify-content-between">
-                <button type="button" data-status="draft" class="btn btn-secondary mr-2 submitBtn">保存草稿</button>
+                <button type="button" data-status="draft" class="btn btn-secondary mr-2 submitBtn">save draft</button>
                 <a target="_blank" #if(article.id ??)
                    href="#(CPATH)/admin/preview?url=#(CPATH)/admin/article/preview/#(article.id ??)" #else
                    onclick="previewArticle(this)" #end
-                   id="preview" class="btn btn-secondary mr-2"><span>预览</span></a>
-                <button type="button" data-status="normal" class="btn btn-primary mr-2 submitBtn">发布</button>
+                   id="preview" class="btn btn-secondary mr-2"><span>Preview</span></a>
+                <button type="button" data-status="normal" class="btn btn-primary mr-2 submitBtn">release</button>
                 <span class="switch-btn" id="rightSwitch"><i class="bi bi-gear" style="font-size:18px"></i></span>
                 <span data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="pl-2"><i
                         class="bi bi-three-dots-vertical"></i></span>
                 <div class="dropdown-menu mr-2">
-                    <a class="dropdown-item submitBtn" data-status="trash" href="javascript:;">移至垃圾箱</a>
-                    <a class="dropdown-item" href="javascript:;" onclick="doChangeEditor()">切换编辑器</a>
+                    <a class="dropdown-item submitBtn" data-status="trash" href="javascript:;">Move to a trash can</a>
+                    <a class="dropdown-item" href="javascript:;" onclick="doChangeEditor()">Switch editor</a>
                 </div>
             </div>
         </section>
@@ -522,15 +522,15 @@
                     <ul class="nav nav-tabs" id="formAttrTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab"
-                               href="#main-tab" role="tab" aria-controls="component" aria-selected="true">文章</a>
+                               href="#main-tab" role="tab" aria-controls="component" aria-selected="true">article</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#template-tab" role="tab"
-                               aria-controls="module" aria-selected="false">模板</a>
+                               aria-controls="module" aria-selected="false">template</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#extend-tab" role="tab"
-                               aria-controls="module" aria-selected="false">扩展</a>
+                               aria-controls="module" aria-selected="false">Expand</a>
                         </li>
                     </ul>
                     <div class="tab-content ">
@@ -544,7 +544,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#fields-card">
-                                                基础
+                                                Base
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -554,46 +554,46 @@
 
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">文章摘要</label>
+                                                <label class="col-sm-12">Thesis</label>
                                                 <div class="col-sm-12">
                                                     <textarea class="form-control"
                                                               id="summary"
                                                               name="article.summary"
-                                                              placeholder="请输入" rows="4">#(article.summary ??)</textarea>
+                                                              placeholder="please enter" rows="4">#(article.summary ??)</textarea>
                                                     <p class="text-muted"></p>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">排序序号</label>
+                                                <label class="col-sm-12">Sorting serial number</label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control"
                                                            id="order_number"
                                                            name="article.order_number"
-                                                           placeholder="请输入" value="#(article.order_number ??0)"/>
-                                                    <p class="text-muted">文章列表会根据这个数值进行排序，越大越靠前。</p>
+                                                           placeholder="please enter" value="#(article.order_number ??0)"/>
+                                                    <p class="text-muted">The article list will be sorted according to this value, the larger the more advanced.</p>
                                                 </div>
                                             </div>
 
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">外链</label>
+                                                <label class="col-sm-12">External chain</label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control"
                                                            id="link_to"
                                                            name="article.link_to"
-                                                           placeholder="请输入" value="#unescape(article.link_to ??)"/>
-                                                    <p class="text-muted">填写外链后，浏览文章将会跳转到此链接。</p>
+                                                           placeholder="please enter" value="#unescape(article.link_to ??)"/>
+                                                    <p class="text-muted">After filling in the external link, browsing the article will jump to this link.</p>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">发布时间</label>
+                                                <label class="col-sm-12">release time</label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control datetime"
                                                            id="created"
                                                            name="article.created"
-                                                           placeholder="请输入" value="#date(article.created ??)"/>
+                                                           placeholder="please enter" value="#date(article.created ??)"/>
                                                     <p class="text-muted"></p>
                                                 </div>
                                             </div>
@@ -609,20 +609,20 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link  btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#slug-card">
-                                                固定链接
+                                                Fixed link
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
                                     </div>
                                     <div id="slug-card" class="collapse">
                                         <div class="card-body">
-                                            网址：<span
+                                            URL:<span
                                                 class="domainSpan">#option('web_domain')</span>#(CPATH)/article/<span
                                                 id="slug"
                                                 class="slugSpan"
                                                 for-input="article-slug">#(article.slug ??)</span>#if(option("web_fake_static_enable"))#option('web_fake_static_suffix')#end
                                             #if(article && article.isNormal())
-                                            （<a href="#(article.url)" target="_blank">访问</a>）
+                                            (<a href="#(article.url)" target="_blank">access</a>)
                                             #end
                                             <input type="hidden" id="article-slug" name="article.slug"
                                                    value="#(article.slug ??)">
@@ -638,7 +638,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#category-card">
-                                                分类
+                                                Classification
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -664,7 +664,7 @@
                                                     </label>
                                                 </div>
                                                 #else
-                                                暂无分类
+                                                No classification
                                                 #end
                                             </div>
                                         </div>
@@ -678,7 +678,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link  btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#image-card">
-                                                图片
+                                                picture
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -695,10 +695,10 @@
                                         <div class="card-footer">
                                             <button type="button" class="btn-image-browser btn btn-default btn-sm "
                                                     for-src="thumbnail"
-                                                    for-input="articleThumbnail">选择图片
+                                                    for-input="articleThumbnail">Select Image
                                             </button>
                                             <a href="javascript:;" style="padding-left: 15px"
-                                               id="removeThumbnail">移除</a>
+                                               id="removeThumbnail">Remove</a>
                                         </div>
                                     </div>
                                 </div>
@@ -710,7 +710,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#tags-card">
-                                                标签
+                                                Label
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -722,7 +722,7 @@
                                                 <option value="#(tag.title ??)" selected>#(tag.title ??)</option>
                                                 #end
                                             </select>
-                                            <p class="text-muted">多个标签请用 “回车键” 或英文逗号（,）隔开。</p>
+                                            <p class="text-muted">Please use the "Enter" or English commas (,) to separate multiple labels.</p>
 
                                             <div class="tags">
                                                 #tags(count = 20)
@@ -751,9 +751,9 @@
                                         <div class="card-body">
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">SEO标题</label>
+                                                <label class="col-sm-12">Seo title</label>
                                                 <div class="col-sm-12">
-                                                    <input type="input" class="form-control" placeholder="请输入"
+                                                    <input type="input" class="form-control" placeholder="please enter"
                                                            id="meta_title" name="article.meta_title"
                                                             value="#(article.meta_title ??)">
                                                     <p class="text-muted"></p>
@@ -761,20 +761,20 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">SEO关键字</label>
+                                                <label class="col-sm-12">SEO keyword</label>
                                                 <div class="col-sm-12">
                                                     <textarea class="form-control" id="meta_keywords"
-                                                              name="article.meta_keywords" placeholder="请输入"
+                                                              name="article.meta_keywords" placeholder="please enter"
                                                               rows="2">#(article.meta_keywords ??)</textarea>
                                                     <p class="text-muted"></p>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-12">SEO描述</label>
+                                                <label class="col-sm-12">Seo description</label>
                                                 <div class="col-sm-12">
                                                     <textarea class="form-control" id="meta_description"
-                                                              name="article.meta_description" placeholder="请输入"
+                                                              name="article.meta_description" placeholder="please enter"
                                                               rows="2">#(article.meta_description ??)</textarea>
                                                     <p class="text-muted"></p>
                                                 </div>
@@ -790,7 +790,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#status-card">
-                                                状态
+                                                state
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -800,7 +800,7 @@
 
                                             <div class="form-group row">
                                                 <label class="col-sm-9"
-                                                       style="padding-top:7.5px;padding-left:15px">允许评论</label>
+                                                       style="padding-top:7.5px;padding-left:15px">Allow comments</label>
                                                 <div class="col-sm-3">
                                                     <input type="checkbox" class="switchery" #checkedIf(article.comment_status ?? true)
                                                            data-for="comment_status" value="true">
@@ -809,7 +809,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-9"
-                                                       style="padding-top:7.5px;padding-left:15px">是否推荐</label>
+                                                       style="padding-top:7.5px;padding-left:15px">Whether to recommend</label>
                                                 <div class="col-sm-3">
                                                     <input type="checkbox" class="switchery" #checkedIf(article.with_recommend ??)
                                                            data-for="with_recommend" value="true">
@@ -818,7 +818,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-9"
-                                                       style="padding-top:7.5px;padding-left:15px">是否置顶</label>
+                                                       style="padding-top:7.5px;padding-left:15px">Whether to</label>
                                                 <div class="col-sm-3">
                                                     <input type="checkbox" class="switchery" #checkedIf(article.with_top ??)
                                                            data-for="with_top" value="true">
@@ -827,7 +827,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-9"
-                                                       style="padding-top:7.5px;padding-left:15px">是否热门</label>
+                                                       style="padding-top:7.5px;padding-left:15px">Whether it is popular</label>
                                                 <div class="col-sm-3">
                                                     <input type="checkbox" class="switchery" #checkedIf(article.with_hot ??)
                                                            data-for="with_hot" value="true">
@@ -836,7 +836,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-9"
-                                                       style="padding-top:7.5px;padding-left:15px">是否头条</label>
+                                                       style="padding-top:7.5px;padding-left:15px">Whether a headline</label>
                                                 <div class="col-sm-3">
 
                                                     <input type="checkbox" class="switchery" #checkedIf(article.with_lead_news ??)
@@ -845,7 +845,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-9" style="padding-top:7.5px;padding-left:15px">是否允许被搜索</label>
+                                                <label class="col-sm-9" style="padding-top:7.5px;padding-left:15px">Whether to be searched</label>
                                                 <div class="col-sm-3">
                                                     <input type="checkbox" class="switchery" #checkedIf(article.with_allow_search ?? true)
                                                            data-for="with_allow_search" value="true">
@@ -872,7 +872,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#template-card">
-                                                模板
+                                                template
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -880,9 +880,9 @@
                                     <div id="template-card" class="collapse show">
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label class="col-sm-12">渲染模板文件</label>
+                                                <label class="col-sm-12">Rendering template file</label>
                                                 <select class="form-control" name="article.style">
-                                                    <option value="">默认（article.html）</option>
+                                                    <option value="">Default (article.html)</option>
                                                     #for(style : styles)
                                                     <option value="#(style)" #selectedIf(article &&
                                                             article.style==style)>
@@ -893,11 +893,11 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-sm-12">文章标识</label>
+                                                <label class="col-sm-12">Articles</label>
                                                 <input type="text" class="form-control" name="article.flag"
-                                                       placeholder="文章标识" value="#(article.flag ??)" id="flag"/>
+                                                       placeholder="Articles" value="#(article.flag ??)" id="flag"/>
                                                 #if(flags && flags.size() > 0)
-                                                <p class="text-muted">当前模板支持的展示标识有：</p>
+                                                <p class="text-muted">The display logo supported by the current template is:</p>
                                                 <div class="tags">
                                                     #for(flag : flags ??)
                                                     <a href="javascript:;" class="tflag">#(flag)</a>
@@ -924,7 +924,7 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link btn-block text-left text-dark" type="button"
                                                     data-toggle="collapse" data-target="#extend-card">
-                                                扩展属性
+                                                Extended attribute
                                                 <span class="float-right"><i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </h2>
@@ -932,7 +932,7 @@
                                     <div id="extend-card" class="collapse show">
                                         <div class="card-body">
 
-                                            #(fields.render('暂无扩展字段'))
+                                            #(fields.render('No extension field'))
 
                                         </div>
                                     </div>

@@ -21,7 +21,7 @@ public class TemplateUtil {
 
 
     /**
-     * 读取模板定义的 #blockContainer 容器配置
+     * Read the template definition #blockContainer Container configuration
      *
      * @param templateFile
      * @return
@@ -66,8 +66,8 @@ public class TemplateUtil {
 
 
     /**
-     * 读取 block_***.html 文件的 title 和 icon 配置
-     * 以及
+     * Read the title and icon configuration of block_ ***. Html file
+     * as well as
      *
      * @param html
      * @param block
@@ -81,8 +81,8 @@ public class TemplateUtil {
 
 
     /**
-     * 读取 block_***.html 文件的 title 和 icon 配置
-     * 以及
+     * Read the title and icon configuration of block_ ***. Html file
+     * as well as
      *
      * @param file
      * @param block
@@ -175,7 +175,7 @@ public class TemplateUtil {
 
 
     /**
-     * 读取模板的 短ID （ md5(id).substring(0, 6) ）
+     * Read the short ID of the template （ md5(id).substring(0, 6) ）
      *
      * @param templateZipFile
      * @return
@@ -192,7 +192,7 @@ public class TemplateUtil {
 
 
     /**
-     * 读取模板的 ID
+     * Template ID
      *
      * @param templateZipFile
      * @return

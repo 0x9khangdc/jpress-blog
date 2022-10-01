@@ -23,8 +23,8 @@ import io.jpress.core.menu.MenuManager;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 用户中心的拦截器，用户中心要求用户必须登录
- * 该拦截器应该放在 UserInterceptor 之后执行
+ * @Title: The interceptor of the user center, the user center requires the user to log in
+ * The interceptor should be placed in UserInterceptor Then execute
  */
 public class UserCenterInterceptor implements Interceptor {
 

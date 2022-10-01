@@ -45,7 +45,7 @@ public class TemplateInterceptor implements Interceptor {
         setGlobalAttrs(controller.getRequest());
 
 
-        //添加CSRF的配置，方便在前台进行退出等操作
+        //Add the configuration of CSRF, which is convenient for exit in the front desk
         String csrfToken = CSRFInterceptor.createSCRFToken(inv);
         if (csrfToken != null) {
             inv.getController().setCookie(CSRFInterceptor.CSRF_KEY, csrfToken, -1);

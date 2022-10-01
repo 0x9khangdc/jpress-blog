@@ -36,7 +36,7 @@ public class _MessageController extends AdminControllerBase {
     private JpressAddonMessageService service;
 
 
-    @AdminMenu(text = "留言列表", groupId = "message")
+    @AdminMenu(text = "Message List", groupId = "message")
     public void list() {
         Page<JpressAddonMessage> entries=service.paginate(getPagePara(), 10);
         setAttr("page", entries);

@@ -45,7 +45,7 @@ public abstract class ControllerBase extends JbootController {
     public Long getIdPara() {
         Long id = getParaToLong();
         if (id == null) {
-            //renderError 会直接抛出异常，阻止程序往下执行
+            //renderError It will directly throw an exception and prevent the program from executing down
             renderError(404);
         }
         return id;
@@ -98,8 +98,8 @@ public abstract class ControllerBase extends JbootController {
     }
 
 
-    //options 应该是通过代码去覆盖的，而非通过 options 来设置
-    //此处是为了保证安全
+    //options It should be covered by code instead of setting through Options
+    //Here is to ensure safety
     private <T> T removeOptionsAttr(T model) {
         if (model instanceof Model) {
             ((Model<?>) model).remove("options");
@@ -109,7 +109,7 @@ public abstract class ControllerBase extends JbootController {
 
 
     /**
-     * 获得当前页面的页码
+     * Get the page number of the current page
      *
      * @return
      */
@@ -222,7 +222,7 @@ public abstract class ControllerBase extends JbootController {
     }
 
     /**
-     * 对于某些高并发的接口，useCache 应该传入 true，减少 ret 的创建
+     * For some high-edged interfaces, Usecache should be introduced into True to reduce the creation of RET
      *
      * @param message
      * @param useCache

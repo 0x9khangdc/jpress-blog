@@ -57,7 +57,7 @@ public class _JobController extends AdminControllerBase {
     @Inject
     private OptionService optionService;
 
-    @AdminMenu(text = "招聘岗位", groupId = "job", order = 11)
+    @AdminMenu(text = "Recruitment position", groupId = "job", order = 11)
     public void list() {
 
         Columns columns = new Columns();
@@ -105,12 +105,12 @@ public class _JobController extends AdminControllerBase {
         Job entry = getModel(Job.class, "job");
 
         if (entry.getTitle() == null) {
-            renderFailJson("名称不能为空");
+            renderFailJson("Name is required");
             return;
         }
 
         if(entry.getCategoryId() == null){
-            renderFailJson("请选择分类");
+            renderFailJson("please select a type");
             return;
         }
 
@@ -142,7 +142,7 @@ public class _JobController extends AdminControllerBase {
         if ((entry.getAgeLimitStart() != null && entry.getAgeLimitEnd() != null) &&
                 (entry.getAgeLimitEnd() < entry.getAgeLimitStart() ||
                         (entry.getAgeLimitStart() <= 0 || entry.getAgeLimitEnd() <= 0))) {
-            renderFailJson("请正确填写年龄要求");
+            renderFailJson("Please fill in the age requirements correctly");
             return;
         }
 
@@ -182,7 +182,7 @@ public class _JobController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "分类", groupId = "job", order = 22)
+    @AdminMenu(text = "Classification", groupId = "job", order = 22)
     public void JobCategory() {
 
         Columns columns = new Columns();
@@ -223,7 +223,7 @@ public class _JobController extends AdminControllerBase {
 
 
     //地址管理 和 分类管理 共用一张表 区别在于 字段 type
-    @AdminMenu(text = "地址", groupId = "job", order = 33)
+    @AdminMenu(text = "address", groupId = "job", order = 33)
     public void JobAddress() {
 
         Columns columns = new Columns();
@@ -255,7 +255,7 @@ public class _JobController extends AdminControllerBase {
         renderJson(Ret.ok().set("id", id));
     }
 
-    @AdminMenu(text = "简历管理", groupId = "job", order = 1)
+    @AdminMenu(text = "Resume management", groupId = "job", order = 1)
     public void JobApply() {
 
         Columns columns = new Columns();
@@ -311,7 +311,7 @@ public class _JobController extends AdminControllerBase {
 
         String content = getPara("disposedContent");
         if (content == null) {
-            renderFailJson("请填写处理意见");
+            renderFailJson("Please fill in the handling opinion");
             return;
         }
 
@@ -336,7 +336,7 @@ public class _JobController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "设置", groupId = "job", order = 99)
+    @AdminMenu(text = "set up", groupId = "job", order = 99)
     public void setting() {
         render("job/job_setting.html");
     }

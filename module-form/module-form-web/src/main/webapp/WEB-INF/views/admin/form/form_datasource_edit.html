@@ -49,10 +49,10 @@
                 <div class="row mb-2">
                     <div class="col-sm-12">
                         <h1>
-                            #if(datasource.id ??) 编辑数据源 #else 新增数据源 #end
+                            #if(datasource.id ??) Edit data source #else New data source #end
                             <small data-toggle="tooltip" title="" data-placement="right"
                                    data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
-                            <small> 首页 / 表单 / 数据源 /  #if(datasource.id ??) 编辑 #else 新增 #end </small>
+                            <small> front page / Form / data source /  #if(datasource.id ??) edit #else Newly increase #end </small>
                         </h1>
                     </div>
                 </div>
@@ -75,26 +75,26 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">名称</label>
+                            <label class="col-sm-2 col-form-label">name</label>
                             <div class="col-sm-6">
 
                                 <input type="input" name="datasource.name" class="form-control"
                                        value="#(datasource.name ??)"
-                                       placeholder="请输入字典名称" required>
+                                       placeholder="Please enter the dictionary name" required>
                             </div>
                         </div>
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">内容选择</label>
+                            <label class="col-sm-2 col-form-label">Content option</label>
                             <div class="col-sm-6" style="margin-top: 10px">
 
                                 <label for="datasource.with_static1">
-                                    <input type="radio" id="datasource.with_static1" name="datasource.with_static" value=true #if(!datasource || datasource.with_static ?? == true) checked #end>静态内容
+                                    <input type="radio" id="datasource.with_static1" name="datasource.with_static" value=true #if(!datasource || datasource.with_static ?? == true) checked #end>Static content
                                 </label>
 
                                 <label for="datasource.with_static2">
-                                    <input id="datasource.with_static2" style="margin-left: 10px" type="radio" name="datasource.with_static" value=false #if(datasource && datasource.with_static ?? == false ) checked #end>动态内容
+                                    <input id="datasource.with_static2" style="margin-left: 10px" type="radio" name="datasource.with_static" value=false #if(datasource && datasource.with_static ?? == false ) checked #end>Dynamic content
                                 </label>
 
                             </div>
@@ -103,7 +103,7 @@
                         <div class="form-group row" #if(!datasource.with_static ??) style="display: none" #end id="importType">
                             <div class="col-sm-6" style="margin-top: 10px">
                                 <div style="margin-left: 20px;display: none">
-                                    <input type="radio" name="datasource.import_type" value="2" #if(!datasource.with_static ??) checked #end>动态URL
+                                    <input type="radio" name="datasource.import_type" value="2" #if(!datasource.with_static ??) checked #end>Dynamic URL
                                 </div>
 
                             </div>
@@ -112,18 +112,18 @@
                         <div class="form-group row"  id="importText" #if(datasource.with_static ?? == false) style="display: none" #else #end>
                             <label class="col-sm-2 col-form-label">说明：</label>
                             <div class="col-sm-6 text-muted" style="padding-top: 7.5px;">
-                                静态内容只能在创建完数据源后，手动为该数据源添加内容数据。
+                                Static content can only add content data to the data source after creating the data source.
                             </div>
                         </div>
 
                         <div class="form-group row" #if(datasource.with_static ?? == true || !datasource) style="display: none" #end id="importUrl">
-                            <label class="col-sm-2 col-form-label">动态URL</label>
+                            <label class="col-sm-2 col-form-label">Dynamic URL</label>
                             <div class="col-sm-6">
 
                                 <input type="input" id="importUrlInput" class="form-control"
                                        value="#(datasource.import_text ??)" name="datasource.import_text"
-                                       placeholder="请输入导入数据的url">
-                                <p class="text-muted"> URL 返回的数据 应为 json 格式内容 例如：
+                                       placeholder="Please enter the URL of the imported data">
+                                <p class="text-muted"> URL The return data should be json Format content for example:
                                     <br/>
 
                                     <code>[
@@ -145,7 +145,7 @@
                             <label class="col-sm-2 col-form-label">headers</label>
                             <div class="col-sm-6">
 
-                                <textarea placeholder="请输入导入数据的headers信息" rows="5" class="form-control" name="datasource.headers">#(datasource.headers ??)</textarea>
+                                <textarea placeholder="Please enter the headers information of the imported data" rows="5" class="form-control" name="datasource.headers">#(datasource.headers ??)</textarea>
 
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                     <div class="card-footer">
                         <div class="offset-sm-2 col-sm-10 submit-block">
                             <div class="card-submit">
-                                <button type="submit" class="btn btn-primary">提交</button>
+                                <button type="submit" class="btn btn-primary">submit</button>
                             </div>
                         </div>
                     </div>

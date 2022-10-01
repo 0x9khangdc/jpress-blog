@@ -41,7 +41,7 @@ public class ApiInterceptor implements Interceptor {
 
 
     /**
-     * api 的有效时间，默认为 10 分钟
+     * The valid time of API, the default is 10 minutes
      */
     private static final long TIMEOUT = 10 * 60 * 1000;
 
@@ -59,37 +59,37 @@ public class ApiInterceptor implements Interceptor {
 
         // API 功能未启用
         if (apiEnable == false) {
-            inv.getController().renderJson(Ret.fail().set("message", "API功能已经关闭，请管理员在后台进行开启"));
+            inv.getController().renderJson(Ret.fail().set("message", "The API function has been closed, please ask the administrator to open in the background"));
             return;
         }
 
         if (StrUtil.isBlank(apiAppId)) {
-            inv.getController().renderJson(Ret.fail().set("message", "后台配置的 APP ID 不能为空，请先进入后台的接口管理进行配置。"));
+            inv.getController().renderJson(Ret.fail().set("message", "The APP ID of the background configuration cannot be empty, please enter the interface management of the background first to configure."));
             return;
         }
 
         if (StrUtil.isBlank(apiSecret)) {
-            inv.getController().renderJson(Ret.fail().set("message", "后台配置的 API 密钥不能为空，请先进入后台的接口管理进行配置。"));
+            inv.getController().renderJson(Ret.fail().set("message", "The API key in the background configuration cannot be empty, please enter the interface management of the background first to configure."));
             return;
         }
 
         ApiControllerBase controller = (ApiControllerBase) inv.getController();
         String queryString = controller.getRequest().getQueryString();
         if (StrUtil.isBlank(queryString)) {
-            inv.getController().renderJson(Ret.fail().set("message", "请求参数错误。"));
+            inv.getController().renderJson(Ret.fail().set("message", "The request parameters are wrong."));
             return;
         }
 
         Map<String, String> parasMap = queryStringToMap(queryString);
         String appId = parasMap.get("jpressAppId");
         if (StrUtil.isBlank(appId)) {
-            inv.getController().renderJson(Ret.fail().set("message", "在 Url 中未获取到 jpressAppId 内容，请注意 Url 是否正确。"));
+            inv.getController().renderJson(Ret.fail().set("message", "JPress Appid content is not obtained in the URL, please note whether the URL is correct."));
             return;
         }
 
 
         if (!appId.equals(apiAppId)) {
-            inv.getController().renderJson(Ret.fail().set("message", "客户端配置的AppId和服务端配置的不一致。"));
+            inv.getController().renderJson(Ret.fail().set("message", "The client configuration appid is inconsistent with the server configuration."));
             return;
         }
 
@@ -97,26 +97,26 @@ public class ApiInterceptor implements Interceptor {
         String timeStr = parasMap.get("ct");
         Long time = timeStr == null ? null : Long.valueOf(timeStr);
         if (time == null) {
-            controller.renderJson(Ret.fail("message", "时间参数不能为空，请提交 ct 参数数据。"));
+            controller.renderJson(Ret.fail("message", "Time parameters cannot be empty, please submit CT parameter data."));
             return;
         }
 
         // 时间验证，可以防止重放攻击
         if (Math.abs(System.currentTimeMillis() - time) > TIMEOUT) {
-            controller.renderJson(Ret.fail("message", "请求超时，请重新请求。"));
+            controller.renderJson(Ret.fail("message", "The request timeout, please re -request."));
             return;
         }
 
 
         String sign = parasMap.get("sign");
         if (StrUtil.isBlank(sign)) {
-            controller.renderJson(Ret.fail("message", "签名数据不能为空，请提交 sign 数据。"));
+            controller.renderJson(Ret.fail("message", "Signature data cannot be empty, please submit SIGN data."));
             return;
         }
 
         String localSign = createLocalSign(controller.getRequest(), apiSecret);
         if (!sign.equals(localSign)) {
-            inv.getController().renderJson(Ret.fail().set("message", "数据签名错误。"));
+            inv.getController().renderJson(Ret.fail().set("message", "Data signature error."));
             return;
         }
 

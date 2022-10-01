@@ -78,7 +78,7 @@ public class JobModuleInitializer extends ModuleBase {
     public void onConfigAdminMenu(List<MenuGroup> adminMenus) {
 		MenuGroup menuGroup = new MenuGroup();
         menuGroup.setId("job");
-        menuGroup.setText("招聘");
+        menuGroup.setText("Recruitment");
         menuGroup.setIcon("<i class=\"fa fa-suitcase\"></i>");
         menuGroup.setOrder(4);
         adminMenus.add(menuGroup);

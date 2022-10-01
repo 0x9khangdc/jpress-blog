@@ -50,7 +50,7 @@ public abstract class AdminControllerBase extends ControllerBase {
             return true;
         }
 
-        //不能是纯数字
+        //Can't be pure numbers
         if (StrUtil.isNumeric(slug)) {
             return false;
         }
@@ -68,7 +68,7 @@ public abstract class AdminControllerBase extends ControllerBase {
     @NotAction
     public void renderErrorForNoPermission() {
         if (isAjaxRequest()) {
-            renderJson(Ret.fail().set("message", "您没有权限操作此功能。"));
+            renderJson(Ret.fail().set("message", "You have no permission to operate this function."));
         } else {
             render(NO_PERMISSION_VIEW);
         }

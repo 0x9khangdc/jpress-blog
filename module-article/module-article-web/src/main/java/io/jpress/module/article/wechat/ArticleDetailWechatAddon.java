@@ -34,15 +34,15 @@ import io.jpress.service.OptionService;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 用于文章查看的微信插件
- * @Description: 输入关键字内容为：文章:slug
+ * @Title: WeChat plug -in for articles view
+ * @Description: Enter the keyword content as: article: slug
  * @Package io.jpress.module.article.wechat
  */
 @WechatAddonConfig(
         id = "ip.press.article",
-        title = "文章查看",
-        description = "输入 article:slug 返回文章内容",
-        author = "海哥")
+        title = "View article",
+        description = "enter article:slug Return to the article content",
+        author = "Sea brother")
 public class ArticleDetailWechatAddon implements WechatAddon {
 
     @Inject
@@ -78,7 +78,7 @@ public class ArticleDetailWechatAddon implements WechatAddon {
         String webDomain = optionService.findByKey(JPressConsts.OPTION_WEB_DOMAIN);
         if (StrUtil.isBlank(webDomain)) {
             OutTextMsg outTextMsg = new OutTextMsg(inMsg);
-            outTextMsg.setContent("服务器配置错误：网站域名配置为空，请先到 后台->系统->常规 配置网站域名");
+            outTextMsg.setContent("Server configuration error: Website domain name configuration is empty, please go to the background first-> System-> Conventional configuration website domain name");
             msgController.render(outTextMsg);
             return true;
         }

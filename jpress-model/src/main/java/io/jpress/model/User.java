@@ -38,11 +38,11 @@ public class User extends BaseUser<User> {
     public static final Map<String, String> sourceMap = new HashMap<>();
 
     static {
-        sourceMap.put(SOURCE_WECHAT_WEB, "微信网页授权");
-        sourceMap.put(SOURCE_WECHAT_MESSAGE, "微信公众号");
-        sourceMap.put(SOURCE_WECHAT_MINIPROGRAM, "微信小程序");
-        sourceMap.put(SOURCE_WEB_REGISTER, "网页注册");
-        sourceMap.put(SOURCE_ADMIN_CREATE, "后台创建");
+        sourceMap.put(SOURCE_WECHAT_WEB, "WeChat web authority authorization");
+        sourceMap.put(SOURCE_WECHAT_MESSAGE, "WeChat public account");
+        sourceMap.put(SOURCE_WECHAT_MINIPROGRAM, "WeChat Mini Program");
+        sourceMap.put(SOURCE_WEB_REGISTER, "Webpage registration");
+        sourceMap.put(SOURCE_ADMIN_CREATE, "Background creation");
     }
 
     public String getSourceString() {

@@ -40,39 +40,39 @@ import javax.validation.constraints.NotNull;
  * @Title: 文章评论相关 API
  */
 @RequestMapping("/api/article/comment")
-@Api("文章评论相关API")
+@Api("Article Review Related API")
 public class ArticleCommentApiController extends ApiControllerBase {
 
     @Inject
     private ArticleCommentService commentService;
 
 
-    @ApiOper("分页查询谋篇文章的评论")
-    @ApiResp(field = "page", notes = "文章评论分页数据", dataType = Page.class, genericTypes = ArticleComment.class)
-    public Ret paginateByArticleId(@ApiPara("文章ID") @NotNull Long articleId
-            , @ApiPara("分页页码") @DefaultValue("1") int pageNumber
-            , @ApiPara("每页数据量") @DefaultValue("10") int pageSize) {
+    @ApiOper("Comment on pagination query articles")
+    @ApiResp(field = "page", notes = "Article comments pagination data", dataType = Page.class, genericTypes = ArticleComment.class)
+    public Ret paginateByArticleId(@ApiPara("Article ID") @NotNull Long articleId
+            , @ApiPara("Paging page number") @DefaultValue("1") int pageNumber
+            , @ApiPara("Data volume per page") @DefaultValue("10") int pageSize) {
         return Ret.ok().set("page", commentService.paginateByArticleIdInNormal(pageNumber, pageSize, articleId));
     }
 
 
-    @ApiOper("删除评论")
-    public Ret doDelete(@ApiPara("评论ID") @NotNull Long id) {
+    @ApiOper("Delete comment")
+    public Ret doDelete(@ApiPara("Comment ID") @NotNull Long id) {
         commentService.deleteById(id);
         return Rets.OK;
     }
 
 
-    @ApiOper(value = "创建新的评论", contentType = ContentType.JSON)
-    @ApiResp(field = "id", notes = "评论的ID", dataType = Long.class, mock = "123")
-    public Ret doCreate(@ApiPara("评论的 json") @JsonBody ArticleComment articleComment) {
+    @ApiOper(value = "Create a new comment", contentType = ContentType.JSON)
+    @ApiResp(field = "id", notes = "Comments ID", dataType = Long.class, mock = "123")
+    public Ret doCreate(@ApiPara("Commentary json") @JsonBody ArticleComment articleComment) {
         Object id = commentService.save(articleComment);
         return Ret.ok().set("id", id);
     }
 
 
-    @ApiOper(value = "更新评论信息", contentType = ContentType.JSON)
-    public Ret doUpdate(@ApiPara("评论的 json") @JsonBody ArticleComment articleComment) {
+    @ApiOper(value = "Update comment information", contentType = ContentType.JSON)
+    public Ret doUpdate(@ApiPara("Commentary json") @JsonBody ArticleComment articleComment) {
         commentService.update(articleComment);
         return Rets.OK;
     }

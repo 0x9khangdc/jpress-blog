@@ -60,7 +60,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
     private ArticleCommentService commentService;
 
 
-    @UCenterMenu(text = "文章列表", groupId = "article", order = 0)
+    @UCenterMenu(text = "Article list", groupId = "article", order = 0)
     public void index() {
 
         User loginedUser = getLoginedUser();
@@ -85,14 +85,14 @@ public class ArticleUCenterController extends UcenterControllerBase {
         }
 
         if (notLoginedUserModel(article)) {
-            renderJson(Ret.fail().set("message", "非法操作"));
+            renderJson(Ret.fail().set("message", "Illegal operation"));
             return;
         }
 
         renderJson(articleService.deleteById(id) ? OK : FAIL);
     }
 
-    @UCenterMenu(text = "投稿", groupId = "article", order = 1)
+    @UCenterMenu(text = "Posting", groupId = "article", order = 1)
     public void write() {
 
         int articleId = getParaToInt(0, 0);
@@ -157,8 +157,8 @@ public class ArticleUCenterController extends UcenterControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "article.title", message = "标题不能为空"),
-            @Form(name = "article.content", message = "文章内容不能为空")
+            @Form(name = "article.title", message = "The title can not be blank"),
+            @Form(name = "article.content", message = "The content of the article cannot be empty")
     })
     public void doWriteSave() {
 
@@ -169,31 +169,31 @@ public class ArticleUCenterController extends UcenterControllerBase {
         article.setUserId(getLoginedUser().getId());
 
         if (!getLoginedUser().isStatusOk()) {
-            renderJson(Ret.fail().set("message", "当前脏话未激活，无法投稿。"));
+            renderJson(Ret.fail().set("message", "The current swear words are not activated and cannot be submitted."));
             return;
         }
 
 
         if (article.getId() != null && notLoginedUserModel(article)) {
-            renderJson(Ret.fail().set("message", "非法操作"));
+            renderJson(Ret.fail().set("message", "Illegal operation"));
             return;
         }
 
         if (!validateSlug(article)) {
-            renderJson(Ret.fail("message", "固定连接不能以数字结尾"));
+            renderJson(Ret.fail("message", "Fixed connection cannot end with numbers"));
             return;
         }
 
         if (StrUtil.isNotBlank(article.getSlug())) {
             Article existArticle = articleService.findFirstBySlug(article.getSlug());
             if (existArticle != null && !existArticle.getId().equals(article.getId())) {
-                renderJson(Ret.fail("message", "该固定链接已经存在"));
+                renderJson(Ret.fail("message", "This fixed link already exists"));
                 return;
             }
         }
 
         if (WordFilterUtil.isMatchedFilterWords(article.getText())) {
-            renderJson(Ret.fail().set("message", "投稿内容包含非法字符。"));
+            renderJson(Ret.fail().set("message", "The submission content includes illegal characters."));
             return;
         }
 
@@ -252,7 +252,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
     }
 
 
-    @UCenterMenu(text = "文章评论", groupId = "comment", order = 0, icon = "<i class=\"fas fa-comment\"></i>")
+    @UCenterMenu(text = "Article comment", groupId = "comment", order = 0, icon = "<i class=\"fas fa-comment\"></i>")
     public void comment() {
         Page<ArticleComment> page = commentService._paginateByUserId(getPagePara(), 10, getLoginedUser().getId());
         setAttr("page", page);
@@ -270,7 +270,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
 
 
         if (notLoginedUserModel(comment)) {
-            renderFailJson("非法操作");
+            renderFailJson("Illegal operation");
             return;
         }
 

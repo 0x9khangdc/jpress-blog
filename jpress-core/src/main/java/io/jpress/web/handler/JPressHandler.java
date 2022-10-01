@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 伪静态处理器
+ * @Title: Pseudo -static processor
  * @Package io.jpress.web.handler
  */
 
@@ -73,7 +73,7 @@ public class JPressHandler extends Handler {
             request.setAttribute("VERSION", JPressConsts.VERSION);
             request.setAttribute("CPATH", request.getContextPath());
 
-            // SPATH 默认值为 "" 空字符串
+            // SPATH The default value is "" "empty string
             request.setAttribute("SPATH","");
             doHandle(target, request, response, isHandled);
         } finally {
@@ -84,7 +84,7 @@ public class JPressHandler extends Handler {
 
 
     public void doHandle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-        //不让访问 插件目录 下的 .html、 .sql 文件 和 WEB-INF 目录下的任何文件
+        //Do not allow any files in the .html, .sql files and web-inf directory in the plug-in directory
         if (target.startsWith(ADDON_TARGET_PREFIX)) {
             if (target.endsWith(".html")
                     || target.endsWith(".sql")
@@ -97,7 +97,7 @@ public class JPressHandler extends Handler {
             }
         }
 
-        //不让访问 模板目录 下的 .html 文件
+        //Do not allow the .html file in the interview template directory
         if (target.startsWith(TEMPLATES_TARGET_PREFIX)) {
             if (target.endsWith(".html")) {
                 HandlerKit.renderError404(request, response, isHandled);
@@ -105,28 +105,28 @@ public class JPressHandler extends Handler {
             }
         }
 
-        //v4 版本已经合并了 v3 版本的 css 到 jpressfront.css 了
-        //需要重定向，否则无法兼容 v3 的模板
+        //V4 version has been merged with V3 version css to jpressfront.css
+        //Need to redirect, otherwise it will not be compatible with the template of V3
         if (target.endsWith(".css") && v3CssPaths.contains(target)) {
             HandlerKit.redirect301(request.getContextPath() + "/static/front/jpressfront.css", request, response, isHandled);
             return;
         }
 
-        //v4 版本已经合并了 v3 版本的 js 到 jpressfront.js 了
-        //需要重定向，否则无法兼容 v3 的模板
+        //V4 version has been merged with V3 version JS to jpressfront.js
+        //Need to redirect, otherwise it will not be compatible with the template of V3
         if (target.endsWith(".js") && v3JsPaths.contains(target)) {
             HandlerKit.redirect301(request.getContextPath() + "/static/front/jpressfront.js", request, response, isHandled);
             return;
         }
 
-        //附件目录
+        //Attachment directory
         if (target.startsWith(ATTACHMENT_TARGET_PREFIX)) {
             AttachmentHandlerKit.handle(JPressConfig.me.getAttachmentRoot(), target, request, response, isHandled);
             return;
         }
 
         if (target.contains(".")){
-            //如果是访问 .html ，直接去除后缀
+            //If it is access .html, remove the suffix directly
             if (target.endsWith(".html")) {
                 target = target.substring(0, target.length() - 5);
                 setCurrentTarget(target);
@@ -138,12 +138,12 @@ public class JPressHandler extends Handler {
 
         String suffix = JPressOptions.getAppUrlSuffix();
 
-        //若不启用伪静态，让 undertow 处理静态资源 css js 等
+        //If the pseudo-static is not enabled, let Undertow handle static resource CSS JS, etc.
         if (StrUtil.isBlank(suffix) && target.indexOf('.') != -1) {
             return;
         }
 
-        //启用伪静态
+        //Enable pseudo-static
         if (StrUtil.isNotBlank(suffix) && target.endsWith(suffix)) {
             target = target.substring(0, target.length() - suffix.length());
         }

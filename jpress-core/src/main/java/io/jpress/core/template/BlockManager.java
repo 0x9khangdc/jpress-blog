@@ -34,7 +34,7 @@ public class BlockManager extends BsFormManager {
     private void initComponents() {
         addComponent(new BlockContainerComponent());
 
-        //根据路径来添加
+        //Add according to the path
         addBlocksByPath("","/WEB-INF/views/admin/template/blocks");
     }
 

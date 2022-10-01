@@ -50,7 +50,7 @@ public class CategoryArticlesDirective extends JbootDirectiveBase {
         String flag = getPara("categoryFlag", scope);
 
         if (StrUtil.isBlank(flag) && categoryId == null) {
-            throw new IllegalArgumentException("#categoryArticles(categoryFlag=xxx，categoryId=xxx) is error, " +
+            throw new IllegalArgumentException("#categoryArticles(categoryFlag=xxx, categoryId=xxx) is error, " +
                     "categoryFlag or categoryId must not be empty. " + getLocation());
         }
 

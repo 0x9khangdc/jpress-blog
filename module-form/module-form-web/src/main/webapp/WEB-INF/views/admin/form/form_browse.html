@@ -1,112 +1,103 @@
-#@layer()
-
-#define css()
+#@layer() #define css()
 <style>
-    .nav-tabs .nav-link {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-    .jpress-form-item:hover {
-        border: 1px solid #0069d9;
-    }
-    .my-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+  .nav-tabs .nav-link {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .jpress-form-item:hover {
+    border: 1px solid #0069d9;
+  }
+  .my-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-    #uploader {
-        height: 230px;
-    }
+  #uploader {
+    height: 230px;
+  }
 
-    .myPanel {
-        font-size: 25px;
-        color: #ccc;
-        text-align: center;
-        padding-top: 60px;
-    }
+  .myPanel {
+    font-size: 25px;
+    color: #ccc;
+    text-align: center;
+    padding-top: 60px;
+  }
 
-    .tab-content > .tab-pane {
-        padding: 1rem;
-    }
+  .tab-content > .tab-pane {
+    padding: 1rem;
+  }
 
-    .card.card-outline-tabs .card-header a {
-        border-top-color: #dee2e6;
-    }
+  .card.card-outline-tabs .card-header a {
+    border-top-color: #dee2e6;
+  }
 </style>
-#end
-
-#define script()
+#end #define script()
 <script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
-<link href="#(CPATH)/static/components/qcloud-upload-sdk/player/css/tcplayer.min.css" rel="stylesheet">
+<link
+  href="#(CPATH)/static/components/qcloud-upload-sdk/player/css/tcplayer.min.css"
+  rel="stylesheet"
+/>
 <script src="#(CPATH)/static/components/qcloud-upload-sdk/player/hls.min.0.13.2m.js"></script>
 <script src="#(CPATH)/static/components/qcloud-upload-sdk/player/tcplayer.v4.2.1.min.js"></script>
 <script>
+  //clear layer.data
+  parent.layer.data = {};
 
-    //clear layer.data
-    parent.layer.data = {};
-
-    $(".jpress-form-item").click(function () {
-
-        //表单id
-        parent.layer.data.uid = $(this).attr("data-id");
-        parent.layer.data.name = $(this).attr("data-name");
-        parent.layer.closeAll();
-    })
-
+  $(".jpress-form-item").click(function () {
+    //表单id
+    parent.layer.data.uid = $(this).attr("data-id");
+    parent.layer.data.name = $(this).attr("data-name");
+    parent.layer.closeAll();
+  });
 </script>
 
+#end #define content()
 
-#end
+<div class="card card-outline card-tabs" style="box-shadow: none">
+  <div class="card-header p-0 border-bottom-0">
+    <ul class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link active" id="uititle">Form</a></li>
+    </ul>
+  </div>
 
-#define content()
-
-<div class="card card-outline card-tabs" style="box-shadow: none;">
-    <div class="card-header p-0 border-bottom-0">
-        <ul class="nav nav-tabs">
-
-            <li class="nav-item"><a class="nav-link active" id="uititle">表单</a></li>
-
-        </ul>
-
-    </div>
-
-    <div class="card-body">
-        <div class="tab-content" style="padding-top:20px;">
-            <div class="active tab-pane" id="activity">
-                <div class="row">
-                    #for(form : page.list)
-                    <div class="col-md-3">
-                        <div class="jpress-form-item" data-id="#(form.uuid ??)" data-name="#(form.name ??)">
-                            <a href="javascript:void(0);">
-                                <div class="jpress-form-item-header">
-                                    <i class="bi bi-bar-chart-fill"></i>
-                                    #(form.name ??)
-                                </div>
-                                #if(form.isPublished())
-                                <div class="form-state-published">已经发布</div>
-                                #else
-                                <div class="form-state-unpublish">未发布</div>
-                                #end
-                                <div class="jpress-form-item-footer">
-                                    <span>#(form.data_count ??, "暂无")</span>
-                                    <span class="float-right">#(form.data_created ??)</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    #end
+  <div class="card-body">
+    <div class="tab-content" style="padding-top: 20px">
+      <div class="active tab-pane" id="activity">
+        <div class="row">
+          #for(form : page.list)
+          <div class="col-md-3">
+            <div
+              class="jpress-form-item"
+              data-id="#(form.uuid ??)"
+              data-name="#(form.name ??)"
+            >
+              <a href="javascript:void(0);">
+                <div class="jpress-form-item-header">
+                  <i class="bi bi-bar-chart-fill"></i>
+                  #(form.name ??)
                 </div>
-
-                <div class="row" style="padding-right: 20px;padding-top: 30px">
-                    <div class="col-12">
-                        #@_paginate()
-                    </div>
+                #if(form.isPublished())
+                <div class="form-state-published">Have been released</div>
+                #else
+                <div class="form-state-unpublish">Unpublished</div>
+                #end
+                <div class="jpress-form-item-footer">
+                  <span>#(form.data_count ??, "None for the time being")</span>
+                  <span class="float-right">#(form.data_created ??)</span>
                 </div>
+              </a>
             </div>
-
+          </div>
+          #end
         </div>
+
+        <div class="row" style="padding-right: 20px; padding-top: 30px">
+          <div class="col-12">#@_paginate()</div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 #end

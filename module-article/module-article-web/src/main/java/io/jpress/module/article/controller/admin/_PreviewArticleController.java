@@ -64,7 +64,7 @@ public class _PreviewArticleController extends TemplateControllerBase {
         //当文章处于审核中、草稿、或者未到发布时间时候，显示404
         render404If(article == null );
 
-        article.setTitle("（预览中...）" + article.getTitle());
+        article.setTitle("(Preview...)" + article.getTitle());
 
         //设置页面的seo信息
         setSeoInfos(article);

@@ -5,8 +5,8 @@ import io.jpress.core.bsformbuilder.BsFormComponent;
 import java.util.Objects;
 
 /**
- * html 块里的配置定义
- * block_***.html 里定义的 #blockOption 指令或者方法
+ * html Configuration definition in the block
+ * block_***.html Definition #blockOption Instruction or method
  */
 public class HtmlBlockOptionDef {
 

@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 微信获取用户相关的拦截器
+ * @Title: WeChat obtain user-related interceptors
  */
 
 public class WechatInterceptor implements Interceptor{
@@ -63,7 +63,7 @@ public class WechatInterceptor implements Interceptor{
     }
 
     /**
-     * 获取当前的url
+     * Get the current URL
      *
      * @param controller
      * @return
@@ -72,10 +72,10 @@ public class WechatInterceptor implements Interceptor{
 
         HttpServletRequest req = controller.getRequest();
 
-        // 获取用户将要去的路径
+        // Get the path that the user is going to go
         String queryString = req.getQueryString();
 
-        // 被拦截前的请求URL
+        // The request URL before being intercepted
         String url = req.getScheme() + "://" + req.getServerName() + req.getRequestURI();
         if (StrUtil.isNotBlank(queryString)) {
             url = url.concat("?").concat(queryString);

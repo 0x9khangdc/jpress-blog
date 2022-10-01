@@ -18,10 +18,10 @@ public class SiteHandler extends Handler {
     @Override
     public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
 
-        // 匹配站点方式
-        // 1、根据域名匹配
-        // 2、根据绑定二级目录匹配
-        // 3、更加 cookie 信息匹配
+        // Matching site method
+        // 1. Matching according to the domain name
+        // 2. Matching according to the binding secondary directory
+        // 3. More cookie information matching
         SiteInfo siteInfo = SiteManager.me().matchSite(target, request, response);
         if (siteInfo != null) {
 
@@ -48,7 +48,7 @@ public class SiteHandler extends Handler {
         }
 
 
-        //设置缓存前缀
+        //Set the cache prefix
         JbootCache cache = JbootCacheManager.me().getCache();
         try {
             cache.setCurrentCacheNamePrefix("site" + SiteContext.getSiteId() + ":");

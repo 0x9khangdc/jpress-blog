@@ -17,7 +17,7 @@
         create: true,
         render: {
             option_create: function (data, escape) {
-                return '<div class="create" style="padding-left: 5px"> 添加标签：<strong style="color: #DD1144">' + escape(data.input) + '</strong></div>';
+                return '<div class="create" style="padding-left: 5px"> add tag:<strong style="color: #DD1144">' + escape(data.input) + '</strong></div>';
             }
         }
     });
@@ -48,7 +48,7 @@
         ajaxSubmit("#form", function (data) {
             $("#articleId").attr("value", data.id);
             window.history.replaceState({}, '', `#(CPATH)/admin/job/doSave/` + data.id)
-            toastr.success('岗位保存成功。');
+            toastr.success('The post is successfully preserved.');
         });
     };
 
@@ -59,7 +59,7 @@
      * @param id
      */
     function doChangeEditor(id) {
-        if (confirm('确定要切换编辑器吗？切换可能出现前台渲染内容缺失的问题，且只对未发布岗位有效')) {
+        if (confirm('Are you sure you want to switch the editor? Switching may occur in the problem of lack of content in the front desk, and it is only valid for not being released.')) {
             var changeMode = editMode == "html" ? "markdown" : "html";
             if (id && id !== '0') {
                 ajaxGet('#(CPATH)/admin/article/doChangeEditMode?id=' + id + "&mode=" + changeMode);
@@ -82,12 +82,12 @@
         var $this = $(this);
         layer.open({
             type: 2,
-            title: '选择附件',
+            title: 'Select an attachment',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
             area: ['90%', '90%'],
-            content: jpress.cpath + '/admin/attachment/browse?uititle=附件',
+            content: jpress.cpath + '/admin/attachment/browse?uititle=appendix',
             end: function () {
                 if (layer.data.src != null) {
 
@@ -105,7 +105,7 @@
 
                             insertHtmlToEditor(video.outerHTML);
                         } else if (currentVditor) {
-                            currentVditor.insertValue('附件：[' + layer.data.title + '](' + src + ')')
+                            currentVditor.insertValue('appendix:[' + layer.data.title + '](' + src + ')')
                         }
 
 
@@ -131,9 +131,9 @@
                             a.setAttribute('href', src)
                             a.setAttribute("target", "_blank")
                             a.innerHTML = layer.data.title;
-                            insertHtmlToEditor('附件：' + a.outerHTML);
+                            insertHtmlToEditor('appendix:' + a.outerHTML);
                         } else if (currentVditor) {
-                            currentVditor.insertValue('附件：[' + layer.data.title + '](' + src + ')')
+                            currentVditor.insertValue('appendix:[' + layer.data.title + '](' + src + ')')
                         }
                     }
                 }
@@ -173,12 +173,12 @@
         var $this = $(this);
         layer.open({
             type: 2,
-            title: '选择视频',
+            title: 'Choose a video',
             anim: 2,
             shadeClose: true,
             shade: 0.3,
             area: ['90%', '90%'],
-            content: jpress.cpath + '/admin/attachment/video/browse?uititle=视频',
+            content: jpress.cpath + '/admin/attachment/video/browse?uititle=video',
             end: function () {
 
                 if (layer.data.uid != null) {
@@ -202,7 +202,7 @@
                         insertHtmlToEditor(video.outerHTML);
 
                     } else if (currentVditor) {
-                        alert("此编辑器暂不支持插入视频！")
+                        alert("This editor does not support inserting videos for the time being!")
                     }
                 }
             }

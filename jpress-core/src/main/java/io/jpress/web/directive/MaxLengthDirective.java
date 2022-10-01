@@ -43,7 +43,7 @@ public class MaxLengthDirective extends JbootDirectiveBase {
 
         int maxLength = getParaToInt(1, scope, 0);
         if (maxLength <= 0) {
-            throw new IllegalArgumentException("#maxLength(content,length) 参数错误，length必须大于0 " + getLocation());
+            throw new IllegalArgumentException("#maxLength(content,length) Parameter error, length must be greater than 0 " + getLocation());
         }
 
         String suffix = getPara(2, scope);

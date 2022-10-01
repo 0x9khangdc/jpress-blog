@@ -43,7 +43,7 @@ public class SitemapController extends JbootController {
 
         buildUrlsetHeader(xmlBuilder);
 
-        //首页 sitemap
+        //front page sitemap
         Sitemap index = new Sitemap();
         index.setLoc("/");
         index.setChangefreq(Sitemap.CHANGEFREQ_ALWAYS);
