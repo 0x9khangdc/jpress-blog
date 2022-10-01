@@ -49,11 +49,11 @@ public class AdminMessageSender {
         SimpleEmailSender ses = new SimpleEmailSender();
 
         if (!ses.isEnable()) {
-            return Ret.fail().set("message", "您未开启邮件功能，无法发送。");
+            return Ret.fail().set("message", "You can't send it without opening the mail function.");
         }
 
         if (!ses.isConfigOk()) {
-            return Ret.fail().set("message", "未配置正确，smtp 或 用户名 或 密码 为空。");
+            return Ret.fail().set("message", "Unconfigured is correct, SMTP or user name or password is empty.");
         }
 
         if (ArrayUtil.isNotEmpty(users)) {
@@ -121,7 +121,7 @@ public class AdminMessageSender {
 
         SmsSender smsSender = SmsSenderFactory.createSender();
         if (smsSender instanceof NonSmsSender) {
-            return Ret.fail().set("message", "您未开启短信功能，无法发送。");
+            return Ret.fail().set("message", "You can't send the SMS function and cannot send it.");
         }
 
 

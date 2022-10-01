@@ -35,18 +35,18 @@ public class SendEmailCodeController  extends ControllerBase {
 
         if (validResult != null && validResult.isSuccess()) {
             if (!StrUtil.isEmail(emailAddr)) {
-                renderFailJson("您输入的邮箱地址有误。");
+                renderFailJson("The mailbox address you entered is wrong.");
                 return;
             }
 
             SimpleEmailSender ses = new SimpleEmailSender();
             if (!ses.isEnable()) {
-                renderFailJson("您未开启邮件功能，无法发送。");
+                renderFailJson("You can't send it without opening the mail function.");
                 return;
             }
 
             if (!ses.isConfigOk()) {
-                renderFailJson("未配置正确，smtp 或 用户名 或 密码 为空。");
+                renderFailJson("Unconfigured is correct, SMTP or user name or password is empty.");
                 return;
             }
 
@@ -59,18 +59,18 @@ public class SendEmailCodeController  extends ControllerBase {
 
             Email email = Email.create();
             email.subject(subject);
-            email.content(" 验证码："+code+"，用于注册/登录，10分站内有效。");
+            email.content(" Verification code:"+code+", For registration/login, valid in 10 points.");
             email.to(emailAddr);
 
             //发送邮箱验证码
             boolean sendOk = EmailKit.sendEmailCode(emailAddr, code, email);
             if (sendOk) {
-                renderJson(Ret.ok().set("message", "邮箱验证码发送成功，请手机查看"));
+                renderJson(Ret.ok().set("message", "The mailbox verification code is successfully sent, please check the mobile phone"));
             } else {
-                renderJson(Ret.fail().set("message", "邮箱验证码实发失败，请联系管理员"));
+                renderJson(Ret.fail().set("message", "The email verification code fails, please contact the administrator"));
             }
         } else {
-            renderFailJson("验证错误");
+            renderFailJson("Verification error");
         }
     }
 }

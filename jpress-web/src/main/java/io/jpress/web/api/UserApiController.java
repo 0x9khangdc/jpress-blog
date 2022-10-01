@@ -38,7 +38,7 @@ import javax.validation.constraints.NotNull;
  * 用户相关的API
  */
 @RequestMapping("/api/user")
-@Api("用户相关API")
+@Api("User -related API")
 public class UserApiController extends ApiControllerBase {
 
     @Inject
@@ -46,13 +46,13 @@ public class UserApiController extends ApiControllerBase {
 
 
     @PostRequest
-    @ApiOper("用户登录")
-    @ApiResp(field = "Jwt", notes = "Jwt 的 token 信息", mock = "ey1NiJ9.eyJpYX0ifQ.Y3p4akomy4")
-    public Ret login(@ApiPara(value = "登录账户", notes = "可以是邮箱") @NotNull String loginAccount
-            , @ApiPara("登录密码") @NotNull String password) {
+    @ApiOper("User login")
+    @ApiResp(field = "Jwt", notes = "JWT's token information", mock = "ey1NiJ9.eyJpYX0ifQ.Y3p4akomy4")
+    public Ret login(@ApiPara(value = "login account", notes = "Can be mailboxes") @NotNull String loginAccount
+            , @ApiPara("login password") @NotNull String password) {
         User loginUser = userService.findByUsernameOrEmail(loginAccount);
         if (loginUser == null) {
-            return Ret.fail("message", "没有该用户信息");
+            return Ret.fail("message", "No user information");
         }
 
         Ret ret = userService.doValidateUserPwd(loginUser, password);
@@ -68,30 +68,30 @@ public class UserApiController extends ApiControllerBase {
     }
 
 
-    @ApiOper("用户详情")
-    @ApiResp(field = "user", dataType = User.class, notes = "用户信息")
-    public Ret detail(@ApiPara("用户ID") @NotNull Long id) {
+    @ApiOper("User details")
+    @ApiResp(field = "user", dataType = User.class, notes = "User Info")
+    public Ret detail(@ApiPara("User ID") @NotNull Long id) {
         User user = userService.findById(id);
         return Ret.ok().set("user", user.copy().keepSafe());
     }
 
 
-    @ApiOper("更新用户信息")
-    public Ret update(@ApiPara("用户 json 信息") @JsonBody @NotNull User user) {
+    @ApiOper("Update user information")
+    public Ret update(@ApiPara("User JSON Information") @JsonBody @NotNull User user) {
         user.keepUpdateSafe();
         userService.update(user);
         return Ret.ok();
     }
 
     @PostRequest
-    @ApiOper("更新用户密码")
+    @ApiOper("Update user password")
     public Ret updatePassword(@ApiPara("用户ID") @NotNull Long userId
-            , @ApiPara("用户新密码") @NotEmpty String newPassword
-            , @ApiPara(value = "用户旧密码", notes = "如果登录用户是超级管理员，则可以不输入密码") String oldPassowrd) {
+            , @ApiPara("New password") @NotEmpty String newPassword
+            , @ApiPara(value = "Old password", notes = "If the login user is a super administrator, you can enter the password without entering the password") String oldPassowrd) {
 
         User user = userService.findById(userId);
         if (user == null) {
-            return Ret.fail("message", "该用户不存在");
+            return Ret.fail("message", "this user does not exist");
         }
 
         String salt = user.getSalt();
@@ -107,9 +107,9 @@ public class UserApiController extends ApiControllerBase {
     }
 
 
-    @ApiOper("创建新的用户")
-    @ApiResp(field = "userId", notes = "用户ID，用户创建成功后返回此数据", dataType = Long.class)
-    public Ret create(@ApiPara("用户 json 信息") @JsonBody @NotNull User user) {
+    @ApiOper("Create a new user")
+    @ApiResp(field = "userId", notes = "User ID, the user returns this data after successful creation", dataType = Long.class)
+    public Ret create(@ApiPara("User JSON Information") @JsonBody @NotNull User user) {
         userService.save(user);
         return Ret.ok().set("userId", user.getId());
     }

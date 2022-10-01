@@ -54,7 +54,7 @@ public class AttachmentController extends UserControllerBase {
 
         UploadFile uploadFile = getFile();
         if (uploadFile == null) {
-            renderJson(Ret.fail().set("message", "请选择要上传的文件"));
+            renderJson(Ret.fail().set("message", "Please select the file to be uploaded"));
             return;
         }
 
@@ -62,13 +62,13 @@ public class AttachmentController extends UserControllerBase {
         File file = uploadFile.getFile();
         if (!getLoginedUser().isStatusOk()) {
             AttachmentUtils.delete(file);
-            renderJson(Ret.of("error", Ret.of("message", "当前用户未激活，不允许上传任何文件。")));
+            renderJson(Ret.of("error", Ret.of("message", "The current users are not activated and are not allowed to upload any files.")));
             return;
         }
 
         if (AttachmentUtils.isUnSafe(file)) {
             AttachmentUtils.delete(file);
-            renderJson(Ret.fail().set("message", "不支持此类文件上传"));
+            renderJson(Ret.fail().set("message", "Do not support such files upload"));
             return;
         }
 
@@ -83,7 +83,7 @@ public class AttachmentController extends UserControllerBase {
         int fileSize = Math.round(file.length() / 1024 * 100) / 100;
         if (maxSize > 0 && fileSize > maxSize * 1024) {
             file.delete();
-            renderJson(Ret.fail().set("message", "上传文件大小不能超过 " + maxSize + " MB"));
+            renderJson(Ret.fail().set("message", "The size of the upload file cannot be exceeded " + maxSize + " MB"));
             return;
         }
 

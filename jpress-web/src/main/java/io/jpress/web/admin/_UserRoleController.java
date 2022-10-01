@@ -49,7 +49,7 @@ public class _UserRoleController extends AdminControllerBase {
     private PermissionService permissionService;
 
 
-    @AdminMenu(text = "角色", groupId = JPressConsts.SYSTEM_MENU_USER, order = 9)
+    @AdminMenu(text = "Role", groupId = JPressConsts.SYSTEM_MENU_USER, order = 9)
     public void index() {
         List<Role> roles = roleService.findAll();
         setAttr("roles", roles);

@@ -73,7 +73,7 @@ public class _UserController extends AdminControllerBase {
     private UserTagService userTagService;
 
 
-    @AdminMenu(text = "用户管理", groupId = JPressConsts.SYSTEM_MENU_USER, order = 0)
+    @AdminMenu(text = "User Management", groupId = JPressConsts.SYSTEM_MENU_USER, order = 0)
     public void list() {
 
         Columns columns = Columns.create("status", getPara("status"));
@@ -101,7 +101,7 @@ public class _UserController extends AdminControllerBase {
         render("user/list.html");
     }
 
-    @AdminMenu(text = "用户标签", groupId = JPressConsts.SYSTEM_MENU_USER, order = 1)
+    @AdminMenu(text = "User label", groupId = JPressConsts.SYSTEM_MENU_USER, order = 1)
     public void tag() {
 
         Page<UserTag> page = userTagService.paginateByColumns(getPagePara(), 10, Columns.EMPTY, "id desc");
@@ -114,7 +114,7 @@ public class _UserController extends AdminControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "tag.title", message = "标签名称不能为空"),
+            @Form(name = "tag.title", message = "The label name cannot be empty"),
     })
     public void doTagSave() {
         UserTag tag = getModel(UserTag.class, "tag");
@@ -122,7 +122,7 @@ public class _UserController extends AdminControllerBase {
 
         String slug = tag.getSlug();
         if (slug == null || slug.contains("-") || StrUtil.isNumeric(slug)) {
-            renderJson(Ret.fail("message", "固定连接不能以数字结尾"));
+            renderJson(Ret.fail("message", "Fixed connection cannot end with numbers"));
             return;
         }
 
@@ -162,30 +162,30 @@ public class _UserController extends AdminControllerBase {
         User user = getBean(User.class);
 
         if (StrUtil.isBlank(pwd)) {
-            renderJson(Ret.fail().set("message", "密码不能为空").set("errorCode", 3));
+            renderJson(Ret.fail().set("message", "password can not be blank").set("errorCode", 3));
             return;
         }
 
         if (StrUtil.isBlank(confirmPwd)) {
-            renderJson(Ret.fail().set("message", "确认密码不能为空").set("errorCode", 4));
+            renderJson(Ret.fail().set("message", "confirm password can not be blank").set("errorCode", 4));
             return;
         }
 
         if (pwd.equals(confirmPwd) == false) {
-            renderJson(Ret.fail().set("message", "两次输入密码不一致").set("errorCode", 5));
+            renderJson(Ret.fail().set("message", "Two input passwords are inconsistent").set("errorCode", 5));
             return;
         }
 
         User dbUser = userService.findFirstByUsername(user.getUsername());
         if (dbUser != null) {
-            renderJson(Ret.fail().set("message", "该用户名已经存在").set("errorCode", 10));
+            renderJson(Ret.fail().set("message", "This user name already exists").set("errorCode", 10));
             return;
         }
 
         if (StrUtil.isNotBlank(user.getEmail())) {
             dbUser = userService.findFirstByEmail(user.getEmail());
             if (dbUser != null) {
-                renderJson(Ret.fail().set("message", "邮箱已经存在了").set("errorCode", 11));
+                renderJson(Ret.fail().set("message", "The mailbox already exists").set("errorCode", 11));
                 return;
             }
         }
@@ -207,7 +207,7 @@ public class _UserController extends AdminControllerBase {
 
 
 
-    @AdminMenu(text = "发消息", groupId = JPressConsts.SYSTEM_MENU_USER, order = 5)
+    @AdminMenu(text = "Send a message", groupId = JPressConsts.SYSTEM_MENU_USER, order = 5)
     public void sendMsg() {
         List<UserTag> hotTags = userTagService.findHotList(50);
         setAttr("hotTags", hotTags);
@@ -286,7 +286,7 @@ public class _UserController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "我的资料", groupId = JPressConsts.SYSTEM_MENU_USER)
+    @AdminMenu(text = "My Profile", groupId = JPressConsts.SYSTEM_MENU_USER)
     public void me() {
         User user = getLoginedUser().copy();
         setAttr("user", user);
@@ -314,7 +314,7 @@ public class _UserController extends AdminControllerBase {
         Long userId = getParaToLong("userId");
 
         if (getLoginedUser().getId().equals(userId)) {
-            renderJson(Ret.fail().set("message", "不能修改自己的角色"));
+            renderJson(Ret.fail().set("message", "Can't modify your role"));
             return;
         }
 
@@ -347,19 +347,19 @@ public class _UserController extends AdminControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "newPwd", message = "新密码不能为空"),
-            @Form(name = "confirmPwd", message = "确认密码不能为空")
+            @Form(name = "newPwd", message = "The new password cannot be empty"),
+            @Form(name = "confirmPwd", message = "confirm password can not be blank")
     })
     public void doUpdatePwd(long uid, String newPwd, String confirmPwd) {
 
         if (!newPwd.equals(confirmPwd)) {
-            renderJson(Ret.fail().set("message", "两次出入密码不一致"));
+            renderJson(Ret.fail().set("message", "Two entry passwords are inconsistent"));
             return;
         }
 
         User user = userService.findById(uid);
         if (user == null) {
-            renderJson(Ret.fail().set("message", "该用户不存在"));
+            renderJson(Ret.fail().set("message", "this user does not exist"));
             return;
         }
 
@@ -368,7 +368,7 @@ public class _UserController extends AdminControllerBase {
 
         //当前登录用户如果不是超级管理员，不能修改超级管理员的密码
         if (!roleService.isSupperAdmin(loginUser.getId()) && roleService.isSupperAdmin(uid)){
-            renderJson(Ret.fail().set("message", "您没有权限修改该用户密码"));
+            renderJson(Ret.fail().set("message", "You have no permission to modify the user password"));
             return;
         }
 
@@ -386,7 +386,7 @@ public class _UserController extends AdminControllerBase {
     }
 
     @EmptyValidate({
-            @Form(name = "path", message = "请先选择图片")
+            @Form(name = "path", message = "Please select the picture first")
     })
     public void doSaveAvatar(String path, Long uid, int x, int y, int w, int h) {
         User user = userService.findById(uid);
@@ -422,7 +422,7 @@ public class _UserController extends AdminControllerBase {
      */
     public void doUserDel() {
         if (getLoginedUser().getId().equals(getIdPara())) {
-            renderJson(Ret.fail().set("message", "不能删除自己"));
+            renderJson(Ret.fail().set("message", "Can't delete yourself"));
             return;
         }
         userService.deleteById(getIdPara());
@@ -436,7 +436,7 @@ public class _UserController extends AdminControllerBase {
     public void doDelByIds() {
         Set<String> idsSet = getParaSet("ids");
         if (idsSet.contains(getLoginedUser().getId().toString())) {
-            renderJson(Ret.fail().set("message", "删除的用户不能包含自己"));
+            renderJson(Ret.fail().set("message", "Deleted users cannot include themselves"));
             return;
         }
         render(userService.deleteByIds(idsSet.toArray()) ? OK : FAIL);
@@ -463,7 +463,7 @@ public class _UserController extends AdminControllerBase {
      */
     public void doUserStatusChange(Long id, String status) {
         if (getLoginedUser().getId().equals(id)) {
-            renderJson(Ret.fail().set("message", "不能修改自己的状态"));
+            renderJson(Ret.fail().set("message", "Can't modify your own state"));
             return;
         }
         render(userService.doChangeStatus(id, status) ? OK : FAIL);

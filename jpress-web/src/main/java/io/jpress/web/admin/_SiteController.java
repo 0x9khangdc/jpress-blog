@@ -28,7 +28,7 @@ public class _SiteController extends AdminControllerBase {
     private RoleService roleService;
 
 
-    @AdminMenu(text = "站点", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 7)
+    @AdminMenu(text = "Site", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 7)
     public void list() {
         List<SiteInfo> siteInfos = siteInfoService.findAll();
         setAttr("siteInfos",siteInfos);
@@ -63,29 +63,29 @@ public class _SiteController extends AdminControllerBase {
         SiteInfo siteInfo = getBean(SiteInfo.class, "siteInfo");
 
         if (siteInfo == null) {
-            renderFailJson("保存失败");
+            renderFailJson("Preservation failure");
             return;
         }
 
         if (siteInfo.getName() == null) {
-            renderFailJson("站点名称不能为空");
+            renderFailJson("The site name cannot be empty");
             return;
         }
 
         if(siteInfo.getSiteId() == null || siteInfo.getSiteId() <= 0){
-            renderFailJson("自定义站点ID不能为空且必须大于等于零");
+            renderFailJson("The custom site ID cannot be empty and must be greater than equal to zero");
             return;
         }
 
         //如果填写了 域名 但是 域名以 http:// 或者 https:// 开头的 则不行
         if (siteInfo.getBindDomain() != null && (siteInfo.getBindDomain().startsWith("http://") || siteInfo.getBindDomain().startsWith("https://"))) {
-            renderFailJson("域名不能以http://或者https://开头");
+            renderFailJson("The domain name cannot http://or https://beginning");
             return;
         }
 
         //如果用户填写了 二级目录 但是目录不以 / 开头 则不行
         if (siteInfo.getBindPath() != null && !siteInfo.getBindPath().startsWith("/")) {
-            renderFailJson("绑定目录必须以/开头");
+            renderFailJson("The binding directory must be/beginning");
             return;
         }
 

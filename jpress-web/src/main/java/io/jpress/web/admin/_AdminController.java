@@ -70,8 +70,8 @@ public class _AdminController extends AdminControllerBase {
 
     @Clear
     @EmptyValidate({
-            @Form(name = "user", message = "账号不能为空"),
-            @Form(name = "pwd", message = "密码不能为空"),
+            @Form(name = "user", message = "The account cannot be empty"),
+            @Form(name = "pwd", message = "password can not be blank"),
     })
     public void doLogin(String user, String pwd) {
 
@@ -86,28 +86,28 @@ public class _AdminController extends AdminControllerBase {
         if (JPressConfig.me.isAdminLoginCaptchValidateEnable()) {
             String captchaPara = getPara("captcha");
             if (StrUtil.isBlank(captchaPara)) {
-                renderFailJson("验证码不能为空");
+                renderFailJson("verification code must be filled");
                 return;
             }
 
             if (!validateCaptcha("captcha")) {
-                renderFailJson("验证码不正确，请重新输入");
+                renderFailJson("The verification code is incorrect. Please re-enter");
                 return;
             }
         }
 
         if (StrUtil.isBlank(user) || StrUtil.isBlank(pwd)) {
-            throw new RuntimeException("你当前的编辑器（idea 或者 eclipse）可能有问题，请参考文档：http://www.jfinal.com/doc/3-3 进行配置");
+            throw new RuntimeException("Your current editor (IDEA or ECLIPSE) may have problems, please refer to the document: www.jfinal.com/doc/3-3 Configuration");
         }
 
         User loginUser = userService.findByUsernameOrEmail(user);
         if (loginUser == null) {
-            renderJson(Ret.fail("message", "用户名不正确。"));
+            renderJson(Ret.fail("message", "The username is incorrect."));
             return;
         }
 
         if (!roleService.hasAnyRole(loginUser.getId())) {
-            renderJson(Ret.fail("message", "您没有登录的权限。"));
+            renderJson(Ret.fail("message", "You have no authority to log in."));
             return;
         }
 

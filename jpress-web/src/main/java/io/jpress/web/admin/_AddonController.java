@@ -46,7 +46,7 @@ public class _AddonController extends AdminControllerBase {
     private static final Log LOG = Log.getLog(_AddonController.class);
 
 
-    @AdminMenu(text = "所有插件", groupId = JPressConsts.SYSTEM_MENU_ADDON, order = 0)
+    @AdminMenu(text = "All addon", groupId = JPressConsts.SYSTEM_MENU_ADDON, order = 0)
     public void list() {
 
         List<AddonInfo> addons = AddonManager.me().getAllAddonInfos();
@@ -55,7 +55,7 @@ public class _AddonController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "安装", groupId = JPressConsts.SYSTEM_MENU_ADDON, order = 5)
+    @AdminMenu(text = "Install", groupId = JPressConsts.SYSTEM_MENU_ADDON, order = 5)
     public void install() {
         render("addon/install.html");
     }
@@ -76,34 +76,34 @@ public class _AddonController extends AdminControllerBase {
         }
 
         if (!StringUtils.equalsAnyIgnoreCase(FileUtil.getSuffix(ufile.getFileName()), ".zip", ".jar")) {
-            renderFailAndDeleteFile("只支持 .zip 或 .jar 的插件文件",ufile);
+            renderFailAndDeleteFile("Only support .zip or .jar Plug -in file",ufile);
             return;
         }
 
         AddonInfo addon = AddonUtil.readSimpleAddonInfo(ufile.getFile());
         if (addon == null || StrUtil.isBlank(addon.getId())) {
-            renderFailAndDeleteFile("无法读取插件配置信息。",ufile);
+            renderFailAndDeleteFile("Unable to read the addon configuration information.",ufile);
             return;
         }
 
         File newAddonFile = addon.buildJarFile();
 
-        //当插件文件存在的时候，有两种可能
-        // 1、该插件确实存在，此时不能再次安装
-        // 2、该插件可能没有被卸载干净，此时需要尝试清除之前已经被卸载的插件
+        //When the plug -in file exists, there are two possibilities
+        // 1. The plug-in does exist, and it cannot be installed again at this time
+        // 2. The plug-in may not be uninstalled. At this time, you need to try to remove the plug -in that has been uninstalled before
         if (newAddonFile.exists()) {
 
-            //说明该插件已经被安装了
+            //Explain that the plugin has been installed
             if (AddonManager.me().getAddonInfo(addon.getId()) != null) {
-                renderFailAndDeleteFile("该插件已经存在。",ufile);
+                renderFailAndDeleteFile("The addon already exists.",ufile);
                 return;
             }
-            //该插件之前已经被卸载了
+            //The plug-in has been uninstalled before
             else {
 
-                //尝试再次去清除jar包，若还是无法删除，则无法安装
+                //Try to remove the JAR package again, if it is still unable to delete, it cannot be installed
                 if (!AddonUtil.forceDelete(newAddonFile)) {
-                    renderFailAndDeleteFile("该插件已经存在。",ufile);
+                    renderFailAndDeleteFile("The addon already exists.",ufile);
                     return;
                 }
             }
@@ -116,16 +116,16 @@ public class _AddonController extends AdminControllerBase {
         try {
             FileUtils.moveFile(ufile.getFile(), newAddonFile);
             if (!AddonManager.me().install(newAddonFile)) {
-                renderFailAndDeleteFile("该插件安装失败，请联系管理员。",ufile);
+                renderFailAndDeleteFile("The plug-in installation failed, please contact the administrator.",ufile);
                 return;
             }
             if (!AddonManager.me().start(addon.getId())) {
-                renderFailAndDeleteFile("该插件安装失败，请联系管理员。",ufile);
+                renderFailAndDeleteFile("The plug-in installation failed, please contact the administrator.",ufile);
                 return;
             }
         } catch (Throwable e) {
             LOG.error("addon install error : ", e);
-            renderFailAndDeleteFile("该插件安装失败，请联系管理员。",ufile);
+            renderFailAndDeleteFile("The plug-in installation failed, please contact the administrator.",ufile);
             deleteFileQuietly(newAddonFile);
             return;
         }
@@ -171,12 +171,12 @@ public class _AddonController extends AdminControllerBase {
         String oldAddonId = getPara("id");
         AddonInfo oldAddon = AddonManager.me().getAddonInfo(oldAddonId);
         if (oldAddon == null) {
-            renderFailAndDeleteFile("无法读取旧的插件信息，可能已经被卸载。", ufile);
+            renderFailAndDeleteFile("Unable to read the old plug-in information may have been unloaded.", ufile);
             return;
         }
 
         if (!StringUtils.equalsAnyIgnoreCase(FileUtil.getSuffix(ufile.getFileName()), ".zip", ".jar")) {
-            renderFailAndDeleteFile("只支持 .zip 或 .jar 的插件文件", ufile);
+            renderFailAndDeleteFile("Only support .zip or .jar plug-in file", ufile);
             return;
         }
 
@@ -186,7 +186,7 @@ public class _AddonController extends AdminControllerBase {
             return;
         } catch (Exception ex) {
             LOG.error(ex.toString(), ex);
-            renderFailAndDeleteFile("插件升级失败，请联系管理员", ufile);
+            renderFailAndDeleteFile("The plug-in upgrade failed, please contact the administrator", ufile);
             return;
         } finally {
             deleteFileQuietly(ufile.getFile());
@@ -215,20 +215,20 @@ public class _AddonController extends AdminControllerBase {
     public void doInstall() {
         String id = getPara("id");
         if (StrUtil.isBlank(id)) {
-            renderJson(Ret.fail().set("message", "ID数据不能为空"));
+            renderJson(Ret.fail().set("message", "ID data cannot be empty"));
             return;
         }
         if (AddonManager.me().install(id)) {
             renderOkJson();
         } else {
-            renderJson(Ret.fail().set("message", "插件安装失败，请联系插件开发者。"));
+            renderJson(Ret.fail().set("message", "The plug-in installation fails, please contact the plug -in developer."));
         }
     }
 
     public void doUninstall() {
         String id = getPara("id");
         if (StrUtil.isBlank(id)) {
-            renderJson(Ret.fail().set("message", "ID数据不能为空"));
+            renderJson(Ret.fail().set("message", "ID data cannot be empty"));
             return;
         }
         if (AddonManager.me().uninstall(id)) {
@@ -241,14 +241,14 @@ public class _AddonController extends AdminControllerBase {
     public void doStart() {
         String id = getPara("id");
         if (StrUtil.isBlank(id)) {
-            renderJson(Ret.fail().set("message", "ID数据不能为空"));
+            renderJson(Ret.fail().set("message", "ID data cannot be empty"));
             return;
         }
 
         if (AddonManager.me().start(id)) {
             renderOkJson();
         } else {
-            renderJson(Ret.fail().set("message", "该插件启动时出现异常，启动失败。"));
+            renderJson(Ret.fail().set("message", "The plug-in was abnormal when starting and failed."));
         }
 
     }
@@ -256,7 +256,7 @@ public class _AddonController extends AdminControllerBase {
     public void doStop() {
         String id = getPara("id");
         if (StrUtil.isBlank(id)) {
-            renderJson(Ret.fail().set("message", "ID数据不能为空"));
+            renderJson(Ret.fail().set("message", "ID data cannot be empty"));
             return;
         }
         AddonManager.me().stop(id);

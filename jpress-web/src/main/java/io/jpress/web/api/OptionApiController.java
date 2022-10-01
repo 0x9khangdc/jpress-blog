@@ -49,18 +49,18 @@ import java.util.Set;
  * }
  */
 @RequestMapping("/api/option")
-@Api("系统配置相关 API ")
+@Api("System configuration correlation API ")
 public class OptionApiController extends ApiControllerBase {
 
     @Inject
     private OptionService optionService;
 
-    @ApiOper("查询配置")
+    @ApiOper("Query configuration")
     @ApiResps({
-            @ApiResp(field = "value", notes = "查询单个配置的时候返回的数据", mock = "..."),
-            @ApiResp(field = "values", notes = "查询多个key的时候返回数据", dataType = Map.class, mock = "{\"key1\":\"value1\",\"key2\":\"value2\"}"),
+            @ApiResp(field = "value", notes = "Query data returned when a single configuration", mock = "..."),
+            @ApiResp(field = "values", notes = "Back data when you query multiple key", dataType = Map.class, mock = "{\"key1\":\"value1\",\"key2\":\"value2\"}"),
     })
-    public Ret query(@ApiPara(value = "查询的 key", notes = "多个 key 用引文逗号隔开") @NotEmpty(message = "key must not empty") String key) {
+    public Ret query(@ApiPara(value = "Query key", notes = "Multiple key is separated with citations comma") @NotEmpty(message = "key must not empty") String key) {
         if (key.contains(",")) {
             Set<String> keys = StrUtil.splitToSet(key, ",");
             Map<String, String> data = new HashMap<>();
@@ -75,8 +75,8 @@ public class OptionApiController extends ApiControllerBase {
         }
     }
 
-    @ApiOper(value = "更新配置", contentType = ContentType.JSON)
-    public Ret set(@ApiPara("要更新的数据 map") @NotEmpty @JsonBody Map<String, String> keyValues) {
+    @ApiOper(value = "Update configuration", contentType = ContentType.JSON)
+    public Ret set(@ApiPara("Data to be updated map") @NotEmpty @JsonBody Map<String, String> keyValues) {
         keyValues.forEach((key, value) -> {
             optionService.saveOrUpdate(key, value);
             JPressOptions.set(key, value);

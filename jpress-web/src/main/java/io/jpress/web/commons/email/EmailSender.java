@@ -96,8 +96,8 @@ public class EmailSender {
             webName = "";
         }
 
-        String title = webName + "邮件激活";
-        String content = "邮箱激活网址：<a href=\"" + url + "\">" + url + "</a>";
+        String title = webName + "Email activation";
+        String content = "Email activation website:<a href=\"" + url + "\">" + url + "</a>";
 
         Email email = Email.create();
 

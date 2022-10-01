@@ -45,7 +45,7 @@ public class _AttachmentVideoController extends AdminControllerBase {
     @Inject
     private AttachmentVideoCategoryService videoCategoryService;
 
-    @AdminMenu(text = "视频", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 29)
+    @AdminMenu(text = "video", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 29)
     public void list() {
 
         //设置分页数量
@@ -152,7 +152,7 @@ public class _AttachmentVideoController extends AdminControllerBase {
     }
 
     @EmptyValidate({
-            @Form(name = "video.vod_name", message = "视频标题不能为空")
+            @Form(name = "video.vod_name", message = "The video title cannot be empty")
     })
     public void doSave(){
         AttachmentVideo video = getModel(AttachmentVideo.class, "video");
@@ -315,7 +315,7 @@ public class _AttachmentVideoController extends AdminControllerBase {
     public Ret doGetUploadVideoAuth(String fileName, String title) {
         Map<String, Object> authMap = AliyunVideoUtil.getUploadVideoAuth(fileName, title);
         if(authMap == null){
-            renderFailJson("请先配置阿里云点播视频的密钥!");
+            renderFailJson("Please configure the key of Alibaba Cloud on-demand video first!");
         }
         return authMap != null ? Ret.ok().set(authMap) : Ret.fail();
     }
@@ -330,7 +330,7 @@ public class _AttachmentVideoController extends AdminControllerBase {
     public Ret doRefreshVideoAuth(String videoId) {
         Map<String, Object> authMap = AliyunVideoUtil.refreshUploadVideoAuth(videoId);
         if(authMap == null){
-            renderFailJson("请先配置阿里云点播视频的密钥!");
+            renderFailJson("Please configure the key of Alibaba Cloud on-demand video first!");
         }
         return authMap != null ? Ret.ok().set(authMap) : Ret.fail();
     }
@@ -459,7 +459,7 @@ public class _AttachmentVideoController extends AdminControllerBase {
 
         UploadFile uploadFile = getFile();
         if (uploadFile == null) {
-            renderJson(Ret.fail().set("message", "请选择要上传的文件"));
+            renderJson(Ret.fail().set("message", "Please select the file to be uploaded"));
             return;
         }
 
@@ -467,13 +467,13 @@ public class _AttachmentVideoController extends AdminControllerBase {
         File file = uploadFile.getFile();
         if (!getLoginedUser().isStatusOk()) {
             AttachmentUtils.delete(uploadFile.getFile());
-            renderJson(Ret.of("error", Ret.of("message", "当前用户未激活，不允许上传任何文件。")));
+            renderJson(Ret.of("error", Ret.of("message", "The current users are not activated and are not allowed to upload any files.")));
             return;
         }
 
         if (AttachmentUtils.isUnSafe(file)) {
             AttachmentUtils.delete(uploadFile.getFile());
-            renderJson(Ret.fail().set("message", "不支持此类文件上传"));
+            renderJson(Ret.fail().set("message", "Do not support such files upload"));
             return;
         }
 
@@ -482,7 +482,7 @@ public class _AttachmentVideoController extends AdminControllerBase {
         int fileSize = Math.round(file.length() / 1024 * 100) / 100;
         if (maxSize > 0 && fileSize > maxSize * 1024) {
             AttachmentUtils.delete(uploadFile.getFile());
-            renderJson(Ret.fail().set("message", "上传视频大小不能超过 " + maxSize + " MB"));
+            renderJson(Ret.fail().set("message", "Upload the video size cannot exceed " + maxSize + " MB"));
             return;
         }
 
@@ -503,13 +503,13 @@ public class _AttachmentVideoController extends AdminControllerBase {
         String uuid = getPara("id");
 
         if(StrUtil.isBlank(uuid)){
-            renderJson(Ret.fail().set("message", "传入的视频uuid为空！"));
+            renderJson(Ret.fail().set("message", "The transmitted video UUID is empty!"));
             return;
         }
 
         AttachmentVideo video = attachmentVideoService.findByUuid(uuid);
         if(video == null){
-            renderJson(Ret.fail().set("message", "视频信息为空！"));
+            renderJson(Ret.fail().set("message", "The video information is empty!"));
             return;
         }
 
@@ -518,13 +518,13 @@ public class _AttachmentVideoController extends AdminControllerBase {
 
             //视频云端id
             if(StrUtil.isBlank(video.getVodVid())){
-                renderJson(Ret.fail().set("message", "阿里云 视频云端id为空！"));
+                renderJson(Ret.fail().set("message", "Alibaba Cloud Video Cloud ID is empty!"));
                 return;
             }
             //阿里云视频播放凭证
             String playAuth = AliyunVideoUtil.getPlayAuth(video.getVodVid());
             if(StrUtil.isBlank(playAuth)){
-                renderJson(Ret.fail().set("message", "阿里云视频播放凭证为空！"));
+                renderJson(Ret.fail().set("message", "Alibaba Cloud Video Play Volume is empty!"));
                 return;
             }
 
@@ -536,13 +536,13 @@ public class _AttachmentVideoController extends AdminControllerBase {
 
             String appId = JPressOptions.get("attachment_qcloudvideo_appid");
             if(StrUtil.isBlank(appId)){
-                renderJson(Ret.fail().set("message", "请配置腾讯云的账号id"));
+                renderJson(Ret.fail().set("message", "Please configure Tencent Cloud's account ID"));
                 return;
             }
 
             //视频云端id
             if(StrUtil.isBlank(video.getVodVid())){
-                renderJson(Ret.fail().set("message", "腾讯云 视频云端id为空！"));
+                renderJson(Ret.fail().set("message", "Tencent Cloud Video Cloud ID is empty!"));
                 return;
             }
 
@@ -555,7 +555,7 @@ public class _AttachmentVideoController extends AdminControllerBase {
             if (StrUtil.isNotBlank(options)){
                 Map<String,String> map = JsonUtil.get(options,"", TypeDef.MAP_STRING);
                 if(map == null){
-                    renderJson(Ret.fail().set("message", "该视频类型是本地视频，请先上传本地视频！"));
+                    renderJson(Ret.fail().set("message", "This video type is a local video, please upload local videos first!"));
                     return;
                 }
                 String src = map.get("local_video_url");

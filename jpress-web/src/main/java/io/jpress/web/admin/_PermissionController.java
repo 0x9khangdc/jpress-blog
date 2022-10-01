@@ -50,7 +50,7 @@ public class _PermissionController extends AdminControllerBase {
     @Inject
     private PermissionService permissionService;
 
-    @AdminMenu(text = "权限", groupId = JPressConsts.SYSTEM_MENU_USER, order = 10)
+    @AdminMenu(text = "Authority", groupId = JPressConsts.SYSTEM_MENU_USER, order = 10)
     public void list() {
         String type = getPara("type");
 
@@ -75,9 +75,9 @@ public class _PermissionController extends AdminControllerBase {
         int syncCount = permissionService.sync(adminPermissions);
 
         if (syncCount == 0) {
-            renderJson(Ret.fail("message", "权限已经是最新状态，无需同步"));
+            renderJson(Ret.fail("message", "The permissions are already the latest, no need to synchronize"));
         } else {
-            renderJson(Ret.ok("message", "权限同步成功，共同步权限数 : " + syncCount));
+            renderJson(Ret.ok("message", "Permanels are successful, common steps of permissions : " + syncCount));
         }
     }
 

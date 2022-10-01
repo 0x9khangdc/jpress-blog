@@ -33,18 +33,18 @@ public class SendSmsCodeController extends Controller {
 
     public void index() {
         if (!validateCaptcha("captcha")) {
-            renderJson(Ret.fail().set("message", "验证码错误，请重新输入"));
+            renderJson(Ret.fail().set("message", "Verification code error, please re-enter"));
             return;
         }
 
         String phone = getPara("phone");
         if (StrUtil.isBlank(phone)) {
-            renderJson(Ret.fail().set("message", "手机号不能为空..."));
+            renderJson(Ret.fail().set("message", "The mobile phone number cannot be empty ..."));
             return;
         }
 
         if (!StrUtil.isMobileNumber(phone)) {
-            renderJson(Ret.fail().set("message", "你输入的手机号码不正确"));
+            renderJson(Ret.fail().set("message", "The mobile phone number you entered is incorrect"));
             return;
         }
 
@@ -56,9 +56,9 @@ public class SendSmsCodeController extends Controller {
         boolean sendOk = SmsKit.sendCode(phone, code, template, sign);
 
         if (sendOk) {
-            renderJson(Ret.ok().set("message", "短信发送成功，请手机查看"));
+            renderJson(Ret.ok().set("message", "Successful SMS sending, please check your mobile phone"));
         } else {
-            renderJson(Ret.fail().set("message", "短信实发失败，请联系管理员"));
+            renderJson(Ret.fail().set("message", "SMS failed, please contact the administrator"));
         }
 
     }

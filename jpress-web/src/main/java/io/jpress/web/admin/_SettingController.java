@@ -40,45 +40,45 @@ import java.util.List;
 public class _SettingController extends AdminControllerBase {
 
 
-    @AdminMenu(text = "常规", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 0)
+    @AdminMenu(text = "conventional", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 0)
     public void index() {
         render("setting/base.html");
     }
 
-    @AdminMenu(text = "通信", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 9)
+    @AdminMenu(text = "communication", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 9)
     public void connection() {
         render("setting/connection.html");
     }
 
     @EmptyValidate({
-            @Form(name = "email", message = "邮箱地址不能为空")
+            @Form(name = "email", message = "The mailbox address cannot be empty")
     })
     public void testEmail() {
         String emailAddr = getPara("email");
         if (!StrUtil.isEmail(emailAddr)) {
-            renderFailJson("您输入的邮箱地址有误。");
+            renderFailJson("The mailbox address you entered is wrong.");
             return;
         }
 
         Email email = Email.create();
 
-        email.subject("这是一封来至 JPress 的测试邮件");
-        email.content("恭喜您，收到此邮件，证明您在 JPress 后台配置的邮件可用。");
+        email.subject("This is a test email to JPress");
+        email.content("Congratulations to you, receiving this email, prove that you are available in the email configured in the JPress background.");
         email.to(emailAddr);
 
         SimpleEmailSender ses = new SimpleEmailSender();
         if (!ses.isEnable()) {
-            renderFailJson("您未开启邮件功能，无法发送。");
+            renderFailJson("You can't send it without opening the mail function.");
             return;
         }
 
         if (!ses.isConfigOk()) {
-            renderFailJson("未配置正确，smtp 或 用户名 或 密码 为空。");
+            renderFailJson("Unconfigured is correct, SMTP or user name or password is empty.");
             return;
         }
 
         if (!ses.send(email)) {
-            renderFailJson("未配置正确，smtp 或 用户名 或 密码 错误。");
+            renderFailJson("Not configured correctly, SMTP or user name or password error.");
             return;
         }
 
@@ -86,7 +86,7 @@ public class _SettingController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "接口", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 10)
+    @AdminMenu(text = "interface", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 10)
     public void api() {
         render("setting/api.html");
     }
@@ -98,24 +98,24 @@ public class _SettingController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "登录注册", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 32)
+    @AdminMenu(text = "log in Register", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 32)
     public void reg() {
         render("setting/reg.html");
     }
 
 
-    @AdminMenu(text = "网站加速", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 33)
+    @AdminMenu(text = "Website acceleration", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 33)
     public void cdn() {
         render("setting/cdn.html");
     }
 
-    @AdminMenu(text = "垃圾过滤", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 44)
+    @AdminMenu(text = "Garbage filter", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 44)
     public void filter() throws Exception {
         render("setting/filter.html");
     }
 
 
-    @AdminMenu(text = "小工具箱", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 222)
+    @AdminMenu(text = "Small toolbox", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 222)
     public void tools() {
         List<String> moduleIncludes = new ArrayList<>();
         List<ModuleListener> listeners = ModuleManager.me().getListeners();
@@ -136,7 +136,7 @@ public class _SettingController extends AdminControllerBase {
         render("setting/tools.html");
     }
 
-    //@AdminMenu(text = "图标", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 223)
+    //@AdminMenu(text = "icon", groupId = JPressConsts.SYSTEM_MENU_SYSTEM, order = 223)
     public void icons() {
         render("setting/icons.html");
     }

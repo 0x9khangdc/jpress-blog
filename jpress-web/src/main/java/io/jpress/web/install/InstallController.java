@@ -84,10 +84,10 @@ public class InstallController extends ControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "dbName", message = "数据库名不能为空"),
-            @Form(name = "dbUser", message = "用户名不能为空"),
-            @Form(name = "dbHost", message = "主机不能为空"),
-            @Form(name = "dbPort", message = "端口号不能为空"),
+            @Form(name = "dbName", message = "The database name cannot be empty"),
+            @Form(name = "dbUser", message = "Username can not be empty"),
+            @Form(name = "dbHost", message = "The host cannot be empty"),
+            @Form(name = "dbPort", message = "The port number cannot be empty"),
     })
     public void gotoStep3() {
 
@@ -98,7 +98,7 @@ public class InstallController extends ControllerBase {
         int dbPort = getParaToInt("dbPort");
 
         if (SqlUtils.hasSqlInject(dbName)) {
-            renderJson(Ret.fail().set("message", "数据库名称存在非安全关键字，请重新填写。").set("errorCode", 5));
+            renderJson(Ret.fail().set("message", "There are non -security keywords in the database name, please fill in again.").set("errorCode", 5));
             return;
         }
 
@@ -106,7 +106,7 @@ public class InstallController extends ControllerBase {
         //是否为用户创建数据库
         boolean dbAutoCreate = getParaToBoolean("dbAutoCreate", false);
         if (dbAutoCreate && !createDatabase(dbName, dbUser, dbPwd, dbHost, dbPort)) {
-            renderJson(Ret.fail().set("message", "无法自动创建数据库，可能是用户名密码错误，或没有权限").set("errorCode", 5));
+            renderJson(Ret.fail().set("message", "Can't automatically create a database, may").set("errorCode", 5));
             return;
         }
 
@@ -116,7 +116,7 @@ public class InstallController extends ControllerBase {
             InstallManager.me().init(dbName, dbUser, dbPwd, dbHost, dbPort);
 
             if (InstallManager.me().isDbExist() && !InstallManager.me().isJPressDb()) {
-                renderJson(Ret.fail("message", "无法安装，该数据库已有表信息了，为了安全起见，请选择全新的数据库进行安装。")
+                renderJson(Ret.fail("message", "Can't be installed, the database already has table information. For safety reasons, please select a new database for installation.")
                         .set("errorCode", 5));
                 return;
             }
@@ -249,15 +249,15 @@ public class InstallController extends ControllerBase {
         if (StrUtil.isNotBlank(username)) {
 
             if (StrUtil.isBlank(pwd)) {
-                return Ret.fail().set("message", "密码不能为空").set("errorCode", 3);
+                return Ret.fail().set("message", "password can not be blank").set("errorCode", 3);
             }
 
             if (StrUtil.isBlank(confirmPwd)) {
-                return Ret.fail().set("message", "确认密码不能为空").set("errorCode", 4);
+                return Ret.fail().set("message", "confirm password can not be blank").set("errorCode", 4);
             }
 
             if (!pwd.equals(confirmPwd)) {
-                return Ret.fail().set("message", "两次输入密码不一致").set("errorCode", 5);
+                return Ret.fail().set("message", "Two input passwords are inconsistent").set("errorCode", 5);
             }
         }
 
@@ -276,7 +276,7 @@ public class InstallController extends ControllerBase {
         if (doFinishedInstall()) {
             return Ret.ok();
         } else {
-            return Ret.fail().set("message", "classes目录没有写入权限，请查看服务器配置是否正确。");
+            return Ret.fail().set("message", "The Classes directory is not written in authority, please check whether the server configuration is correct.");
         }
 
     }
@@ -290,15 +290,15 @@ public class InstallController extends ControllerBase {
         if (StrUtil.isNotBlank(username)) {
 
             if (StrUtil.isBlank(pwd)) {
-                return Ret.fail().set("message", "密码不能为空").set("errorCode", 3);
+                return Ret.fail().set("message", "password can not be blank").set("errorCode", 3);
             }
 
             if (StrUtil.isBlank(confirmPwd)) {
-                return Ret.fail().set("message", "确认密码不能为空").set("errorCode", 4);
+                return Ret.fail().set("message", "confirm password can not be blank").set("errorCode", 4);
             }
 
             if (pwd.equals(confirmPwd) == false) {
-                return Ret.fail().set("message", "两次输入密码不一致").set("errorCode", 5);
+                return Ret.fail().set("message", "Two input passwords are inconsistent").set("errorCode", 5);
             }
         }
 
@@ -311,7 +311,7 @@ public class InstallController extends ControllerBase {
         if (doFinishedInstall()) {
             return Ret.ok();
         } else {
-            return Ret.fail().set("message", "classes目录没有写入权限，请查看服务器配置是否正确。");
+            return Ret.fail().set("message", "The Classes directory is not written in authority, please check whether the server configuration is correct.");
         }
     }
 
@@ -326,31 +326,31 @@ public class InstallController extends ControllerBase {
         String confirmPwd = getPara("confirmPwd");
 
         if (StrUtil.isBlank(webName)) {
-            return Ret.fail().set("message", "网站名称不能为空");
+            return Ret.fail().set("message", "The website name cannot be empty");
         }
 
         if (StrUtil.isBlank(webTitle)) {
-            return Ret.fail().set("message", "网站标题不能为空");
+            return Ret.fail().set("message", "Website title cannot be empty");
         }
 
         if (StrUtil.isBlank(webSubtitle)) {
-            return Ret.fail().set("message", "网站副标题不能为空");
+            return Ret.fail().set("message", "The sub-title of the website cannot be empty");
         }
 
         if (StrUtil.isBlank(username)) {
-            return Ret.fail().set("message", "账号不能为空");
+            return Ret.fail().set("message", "The account cannot be empty");
         }
 
         if (StrUtil.isBlank(pwd)) {
-            return Ret.fail().set("message", "密码不能为空");
+            return Ret.fail().set("message", "password can not be blank");
         }
 
         if (StrUtil.isBlank(confirmPwd)) {
-            return Ret.fail().set("message", "确认密码不能为空");
+            return Ret.fail().set("message", "confirm password can not be blank");
         }
 
         if (!pwd.equals(confirmPwd)) {
-            return Ret.fail().set("message", "两次输入密码不一致").set("errorCode", 5);
+            return Ret.fail().set("message", "Two input passwords are inconsistent").set("errorCode", 5);
         }
 
         try {
@@ -377,7 +377,7 @@ public class InstallController extends ControllerBase {
         if (doFinishedInstall()) {
             return Ret.ok();
         } else {
-            return Ret.fail().set("message", "classes目录没有写入权限，请查看服务器配置是否正确。");
+            return Ret.fail().set("message", "The Classes directory is not written in authority, please check whether the server configuration is correct.");
         }
 
     }
@@ -430,8 +430,8 @@ public class InstallController extends ControllerBase {
             role.setCreated(new Date());
         }
 
-        role.setName("默认角色");
-        role.setDescription("这个是系统自动创建的默认角色");
+        role.setName("Default role");
+        role.setDescription("This is the default role of the system automatically created");
         role.setFlag(Role.ADMIN_FLAG);
         role.setModified(new Date());
 

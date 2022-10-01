@@ -41,7 +41,7 @@ import java.util.Date;
 @RequestMapping("/api/wechat/mp")
 @Before({ApiInterceptor.class,
         WechatMiniProgramApiInterceptor.class})
-@Api(value = "微信小程序相关API",collect = Html2WxmlController.class)
+@Api(value = "WeChat Mini Program related API",collect = Html2WxmlController.class)
 public class WechatMiniProgramApiController extends BaseWechatDecryptController {
 
     @Inject
@@ -152,7 +152,7 @@ public class WechatMiniProgramApiController extends BaseWechatDecryptController 
             userService.update(user);
             renderOkJson();
         } else {
-            renderFailJson("无法获取用户信息");
+            renderFailJson("Unable to get user information");
         }
     }
 

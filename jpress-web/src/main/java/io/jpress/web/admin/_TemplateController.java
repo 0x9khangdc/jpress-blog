@@ -68,7 +68,7 @@ public class _TemplateController extends AdminControllerBase {
     private OptionService optionService;
 
 
-    @AdminMenu(text = "所有模板", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 0)
+    @AdminMenu(text = "All templates", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 0)
     public void list() {
 
         String title = getPara("title");
@@ -100,7 +100,7 @@ public class _TemplateController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "安装", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 5)
+    @AdminMenu(text = "Install", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 5)
     public void install() {
         render("template/install.html");
     }
@@ -124,7 +124,7 @@ public class _TemplateController extends AdminControllerBase {
         if (!".zip".equalsIgnoreCase(FileUtil.getSuffix(uploadFile.getFileName()))) {
             renderJson(Ret.fail()
                     .set("success", false)
-                    .set("message", "只支持 .zip 的压缩模板文件"));
+                    .set("message", "Only support .zip Compressed template file"));
             deleteFileQuietly(uploadFile.getFile());
             return;
         }
@@ -135,7 +135,7 @@ public class _TemplateController extends AdminControllerBase {
         if (StrUtil.isBlank(templateShortId)) {
             renderJson(Ret.fail()
                     .set("success", false)
-                    .set("message", "安装失败，您上传的可能不是 JPress 模板文件"));
+                    .set("message", "If the installation fails, you may not upload it JPress Template file"));
             deleteFileQuietly(uploadFile.getFile());
             return;
         }
@@ -166,7 +166,7 @@ public class _TemplateController extends AdminControllerBase {
             if (templateInstallPath.exists()) {
                 renderJson(Ret.fail()
                         .set("success", false)
-                        .set("message", "该模板可能已经存在，无法进行安装。"));
+                        .set("message", "The template may already exist and cannot be installed."));
                 deleteFileQuietly(uploadFile.getFile());
 
             } else {
@@ -224,7 +224,7 @@ public class _TemplateController extends AdminControllerBase {
         LogKit.error(e.toString(), e);
         renderJson(Ret.fail()
                 .set("success", false)
-                .set("message", "模板文件解压缩失败"));
+                .set("message", "Failure to decompress the template file"));
     }
 
 
@@ -238,7 +238,7 @@ public class _TemplateController extends AdminControllerBase {
         Template template = TemplateManager.me().getTemplateById(tid);
 
         if (template == null) {
-            renderJson(Ret.fail().set("message", "没有该模板"));
+            renderJson(Ret.fail().set("message", "No template"));
             return;
         }
 
@@ -257,7 +257,7 @@ public class _TemplateController extends AdminControllerBase {
         Template template = TemplateManager.me().getTemplateById(tid);
 
         if (template == null) {
-            renderJson(Ret.fail().set("message", "没有该模板"));
+            renderJson(Ret.fail().set("message", "No template"));
             return;
         }
 
@@ -266,7 +266,7 @@ public class _TemplateController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "设置", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 88)
+    @AdminMenu(text = "set up", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 88)
     public void setting() {
         Template template = TemplateManager.me().getCurrentTemplate();
         if (template == null) {
@@ -284,7 +284,7 @@ public class _TemplateController extends AdminControllerBase {
         render(new TemplateRender(template.buildRelativePath(view), false));
     }
 
-    @AdminMenu(text = "编辑", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 99)
+    @AdminMenu(text = "edit", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 99)
     public void edit() {
 
         String dirName = getPara("d");
@@ -417,7 +417,7 @@ public class _TemplateController extends AdminControllerBase {
 
         Template template = TemplateManager.me().getCurrentTemplate();
         if (template == null) {
-            renderJson(Ret.fail().set("message", "当前模板无法编辑"));
+            renderJson(Ret.fail().set("message", "The current template cannot be edited"));
             return;
         }
 
@@ -431,19 +431,19 @@ public class _TemplateController extends AdminControllerBase {
 
         String fileContent = getOriginalPara("fileContent");
         if (StrUtil.isBlank(fileContent)) {
-            renderJson(Ret.fail().set("message", "不能存储空内容"));
+            renderJson(Ret.fail().set("message", "Can't store empty content"));
             return;
         }
 
         File file = new File(pathFile, fileName);
         if (!file.canWrite()) {
-            renderJson(Ret.fail().set("message", "当前文件没有写入权限"));
+            renderJson(Ret.fail().set("message", "The current file is not written permissions"));
             return;
         }
 
 
         if (file.exists() && file.isDirectory()) {
-            renderJson(Ret.fail().set("message", "存储失败，未指定任何文件"));
+            renderJson(Ret.fail().set("message", "The storage fails, no file is specified"));
             return;
         }
 
@@ -455,7 +455,7 @@ public class _TemplateController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "菜单", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 6)
+    @AdminMenu(text = "menu", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 6)
     public void menu() {
         List<Menu> menus = ms.findListByType(Menu.TYPE_MAIN);
         SortKit.toLayer(menus);
@@ -475,8 +475,8 @@ public class _TemplateController extends AdminControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "menu.text", message = "菜单名称不能为空"),
-            @Form(name = "menu.url", message = "Url地址不能为空"),
+            @Form(name = "menu.text", message = "The menu name cannot be empty"),
+            @Form(name = "menu.url", message = "URL address cannot be empty"),
     })
     public void doMenuSave() {
         Menu menu = getModel(Menu.class);

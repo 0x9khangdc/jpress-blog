@@ -19,8 +19,8 @@ import java.util.Collections;
 @RequestMapping("/api/wechat/mp/html2wxml")
 public class Html2WxmlController extends ApiControllerBase {
 
-    @ApiOper("Html 转为 Wxml")
-    public void index(@ApiPara(value = "html内容", method = HttpMethod.POST) String html) {
+    @ApiOper("Html Turn to Wxml")
+    public void index(@ApiPara(value = "HTML content", method = HttpMethod.POST) String html) {
         Params params = getParams();
         String resultJson = HtmlToJson.by(html, params).get();
 

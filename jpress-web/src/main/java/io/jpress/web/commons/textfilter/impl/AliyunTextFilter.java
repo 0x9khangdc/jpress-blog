@@ -20,7 +20,7 @@ import io.jpress.web.commons.textfilter.TextFilter;
 /**
  * @author michael yang (fuhai999@gmail.com)
  * @Date: 2020/1/5
- * 阿里云文本垃圾过滤器
+ * Alibaba Cloud Text Garbage Filter
  * https://help.aliyun.com/document_detail/53427.html
  */
 public class AliyunTextFilter implements TextFilter {

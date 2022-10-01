@@ -116,33 +116,33 @@ public class UserController extends TemplateControllerBase {
 
     @Clear
     @EmptyValidate({
-            @Form(name = "user", message = "账号不能为空"),
-            @Form(name = "pwd", message = "密码不能为空")
+            @Form(name = "user", message = "The account cannot be empty"),
+            @Form(name = "pwd", message = "password can not be blank")
     })
     public void doLogin(String user, String pwd) {
 
         pwd = getOriginalPara("pwd");
 
         if (StrUtil.isBlank(user) || StrUtil.isBlank(pwd)) {
-            LogKit.error("你当前的 idea 或者 eclipse 配置有问题，请参考文档：http://www.jfinal.com/doc/3-3 进行配置");
+            LogKit.error("Your current IDEA or Eclipse configuration has problems, please refer to the document: http://www.jfinal.com/doc/3-3 Configuration");
             return;
         }
 
         if (JPressOptions.getAsBool("login_captcha_enable",true)) {
             String captcha = get("captcha");
             if (StrUtil.isBlank(captcha)){
-                renderJson(Ret.fail().set("message", "验证码不能为空").set("errorCode", 7));
+                renderJson(Ret.fail().set("message", "verification code must be filled").set("errorCode", 7));
                 return;
             }
             if (!validateCaptcha("captcha")) {
-                renderJson(Ret.fail().set("message", "验证码不正确").set("errorCode", 7));
+                renderJson(Ret.fail().set("message", "Incorrect verification code").set("errorCode", 7));
                 return;
             }
         }
 
         User loginUser = userService.findByUsernameOrEmail(user);
         if (loginUser == null) {
-            renderJson(Ret.fail("message", "用户名不正确。"));
+            renderJson(Ret.fail("message", "The username is incorrect."));
             return;
         }
 
@@ -187,7 +187,7 @@ public class UserController extends TemplateControllerBase {
         AuthCode authCode = AuthCodeKit.get(id);
         if (authCode == null) {
             setAttr("code", 1);
-            setAttr("message", "链接已经失效，可以尝试再次发送激活邮件");
+            setAttr("message", "The link has been invalid, you can try to send the activation email again");
             render("user_activate.html", default_user_register_activate);
             return;
         }
@@ -195,7 +195,7 @@ public class UserController extends TemplateControllerBase {
         User user = userService.findById(authCode.getUserId());
         if (user == null) {
             setAttr("code", 2);
-            setAttr("message", "用户不存在或已经被删除");
+            setAttr("message", "Users do not exist or have been deleted");
             render("user_activate.html", default_user_register_activate);
             return;
         }
@@ -222,7 +222,7 @@ public class UserController extends TemplateControllerBase {
         AuthCode authCode = AuthCodeKit.get(id);
         if (authCode == null) {
             setAttr("code", 1);
-            setAttr("message", "链接已经失效，您可以尝试在用户中心再次发送激活邮件");
+            setAttr("message", "The link has failed, you can try to send activation emails again at the user center again");
             render("user_emailactivate.html", default_user_register_emailactivate);
             return;
         }
@@ -230,7 +230,7 @@ public class UserController extends TemplateControllerBase {
         User user = userService.findById(authCode.getUserId());
         if (user == null) {
             setAttr("code", 2);
-            setAttr("message", "用户不存在或已经被删除");
+            setAttr("message", "Users do not exist or have been deleted");
             render("user_emailactivate.html", default_user_register_emailactivate);
             return;
         }
@@ -248,7 +248,7 @@ public class UserController extends TemplateControllerBase {
 
         boolean regEnable = JPressOptions.isTrueOrEmpty("reg_enable");
         if (!regEnable) {
-            renderJson(Ret.fail().set("message", "注册功能已经关闭").set("errorCode", 12));
+            renderJson(Ret.fail().set("message", "The registration function has been closed").set("errorCode", 12));
             return;
         }
 
@@ -258,52 +258,52 @@ public class UserController extends TemplateControllerBase {
         String confirmPwd = getPara("confirmPwd");
 
         if (StrUtil.isBlank(username)) {
-            renderJson(Ret.fail().set("message", "用户名不能为空").set("errorCode", 1));
+            renderJson(Ret.fail().set("message", "Username can not be empty").set("errorCode", 1));
             return;
         }
 
         if (StrUtil.isBlank(email)) {
-            renderJson(Ret.fail().set("message", "邮箱不能为空").set("errorCode", 2));
+            renderJson(Ret.fail().set("message", "E-mail can not be empty").set("errorCode", 2));
             return;
         } else {
             email = email.toLowerCase();
         }
 
         if (StrUtil.isBlank(pwd)) {
-            renderJson(Ret.fail().set("message", "密码不能为空").set("errorCode", 3));
+            renderJson(Ret.fail().set("message", "password can not be blank").set("errorCode", 3));
             return;
         }
 
         if (StrUtil.isBlank(confirmPwd)) {
-            renderJson(Ret.fail().set("message", "确认密码不能为空").set("errorCode", 4));
+            renderJson(Ret.fail().set("message", "confirm password can not be blank").set("errorCode", 4));
             return;
         }
 
         if (!pwd.equals(confirmPwd)) {
-            renderJson(Ret.fail().set("message", "两次输入密码不一致").set("errorCode", 5));
+            renderJson(Ret.fail().set("message", "Two input passwords are inconsistent").set("errorCode", 5));
             return;
         }
 
         if (StrUtil.isBlank(getPara("captcha"))) {
-            renderJson(Ret.fail().set("message", "验证码不能为空").set("errorCode", 6));
+            renderJson(Ret.fail().set("message", "verification code must be filled").set("errorCode", 6));
             return;
         }
 
         if (!EmailKit.validateCode(email,getPara("captcha"))) {
-            renderJson(Ret.fail().set("message", "验证码不正确").set("errorCode", 7));
+            renderJson(Ret.fail().set("message", "Incorrect verification code").set("errorCode", 7));
             return;
         }
 
 
         User user = userService.findFirstByUsername(username);
         if (user != null) {
-            renderJson(Ret.fail().set("message", "该用户名已经存在").set("errorCode", 10));
+            renderJson(Ret.fail().set("message", "This user name already exists").set("errorCode", 10));
             return;
         }
 
         user = userService.findFirstByEmail(email);
         if (user != null) {
-            renderJson(Ret.fail().set("message", "该邮箱已经存在").set("errorCode", 11));
+            renderJson(Ret.fail().set("message", "The mailbox already exists").set("errorCode", 11));
             return;
         }
 
@@ -352,7 +352,7 @@ public class UserController extends TemplateControllerBase {
 
         boolean regEnable = JPressOptions.isTrueOrEmpty("reg_enable");
         if (!regEnable) {
-            renderJson(Ret.fail().set("message", "注册功能已经关闭").set("errorCode", 12));
+            renderJson(Ret.fail().set("message", "The registration function has been closed").set("errorCode", 12));
             return;
         }
 
@@ -362,49 +362,49 @@ public class UserController extends TemplateControllerBase {
         String confirmPwd = getPara("confirmPwd");
 
         if (StrUtil.isBlank(username)) {
-            renderJson(Ret.fail().set("message", "用户名不能为空").set("errorCode", 1));
+            renderJson(Ret.fail().set("message", "Username can not be empty").set("errorCode", 1));
             return;
         }
 
         if (StrUtil.isBlank(phone)) {
-            renderJson(Ret.fail().set("message", "手机号不能为空").set("errorCode", 2));
+            renderJson(Ret.fail().set("message", "The mobile phone number cannot be empty").set("errorCode", 2));
             return;
         }
 
         if (StrUtil.isBlank(pwd)) {
-            renderJson(Ret.fail().set("message", "密码不能为空").set("errorCode", 3));
+            renderJson(Ret.fail().set("message", "password can not be blank").set("errorCode", 3));
             return;
         }
 
         if (StrUtil.isBlank(confirmPwd)) {
-            renderJson(Ret.fail().set("message", "确认密码不能为空").set("errorCode", 4));
+            renderJson(Ret.fail().set("message", "confirm password can not be blank").set("errorCode", 4));
             return;
         }
 
         if (!pwd.equals(confirmPwd)) {
-            renderJson(Ret.fail().set("message", "两次输入密码不一致").set("errorCode", 5));
+            renderJson(Ret.fail().set("message", "Two input passwords are inconsistent").set("errorCode", 5));
             return;
         }
 
         if (StrUtil.isBlank(getPara("captcha"))) {
-            renderJson(Ret.fail().set("message", "验证码不能为空").set("errorCode", 6));
+            renderJson(Ret.fail().set("message", "verification code must be filled").set("errorCode", 6));
             return;
         }
 
         if (!SmsKit.validateCode(phone,getPara("captcha"))) {
-            renderJson(Ret.fail().set("message", "验证码不正确").set("errorCode", 7));
+            renderJson(Ret.fail().set("message", "Incorrect verification code").set("errorCode", 7));
             return;
         }
 
         User user = userService.findFirstByUsername(username);
         if (user != null) {
-            renderJson(Ret.fail().set("message", "该用户名已经存在").set("errorCode", 10));
+            renderJson(Ret.fail().set("message", "This user name already exists").set("errorCode", 10));
             return;
         }
 
         user = userService.findFirstByMobile(phone);
         if (user != null) {
-            renderJson(Ret.fail().set("message", "该手机号已被注册").set("errorCode", 11));
+            renderJson(Ret.fail().set("message", "The phone number has been registered").set("errorCode", 11));
             return;
         }
 
@@ -460,12 +460,12 @@ public class UserController extends TemplateControllerBase {
             boolean sendOk = SmsKit.sendCode(mobile, code, template, sign);
 
             if (sendOk) {
-                renderJson(Ret.ok().set("message", "短信发送成功，请手机查看"));
+                renderJson(Ret.ok().set("message", "Successful SMS sending, please check your mobile phone"));
             } else {
-                renderJson(Ret.fail().set("message", "短信实发失败，请联系管理员"));
+                renderJson(Ret.fail().set("message", "SMS failed, please contact the administrator"));
             }
         } else {
-            renderFailJson("验证错误");
+            renderFailJson("Verification error");
         }
     }
 
@@ -508,24 +508,24 @@ public class UserController extends TemplateControllerBase {
         ResponseModel validResult = captchaService.verification(captchaVO);
         if (validResult != null && validResult.isSuccess()) {
             if (!StrUtil.isEmail(emailAddr)) {
-                renderFailJson("您输入的邮箱地址有误。");
+                renderFailJson("The mailbox address you entered is wrong.");
                 return;
             }
 
             User user = userService.findFirstByEmail(emailAddr);
             if(user == null){
-                renderJson(Ret.fail().set("message", "该邮箱未注册或已被删除").set("errorCode", 11));
+                renderJson(Ret.fail().set("message", "The mailbox is not registered or has been deleted").set("errorCode", 11));
                 return;
             }
 
             SimpleEmailSender ses = new SimpleEmailSender();
             if (!ses.isEnable()) {
-                renderFailJson("您未开启邮件功能，无法发送。");
+                renderFailJson("You can't send it without opening the mail function.");
                 return;
             }
 
             if (!ses.isConfigOk()) {
-                renderFailJson("未配置正确，smtp 或 用户名 或 密码 为空。");
+                renderFailJson("Unconfigured is correct, SMTP or user name or password is empty.");
                 return;
             }
 
@@ -543,7 +543,7 @@ public class UserController extends TemplateControllerBase {
 
             String webName = JPressOptions.get(JPressConsts.ATTR_WEB_NAME);
             if (StrUtil.isNotBlank(webName)) {
-                webName = webName+"：";
+                webName = webName+":";
             }else{
                 webName ="";
             }
@@ -558,7 +558,7 @@ public class UserController extends TemplateControllerBase {
                 paras.put("url", url);
                 contentLink = Engine.use().getTemplateByString(template).renderToString(paras);
             }else{
-                contentLink = "重置密码地址：<a href=\"" + url + "\">" + url + "</a>";
+                contentLink = "Reset password address: <a href=\"" + url + "\">" + url + "</a>";
             }
 
             //获取关于邮箱的配置内容
@@ -572,9 +572,9 @@ public class UserController extends TemplateControllerBase {
 
             //发送邮箱重置密码链接
             EmailKit.sendResetPwdLinkToEmail(email);
-            renderJson(Ret.ok().set("message", "邮箱重置密码链接发送成功，请手机查看").set("email",emailNumber).set("isEmail",true));
+            renderJson(Ret.ok().set("message", "The mailbox reset password link is successful, please check the mobile phone").set("email",emailNumber).set("isEmail",true));
         } else {
-            renderFailJson("验证错误");
+            renderFailJson("Verification error");
         }
     }
 
@@ -600,13 +600,13 @@ public class UserController extends TemplateControllerBase {
             boolean sendOk = SmsKit.sendCode(mobile, code, template, sign);
 
             if (sendOk) {
-                renderJson(Ret.ok().set("message", "短信验证码发送成功，请手机查看！").set("mobile", mobile).set("isEmail", false));
+                renderJson(Ret.ok().set("message", "The SMS verification code is successfully sent, please check your mobile phone!").set("mobile", mobile).set("isEmail", false));
             } else {
-                renderJson(Ret.fail().set("message", "短信实发失败，请联系管理员"));
+                renderJson(Ret.fail().set("message", "SMS failed, please contact the administrator"));
             }
 
         } else {
-            renderFailJson("验证错误");
+            renderFailJson("Verification error");
         }
     }
 
@@ -629,43 +629,43 @@ public class UserController extends TemplateControllerBase {
         String confirmPwd = getPara("confirmPwd");
 
         if (StrUtil.isBlank(token)) {
-            renderJson(Ret.fail().set("message", "token不能为空，请重新发送").set("errorCode", 2));
+            renderJson(Ret.fail().set("message", "Token cannot be empty, please send it again").set("errorCode", 2));
             return;
         }
         if(isEmail && StrUtil.isNotBlank(emailToken) && !token.equals(emailToken)){
-            renderJson(Ret.fail().set("message", "token是无效的，请重新发送！").set("errorCode", 5));
+            renderJson(Ret.fail().set("message", "Token is invalid, please send it again!").set("errorCode", 5));
             return;
         }
 
         if (isEmail && StrUtil.isBlank(email)) {
-            renderJson(Ret.fail().set("message", "邮箱不存在或已被删除").set("errorCode", 2));
+            renderJson(Ret.fail().set("message", "The mailbox does not exist or has been deleted").set("errorCode", 2));
             return;
         } else {
             email = email.toLowerCase();
         }
 
         if(!isEmail&& StrUtil.isNotBlank(mobileToken)  && !mobileToken.equals(token)){
-            renderJson(Ret.fail().set("message", "token是无效的，请重新发送！").set("errorCode", 5));
+            renderJson(Ret.fail().set("message", "Token is invalid, please send it again!").set("errorCode", 5));
             return;
         }
 
         if (!isEmail && StrUtil.isBlank(mobile)) {
-            renderJson(Ret.fail().set("message", "手机号不存在或已被删除").set("errorCode", 2));
+            renderJson(Ret.fail().set("message", "The mobile phone number does not exist or has been deleted").set("errorCode", 2));
             return;
         }
 
         if (StrUtil.isBlank(pwd)) {
-            renderJson(Ret.fail().set("message", "密码不能为空").set("errorCode", 3));
+            renderJson(Ret.fail().set("message", "password can not be blank").set("errorCode", 3));
             return;
         }
 
         if (StrUtil.isBlank(confirmPwd)) {
-            renderJson(Ret.fail().set("message", "确认密码不能为空").set("errorCode", 4));
+            renderJson(Ret.fail().set("message", "confirm password can not be blank").set("errorCode", 4));
             return;
         }
 
         if (!pwd.equals(confirmPwd)) {
-            renderJson(Ret.fail().set("message", "两次输入密码不一致").set("errorCode", 5));
+            renderJson(Ret.fail().set("message", "Two input passwords are inconsistent").set("errorCode", 5));
             return;
         }
 
@@ -680,10 +680,10 @@ public class UserController extends TemplateControllerBase {
                 user.setPassword(hashedPass);
                 userService.update(user);
             }else{
-                renderJson(Ret.fail().set("message", "邮箱不存在或已被删除").set("errorCode", 11));
+                renderJson(Ret.fail().set("message", "The mailbox does not exist or has been deleted").set("errorCode", 11));
                 return;
             }
-            renderJson(user != null ? OK.set("message","重置密码成功") : FAIL.set("message","重置密码失败"));
+            renderJson(user != null ? OK.set("message","Reset password success") : FAIL.set("message","Reset password failure"));
         }else{
             User user = userService.findFirstByMobile(mobile);
             if (user != null) {
@@ -695,10 +695,10 @@ public class UserController extends TemplateControllerBase {
                 user.setPassword(hashedPass);
                 userService.update(user);
             }else{
-                renderJson(Ret.fail().set("message", "该手机号不存在或已被删除").set("errorCode", 11));
+                renderJson(Ret.fail().set("message", "The phone number does not exist or has been deleted").set("errorCode", 11));
                 return;
             }
-            renderJson(user != null ? OK.set("message","重置密码成功") : FAIL.set("message","重置密码失败"));
+            renderJson(user != null ? OK.set("message","Reset password success") : FAIL.set("message","Reset password failure"));
         }
     }
 
@@ -714,12 +714,12 @@ public class UserController extends TemplateControllerBase {
         Object token = CacheUtil.get("mobile_token", phone);
 
         if (StrUtil.isBlank(getPara("captcha"))) {
-            renderJson(Ret.fail().set("message", "验证码不能为空").set("errorCode", 6));
+            renderJson(Ret.fail().set("message", "verification code must be filled").set("errorCode", 6));
             return;
         }
 
         if (!SmsKit.validateCode(phone,getPara("captcha"))) {
-            renderJson(Ret.fail().set("message", "验证码不正确").set("errorCode", 7));
+            renderJson(Ret.fail().set("message", "Incorrect verification code").set("errorCode", 7));
             return;
         }
 
@@ -727,7 +727,7 @@ public class UserController extends TemplateControllerBase {
         User user = userService.findFirstByMobile(phone);
 
         if (user == null) {
-            renderJson(Ret.fail().set("message", "手机号未注册或已被删除，请重新输入！").set("errorCode", 11));
+            renderJson(Ret.fail().set("message", "The mobile phone number is not registered or has been deleted, please re -enter!").set("errorCode", 11));
             return;
         }else{
 
@@ -736,7 +736,7 @@ public class UserController extends TemplateControllerBase {
                 webDomain = RequestUtil.getBaseUrl();
             }
             String url = webDomain + "/user/resetPwd?token=" + token+"&isEmail=false";
-            renderJson(Ret.ok().set("message","校验正确，可以进行密码重置！").set("url",url));
+            renderJson(Ret.ok().set("message","The verification is correct, you can reset your password!").set("url",url));
         }
 
 

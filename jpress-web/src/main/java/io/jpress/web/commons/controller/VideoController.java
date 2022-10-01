@@ -48,13 +48,13 @@ public class VideoController extends Controller {
         String uuid = getPara("id");
 
         if (StrUtil.isBlank(uuid)) {
-            renderJson(Ret.fail().set("message", "传入的视频uuid为空！"));
+            renderJson(Ret.fail().set("message", "The transmitted video UUID is empty!"));
             return;
         }
 
         AttachmentVideo video = videoService.findByUuid(uuid);
         if (video == null) {
-            renderJson(Ret.fail().set("message", "视频信息为空！"));
+            renderJson(Ret.fail().set("message", "The video information is empty!"));
             return;
         }
 
@@ -63,13 +63,13 @@ public class VideoController extends Controller {
 
             //视频云端id
             if (StrUtil.isBlank(video.getVodVid())) {
-                renderJson(Ret.fail().set("message", "阿里云 视频云端id为空！"));
+                renderJson(Ret.fail().set("message", "Alibaba Cloud Video Cloud ID is empty!"));
                 return;
             }
             //阿里云视频播放凭证
             String playAuth = AliyunVideoUtil.getPlayAuth(video.getVodVid());
             if (StrUtil.isBlank(playAuth)) {
-                renderJson(Ret.fail().set("message", "阿里云视频播放凭证为空！"));
+                renderJson(Ret.fail().set("message", "Alibaba Cloud Video Play Volume is empty!"));
                 return;
             }
 
@@ -80,13 +80,13 @@ public class VideoController extends Controller {
 
             String appId = JPressOptions.get("attachment_qcloudvideo_appid");
             if (StrUtil.isBlank(appId)) {
-                renderJson(Ret.fail().set("message", "请配置腾讯云的账号id"));
+                renderJson(Ret.fail().set("message", "Please configure Tencent Cloud's account ID"));
                 return;
             }
 
             //视频云端id
             if (StrUtil.isBlank(video.getVodVid())) {
-                renderJson(Ret.fail().set("message", "腾讯云 视频云端id为空！"));
+                renderJson(Ret.fail().set("message", "Tencent Cloud Video Cloud ID is empty!"));
                 return;
             }
 
@@ -98,7 +98,7 @@ public class VideoController extends Controller {
             if (StrUtil.isNotBlank(options)) {
                 Map<String, String> map = JsonUtil.get(options, "", TypeDef.MAP_STRING);
                 if (map == null) {
-                    renderJson(Ret.fail().set("message", "该视频类型是本地视频，请先上传本地视频！"));
+                    renderJson(Ret.fail().set("message", "This video type is a local video, please upload local videos first!"));
                     return;
                 }
                 String src = map.get("local_video_url");

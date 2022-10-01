@@ -58,7 +58,7 @@ public class CKEditor5Controller extends UserControllerBase {
         UploadFile uploadFile = getFile();
 
         if (uploadFile == null) {
-            renderJson(Ret.of("error", Ret.of("message", "请选择要上传的文件")));
+            renderJson(Ret.of("error", Ret.of("message", "Please select the file to be uploaded")));
             return;
         }
 
@@ -66,14 +66,14 @@ public class CKEditor5Controller extends UserControllerBase {
         File file = uploadFile.getFile();
         if (!getLoginedUser().isStatusOk()) {
             AttachmentUtils.delete(file);
-            renderJson(Ret.of("error", Ret.of("message", "当前用户未激活，不允许上传任何文件。")));
+            renderJson(Ret.of("error", Ret.of("message", "The current users are not activated and are not allowed to upload any files.")));
             return;
         }
 
 
         if (AttachmentUtils.isUnSafe(file)) {
             AttachmentUtils.delete(file);
-            renderJson(Ret.of("error", Ret.of("message", "不支持此类文件上传")));
+            renderJson(Ret.of("error", Ret.of("message", "Do not support such files upload")));
             return;
         }
 
@@ -88,7 +88,7 @@ public class CKEditor5Controller extends UserControllerBase {
 
         if (maxSize > 0 && fileSize > maxSize * 1024) {
             file.delete();
-            renderJson(Ret.of("error", Ret.of("message", "上传文件大小不能超过 " + maxSize + " MB")));
+            renderJson(Ret.of("error", Ret.of("message", "The size of the upload file cannot be exceeded " + maxSize + " MB")));
             return;
         }
 
@@ -108,7 +108,7 @@ public class CKEditor5Controller extends UserControllerBase {
             renderJson(Ret.ok().set("default", url));
 
         } else {
-            renderJson(Ret.of("error", Ret.of("message", "文件保存失败")));
+            renderJson(Ret.of("error", Ret.of("message", "File preservation failed")));
         }
     }
 

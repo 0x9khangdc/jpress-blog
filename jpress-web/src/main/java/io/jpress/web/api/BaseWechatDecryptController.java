@@ -46,7 +46,7 @@ public abstract class BaseWechatDecryptController extends ApiControllerBase {
      * <p>
      * 5、解密就用到刚才的 session_key 了，session_key 其实就是解密的钥匙 （密钥）
      */
-    @ApiOper(value = "微信小程序登录")
+    @ApiOper(value = "WeChat applet login")
     public void login(@NotEmpty String code) {
 
         // 获取SessionKey 和 openId
@@ -73,7 +73,7 @@ public abstract class BaseWechatDecryptController extends ApiControllerBase {
      * 需要调用此接口，才能获取到具体的数据
      * 解密用户数据，小程序的相关接口 https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/wx.getUserInfo.html
      */
-    @ApiOper(value = "微信小程序注册当前用户", notes = "一般只有登录不成功后进行注册", contentType = ContentType.JSON)
+    @ApiOper(value = "WeChat Mini Program Registration Current User", notes = "Generally only after logging in is unsuccessful, register", contentType = ContentType.JSON)
     public void register(@JsonBody @NotEmpty Map<String, String> json) {
 
         //小程序端调用 login() 之后得到的 sessionId
@@ -119,7 +119,7 @@ public abstract class BaseWechatDecryptController extends ApiControllerBase {
     }
 
 
-    @ApiOper(value = "获取当前用户手机号", contentType = ContentType.JSON)
+    @ApiOper(value = "Get the current user mobile phone number", contentType = ContentType.JSON)
     public void phoneNumber(@JsonBody @NotEmpty Map<String, String> json) {
 
         //小程序端调用 code2session() 之后得到的 sessionId

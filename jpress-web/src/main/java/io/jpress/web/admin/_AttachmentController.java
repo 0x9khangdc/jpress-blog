@@ -68,7 +68,7 @@ public class _AttachmentController extends AdminControllerBase {
     private AttachmentCategoryService categoryService;
 
 
-    @AdminMenu(text = "附件列表", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 0)
+    @AdminMenu(text = "Attachment list", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 0)
     public void list() {
         Columns columns = Columns.create();
         columns.likeAppendPercent("title",getPara("title"));
@@ -82,7 +82,7 @@ public class _AttachmentController extends AdminControllerBase {
         render("attachment/list.html");
     }
 
-    @AdminMenu(text = "上传", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 1)
+    @AdminMenu(text = "Upload", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 1)
     public void upload() {
         List<AttachmentCategory> categories = categoryService.findListByColumns(Columns.create(), "order_number asc,id desc");
         setAttr("categories",categories);
@@ -91,13 +91,13 @@ public class _AttachmentController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "设置", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 2)
+    @AdminMenu(text = "set up", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 2)
     public void setting() {
         render("attachment/setting.html");
     }
 
 
-    @AdminMenu(text = "根目录", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 99)
+    @AdminMenu(text = "Root directory", groupId = JPressConsts.SYSTEM_MENU_ATTACHMENT, order = 99)
     public void root() {
         File rootFile = new File(PathKit.getWebRootPath());
         String name = getPara("name");
@@ -180,21 +180,21 @@ public class _AttachmentController extends AdminControllerBase {
 
         UploadFile uploadFile = getFile();
         if (uploadFile == null) {
-            renderJson(Ret.fail().set("message", "请选择要上传的文件"));
+            renderJson(Ret.fail().set("message", "Please select the file to be uploaded"));
             return;
         }
 
         File file = uploadFile.getFile();
         if (AttachmentUtils.isUnSafe(file)) {
             AttachmentUtils.delete(uploadFile.getFile());
-            renderJson(Ret.fail().set("message", "不支持此类文件上传"));
+            renderJson(Ret.fail().set("message", "Do not support such files upload"));
             return;
         }
 
         File rootFile = new File(PathKit.getWebRootPath(), file.getName());
         if (rootFile.exists()) {
             AttachmentUtils.delete(uploadFile.getFile());
-            renderJson(Ret.fail().set("message", "该文件已经存在，请手动删除后再重新上传。"));
+            renderJson(Ret.fail().set("message", "This file already exists, please delete it manually before uploading again."));
             return;
         }
 
@@ -207,7 +207,7 @@ public class _AttachmentController extends AdminControllerBase {
             e.printStackTrace();
         }
 
-        renderJson(Ret.fail().set("message", "系统错误。"));
+        renderJson(Ret.fail().set("message", "system error."));
     }
 
     public static class RootFile {

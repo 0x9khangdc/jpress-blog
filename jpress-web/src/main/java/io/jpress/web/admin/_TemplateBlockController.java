@@ -48,7 +48,7 @@ public class _TemplateBlockController extends AdminControllerBase {
     private TemplateBlockOptionService blockOptionService;
 
 
-    @AdminMenu(text = "板块", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 7)
+    @AdminMenu(text = "Section", groupId = JPressConsts.SYSTEM_MENU_TEMPLATE, order = 7)
     public void index() {
         Template currentTemplate = TemplateManager.me().getCurrentTemplate();
         setAttr("template", currentTemplate);

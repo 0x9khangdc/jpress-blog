@@ -61,7 +61,7 @@ public class UserCenterController extends UcenterControllerBase {
     }
 
 
-    @UCenterMenu(text = "基本信息", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-user\"></i>",order = 10)
+    @UCenterMenu(text = "Basic Information", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-user\"></i>",order = 10)
     public void info() {
         render("info.html");
     }
@@ -85,7 +85,7 @@ public class UserCenterController extends UcenterControllerBase {
     /**
      * 个人签名
      */
-    @UCenterMenu(text = "个人签名", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-bars\"></i>",order = 30)
+    @UCenterMenu(text = "personal signature", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-bars\"></i>",order = 30)
     public void signature() {
         render("signature.html");
     }
@@ -94,7 +94,7 @@ public class UserCenterController extends UcenterControllerBase {
     /**
      * 头像设置
      */
-    @UCenterMenu(text = "头像设置", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fab fa-black-tie\"></i>",order = 40)
+    @UCenterMenu(text = "Avatar settings", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fab fa-black-tie\"></i>",order = 40)
     public void avatar() {
         render("avatar.html");
     }
@@ -103,7 +103,7 @@ public class UserCenterController extends UcenterControllerBase {
     /**
      * 账号密码
      */
-    @UCenterMenu(text = "修改密码", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-key\"></i>",order = 50)
+    @UCenterMenu(text = "change Password", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-key\"></i>",order = 50)
     public void pwd() {
         render("pwd.html");
     }
@@ -112,7 +112,7 @@ public class UserCenterController extends UcenterControllerBase {
     /**
      * 账号绑定
      */
-    @UCenterMenu(text = "账号绑定", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-random\"></i>",order = 60)
+    @UCenterMenu(text = "Account binding", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-random\"></i>",order = 60)
     public void bind() {
         UserOpenidService openidService = Aop.get(UserOpenidService.class);
         List<UserOpenid> list = openidService.findListByUserId(getLoginedUser().getId());
@@ -141,21 +141,21 @@ public class UserCenterController extends UcenterControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "oldPwd", message = "旧不能为空"),
-            @Form(name = "newPwd", message = "新密码不能为空"),
-            @Form(name = "confirmPwd", message = "确认密码不能为空")
+            @Form(name = "oldPwd", message = "Old can't be empty"),
+            @Form(name = "newPwd", message = "The new password cannot be empty"),
+            @Form(name = "confirmPwd", message = "confirm password can not be blank")
     })
     public void doUpdatePwd(String oldPwd, String newPwd, String confirmPwd) {
 
         if (newPwd.equals(confirmPwd) == false) {
-            renderJson(Ret.fail().set("message", "两次输入密码不一致"));
+            renderJson(Ret.fail().set("message", "Two input passwords are inconsistent"));
             return;
         }
 
 
         User user = getLoginedUser();
         if (userService.doValidateUserPwd(user, oldPwd).isFail()) {
-            renderJson(Ret.fail().set("message", "旧密码输入错误"));
+            renderJson(Ret.fail().set("message", "Old password input error"));
             return;
         }
 
@@ -171,7 +171,7 @@ public class UserCenterController extends UcenterControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "path", message = "请先选择图片")
+            @Form(name = "path", message = "Please select the picture first")
     })
     public void doSaveAvatar(String path, int x, int y, int w, int h) {
 

@@ -44,7 +44,7 @@ public class EmailActivateController extends UserControllerBase {
     public void index() {
         Long userId = getParaToLong("userId");
         if (userId == null) {
-            renderJson(Ret.fail().set("message", "userId不能为空"));
+            renderJson(Ret.fail().set("message", "Userid cannot be empty"));
             return;
         }
 
@@ -52,19 +52,19 @@ public class EmailActivateController extends UserControllerBase {
         // 需要对传入的ID进行验证，只能自己给自己发送邮件
         if (roleService.isSupperAdmin(getLoginedUser().getId()) == false) {
             if (getLoginedUser().getId().equals(userId) == false) {
-                renderJson(Ret.fail().set("message", "没有权限操作"));
+                renderJson(Ret.fail().set("message", "No permission operation"));
                 return;
             }
         }
 
         User user = userService.findById(userId);
         if (user == null) {
-            renderJson(Ret.fail().set("message", "用户不存在或已经被删除"));
+            renderJson(Ret.fail().set("message", "Users do not exist or have been deleted"));
             return;
         }
 
         EmailSender.sendForEmailActivate(user);
-        renderJson(Ret.ok().set("message", "激活邮件已经发送成功"));
+        renderJson(Ret.ok().set("message", "The activation mail has been sent successfully"));
     }
 
 
