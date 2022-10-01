@@ -50,7 +50,7 @@ public class PageListDirective extends JbootDirectiveBase {
         int pageSize = getParaToInt("pageSize", scope, 10);
         String orderBy = getPara("orderBy", scope, "id desc");
 
-        // 可以指定当前的分类ID
+        // You can specify the current classification ID
         Long categoryId = getParaToLong("categoryId", scope, 0L);
         SinglePageCategory category = controller.getAttr("category");
 

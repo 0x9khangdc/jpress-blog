@@ -43,8 +43,8 @@ public class PageApiController extends ApiControllerBase {
     @Inject
     private SinglePageService service;
 
-    @ApiOper(value = "页面详情", paraNotes = "id 和 slug 必须有一个不能为空")
-    public Ret detail(@ApiPara("页面ID") Long id, @ApiPara("页面固定连接") String slug) {
+    @ApiOper(value = "Page details", paraNotes = "id and slug There must be one that cannot be empty")
+    public Ret detail(@ApiPara("Page ID") Long id, @ApiPara("Page fixed connection") String slug) {
         if (id != null) {
             SinglePage page = service.findById(id);
             return Ret.ok("detail", page);
@@ -59,29 +59,29 @@ public class PageApiController extends ApiControllerBase {
     }
 
 
-    @ApiOper("根据 flag 查询页面列表")
-    public Ret listByFlag(@ApiPara("页面的 flag 标识") @NotEmpty String flag) {
+    @ApiOper("according to flag Query page list")
+    public Ret listByFlag(@ApiPara("Page flag Identify") @NotEmpty String flag) {
         List<SinglePage> pages = service.findListByFlag(flag);
         return Ret.ok().set("list", pages);
     }
 
 
-    @ApiOper("删除页面")
-    public Ret doDelete(@ApiPara("页面id") @NotNull Long id) {
+    @ApiOper("Delete page")
+    public Ret doDelete(@ApiPara("Page ID") @NotNull Long id) {
         service.deleteById(id);
         return Rets.OK;
     }
 
 
-    @ApiOper(value = "创建新页面", contentType = ContentType.JSON)
-    public Ret doCreate(@ApiPara("页面 json 数据") @JsonBody SinglePage singlePage) {
+    @ApiOper(value = "Create a new page", contentType = ContentType.JSON)
+    public Ret doCreate(@ApiPara("page json data") @JsonBody SinglePage singlePage) {
         Object id = service.save(singlePage);
         return Ret.ok().set("id", id);
     }
 
 
-    @ApiOper(value = "更新页面", contentType = ContentType.JSON)
-    public Ret doUpdate(@ApiPara("页面 json 数据") @JsonBody SinglePage singlePage) {
+    @ApiOper(value = "Update page", contentType = ContentType.JSON)
+    public Ret doUpdate(@ApiPara("page json data") @JsonBody SinglePage singlePage) {
         service.update(singlePage);
         return Rets.OK;
     }

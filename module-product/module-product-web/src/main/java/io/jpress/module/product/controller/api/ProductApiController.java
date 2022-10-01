@@ -47,8 +47,8 @@ public class ProductApiController extends ApiControllerBase {
     @Inject
     private ProductService productService;
 
-    @ApiOper(value = "获取商品详情", paraNotes = "id 和 slug 必须传入一个值")
-    public Ret detail(@ApiPara("产品ID") Long id, @ApiPara("产品固定连接") String slug) {
+    @ApiOper(value = "Get product details", paraNotes = "ID and slug must be passed into a value")
+    public Ret detail(@ApiPara("Product ID") Long id, @ApiPara("Product fixed connection") String slug) {
         Product product = id != null ? productService.findById(id)
                 : (StrUtil.isNotBlank(slug) ? productService.findFirstBySlug(slug) : null);
 
@@ -61,11 +61,11 @@ public class ProductApiController extends ApiControllerBase {
     }
 
 
-    @ApiPara("根据产品的 Flag 获取产品列表")
-    public Ret listByFlag(@ApiPara("产品标识 flag") String flag
-            , @ApiPara(value = "是否必须要图片", notes = "true 必须有图片，false 必须无图片") Boolean hasThumbnail
-            , @ApiPara("排序方式") String orderBy
-            , @ApiPara("查询数量") @DefaultValue("10") int count) {
+    @ApiPara("Get the product list according to the product FLAG")
+    public Ret listByFlag(@ApiPara("Product Identification flag") String flag
+            , @ApiPara(value = "Do you need pictures", notes = "True must have pictures, false must have no picture") Boolean hasThumbnail
+            , @ApiPara("sort by") String orderBy
+            , @ApiPara("Query quantity") @DefaultValue("10") int count) {
 
         Columns columns = Columns.create("flag", flag);
         if (hasThumbnail != null) {
@@ -81,18 +81,18 @@ public class ProductApiController extends ApiControllerBase {
     }
 
 
-    @ApiPara("查询某个产品的相关产品")
-    public Ret listByRelevant(@ApiPara("产品ID") @NotNull @Min(1) Long id
-            , @ApiPara("要查询的产品数量") @DefaultValue("3") int count) {
+    @ApiPara("Query about the product of a certain product")
+    public Ret listByRelevant(@ApiPara("Product ID") @NotNull @Min(1) Long id
+            , @ApiPara("Number of products to be query") @DefaultValue("3") int count) {
         List<Product> relevantProducts = productService.findRelevantListByProductId(id, Product.STATUS_NORMAL, count);
         return Ret.ok().set("list", relevantProducts);
     }
 
 
-    @ApiPara("商品搜索")
-    public Ret search(@ApiPara("关键字") String keyword
-            , @ApiPara("分页页码") @DefaultValue("1") int pageNumber
-            , @ApiPara("每页数量") @DefaultValue("10") int pageSize) {
+    @ApiPara("product search")
+    public Ret search(@ApiPara("Keyword") String keyword
+            , @ApiPara("Paging page number") @DefaultValue("1") int pageNumber
+            , @ApiPara("Number per page") @DefaultValue("10") int pageSize) {
         Page<Product> dataPage = StrUtil.isNotBlank(keyword)
                 ? productService.search(keyword, pageNumber, pageSize)
                 : null;
@@ -100,22 +100,22 @@ public class ProductApiController extends ApiControllerBase {
     }
 
 
-    @ApiOper("删除产品")
-    public Ret doDelete(@ApiPara("产品ID") @NotNull Long id) {
+    @ApiOper("Delete product")
+    public Ret doDelete(@ApiPara("Product ID") @NotNull Long id) {
         productService.deleteById(id);
         return Rets.OK;
     }
 
 
-    @ApiOper(value = "新增产品", contentType = ContentType.JSON)
-    public Ret doCreate(@ApiPara("产品的 JSON 信息") @JsonBody Product product) {
+    @ApiOper(value = "New product", contentType = ContentType.JSON)
+    public Ret doCreate(@ApiPara("Product JSON information") @JsonBody Product product) {
         Object id = productService.save(product);
         return Ret.ok().set("id", id);
     }
 
 
-    @ApiOper(value = "更新产品信息", contentType = ContentType.JSON)
-    public Ret doUpdate(@ApiPara("产品的 JSON 信息") @JsonBody Product product) {
+    @ApiOper(value = "Update product information", contentType = ContentType.JSON)
+    public Ret doUpdate(@ApiPara("Product JSON information") @JsonBody Product product) {
         productService.update(product);
         return Rets.OK;
     }

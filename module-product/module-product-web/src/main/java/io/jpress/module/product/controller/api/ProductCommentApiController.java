@@ -38,37 +38,37 @@ import javax.validation.constraints.NotNull;
  * @Title: 文章评论相关 API
  */
 @RequestMapping("/api/product/comment")
-@Api("文章评论相关API")
+@Api("Article Review Related API")
 public class ProductCommentApiController extends ApiControllerBase {
 
     @Inject
     private ProductCommentService commentService;
 
 
-    @ApiOper("分页查询谋个产品的评论")
-    public Ret paginateByProductId(@ApiPara("产品ID") @NotNull Long productId
-            , @ApiPara("分页页码") @DefaultValue("1") int pageNumber
-            , @ApiPara("每页数据量") @DefaultValue("10") int pageSize) {
+    @ApiOper("Pagling query to consider a product comments")
+    public Ret paginateByProductId(@ApiPara("Product ID") @NotNull Long productId
+            , @ApiPara("Paging page number") @DefaultValue("1") int pageNumber
+            , @ApiPara("Data volume per page") @DefaultValue("10") int pageSize) {
         return Ret.ok().set("page", commentService.paginateByProductIdInNormal(pageNumber, pageSize, productId));
     }
 
 
-    @ApiOper("删除评论")
-    public Ret doDelete(@ApiPara("评论ID") @NotNull Long id) {
+    @ApiOper("Delete comment")
+    public Ret doDelete(@ApiPara("Comment ID") @NotNull Long id) {
         commentService.deleteById(id);
         return Rets.OK;
     }
 
 
-    @ApiOper(value = "创建新的评论", contentType = ContentType.JSON)
-    public Ret doCreate(@ApiPara("评论的 json") @JsonBody ProductComment productComment) {
+    @ApiOper(value = "Create a new comment", contentType = ContentType.JSON)
+    public Ret doCreate(@ApiPara("Commentary json") @JsonBody ProductComment productComment) {
         Object id = commentService.save(productComment);
         return Ret.ok().set("id", id);
     }
 
 
-    @ApiOper(value = "更新评论信息", contentType = ContentType.JSON)
-    public Ret doUpdate(@ApiPara("评论的 json") @JsonBody ProductComment productComment) {
+    @ApiOper(value = "Update comment information", contentType = ContentType.JSON)
+    public Ret doUpdate(@ApiPara("Commentary json") @JsonBody ProductComment productComment) {
         commentService.update(productComment);
         return Rets.OK;
     }

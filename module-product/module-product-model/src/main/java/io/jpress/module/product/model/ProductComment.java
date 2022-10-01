@@ -23,9 +23,9 @@ public class ProductComment extends BaseProductComment<ProductComment> {
     public static final Map<Integer, String> statusStrMap = new HashMap<>();
 
     static {
-        statusStrMap.put(STATUS_NORMAL, "正常");
-        statusStrMap.put(STATUS_UNAUDITED, "待审核");
-        statusStrMap.put(STATUS_TRASH, "垃圾箱");
+        statusStrMap.put(STATUS_NORMAL, "normal");
+        statusStrMap.put(STATUS_UNAUDITED, "To be reviewed");
+        statusStrMap.put(STATUS_TRASH, "Trash");
     }
 
     public boolean isNormal() {

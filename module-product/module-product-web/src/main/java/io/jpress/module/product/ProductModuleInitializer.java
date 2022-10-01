@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 产品模块初始化
+ * @Title: Product module initialization
  * @Package io.jpress
  */
 public class ProductModuleInitializer extends ModuleBase {
@@ -42,7 +42,7 @@ public class ProductModuleInitializer extends ModuleBase {
     public void onConfigAdminMenu(List<MenuGroup> adminMenus) {
         MenuGroup menuGroup = new MenuGroup();
         menuGroup.setId("product");
-        menuGroup.setText("商品");
+        menuGroup.setText("Product");
         menuGroup.setIcon("<i class=\"fas fa-mitten\"></i>");
         menuGroup.setOrder(99);
         adminMenus.add(menuGroup);
@@ -56,22 +56,22 @@ public class ProductModuleInitializer extends ModuleBase {
         Columns columns = new Columns();
         columns.eq("status",Product.STATUS_NORMAL);
 
-        //如果是今天
+        //If it is today
         if(date !=null && date == 0){
 
             columns.between("created", DateUtil.getStartOfDay(new Date()), DateUtil.getEndOfDay(new Date()));
         }
 
-        //最多就让查 28 天
+        //At most, check for 28 days
         else if (date != null && date > 0 && date < 29) {
 
-            //创建日历类对象
+            //Create a calendar object
             Calendar calendar = Calendar.getInstance();
 
-            //设置当前时间
+            //Set the current time
             calendar.setTime(new Date());
 
-            //设置当前时间 加 几天
+            //Set the current time plus a few days
             calendar.add(Calendar.DATE, -date);
 
             columns.between("created", DateUtil.getStartOfDay(calendar.getTime()), DateUtil.getStartOfDay(new Date()));

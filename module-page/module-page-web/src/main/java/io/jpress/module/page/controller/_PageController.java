@@ -58,7 +58,7 @@ public class _PageController extends AdminControllerBase {
     @Inject
     private MenuService menuService;
 
-    @AdminMenu(text = "页面管理", groupId = "page", order = 1)
+    @AdminMenu(text = "Page management", groupId = "page", order = 1)
     public void list() {
 
         String status = getPara("status");
@@ -100,7 +100,7 @@ public class _PageController extends AdminControllerBase {
         render("page/page_list.html");
     }
 
-    @AdminMenu(text = "新建", groupId = "page", order = 2)
+    @AdminMenu(text = "Newly built", groupId = "page", order = 2)
     public void write() {
 
         List<SinglePageCategory> categories = categoryService.findAll();
@@ -126,15 +126,15 @@ public class _PageController extends AdminControllerBase {
 
 
 
-    @AdminMenu(text = "设置", groupId = "page", order = 6)
+    @AdminMenu(text = "set up", groupId = "page", order = 6)
     public void setting() {
         render("page/setting.html");
     }
 
 
     @EmptyValidate({
-            @Form(name = "id", message = "页面ID不能为空"),
-            @Form(name = "mode", message = "页面编辑模式不能为空")
+            @Form(name = "id", message = "Page ID cannot be empty"),
+            @Form(name = "mode", message = "Page editing mode cannot be empty")
     })
     public void doChangeEditMode() {
         Long id = getParaToLong("id");
@@ -153,8 +153,8 @@ public class _PageController extends AdminControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "page.title", message = "标题不能为空"),
-            @Form(name = "page.content", message = "内容不能为空")
+            @Form(name = "page.title", message = "The title can not be blank"),
+            @Form(name = "page.content", message = "the content can not be blank")
     })
     public void doWriteSave() {
         SinglePage page = getModel(SinglePage.class, "page");
@@ -164,14 +164,14 @@ public class _PageController extends AdminControllerBase {
         page.setContent(getCleanedOriginalPara("page.content"));
 
         if (!validateSlug(page)) {
-            renderJson(Ret.fail("message", "固定连接不能以数字结尾"));
+            renderJson(Ret.fail("message", "Fixed connection cannot end with numbers"));
             return;
         }
 
         if (StrUtil.isNotBlank(page.getSlug())) {
             SinglePage exsitModel = sps.findFirstBySlug(page.getSlug());
             if (exsitModel != null && !exsitModel.getId().equals(page.getId())) {
-                renderJson(Ret.fail("message", "该固定链接已经存在"));
+                renderJson(Ret.fail("message", "This fixed link already exists"));
                 return;
             }
         }
@@ -222,7 +222,7 @@ public class _PageController extends AdminControllerBase {
     }
 
 
-    @AdminMenu(text = "分类", groupId = "page", order = 2)
+    @AdminMenu(text = "Classification", groupId = "page", order = 2)
     public void category() {
         List<SinglePageCategory> categories = categoryService.findAll();
         setAttr("categories", categories);
@@ -251,7 +251,7 @@ public class _PageController extends AdminControllerBase {
 
 
     @EmptyValidate({
-            @Form(name = "category.title", message = "分类名称不能为空")
+            @Form(name = "category.title", message = "Classified names cannot be empty")
     })
     public void doCategorySave() {
         SinglePageCategory category = getModel(SinglePageCategory.class, "category");

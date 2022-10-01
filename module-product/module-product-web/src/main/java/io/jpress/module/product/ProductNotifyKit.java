@@ -40,7 +40,7 @@ public class ProductNotifyKit {
     }
 
     /**
-     * 发送邮件给管理员，告知网站有新的评论了
+     * Send an email to the administrator and inform the website new comments
      *
      * @param product
      * @param comment

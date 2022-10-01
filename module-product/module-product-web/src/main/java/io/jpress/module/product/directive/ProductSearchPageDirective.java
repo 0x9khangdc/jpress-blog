@@ -56,7 +56,7 @@ public class ProductSearchPageDirective extends JbootDirectiveBase {
             scope.setGlobal("productPage", dataPage);
         }
 
-        //需要页面自行判断 productPage 是否为空
+        //Need the page to judge by yourself productPage Whether it is empty
         renderBody(env, scope, writer);
     }
 

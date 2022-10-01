@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 商品字段
+ * @Title: Commodity field
  */
 public class ProductFields {
 
@@ -45,7 +45,7 @@ public class ProductFields {
     }
 
     public void addField(SmartField field) {
-        removeField(field.getId()); //防止添加重复的Field
+        removeField(field.getId()); //Prevent adding duplicate Field
         fields.add(field);
         fields.sort(Comparator.comparingInt(SmartField::getOrderNo));
     }

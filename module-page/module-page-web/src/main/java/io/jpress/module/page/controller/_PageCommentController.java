@@ -43,7 +43,7 @@ public class _PageCommentController extends AdminControllerBase {
     private SinglePageCommentService commentService;
 
 
-    @AdminMenu(text = "评论", groupId = "page", order = 5)
+    @AdminMenu(text = "Comment", groupId = "page", order = 5)
     public void list() {
 
         String status = getPara("status");

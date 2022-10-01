@@ -172,7 +172,7 @@ public class PageController extends TemplateControllerBase {
         }
 
         if (StrUtil.isBlank(content)) {
-            renderJson(Ret.fail().set("message", "评论内容不能为空"));
+            renderJson(Ret.fail().set("message", "Comment content cannot be empty"));
             return;
         } else {
             content = StrUtil.escapeHtml(content);
@@ -181,12 +181,12 @@ public class PageController extends TemplateControllerBase {
         //是否对用户输入验证码进行验证
         boolean vCodeEnable = JPressOptions.isTrueOrEmpty("page_comment_vcode_enable");
         if (vCodeEnable && !validateCaptcha("captcha")) {
-            renderJson(Ret.fail().set("message", "验证码错误").set("errorCode", 2));
+            renderJson(Ret.fail().set("message", "Verification code error").set("errorCode", 2));
             return;
         }
 
         if (WordFilterUtil.isMatchedFilterWords(content)) {
-            renderJson(Ret.fail().set("message", "非法内容，无法发布评论信息"));
+            renderJson(Ret.fail().set("message", "Illegal content, cannot publish comment information"));
             return;
         }
 
@@ -201,7 +201,7 @@ public class PageController extends TemplateControllerBase {
         //是否开启评论功能
         boolean commentEnable = JPressOptions.isTrueOrEmpty("page_comment_enable");
         if (!commentEnable) {
-            renderJson(Ret.fail().set("message", "评论功能已关闭"));
+            renderJson(Ret.fail().set("message", "Comments are closed"));
             return;
         }
 
@@ -210,7 +210,7 @@ public class PageController extends TemplateControllerBase {
         Boolean unLoginEnable = optionService.findAsBoolByKey("page_comment_unlogin_enable");
         if (unLoginEnable == null || unLoginEnable == false) {
             if (getLoginedUser() == null) {
-                renderJson(Ret.fail().set("message", "未登录用户不能评论").set("errorCode", 9));
+                renderJson(Ret.fail().set("message", "Unexpected users cannot comment").set("errorCode", 9));
                 return;
             }
         }

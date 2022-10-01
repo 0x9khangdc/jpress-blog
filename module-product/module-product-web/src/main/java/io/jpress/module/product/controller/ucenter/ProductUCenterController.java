@@ -45,7 +45,7 @@ public class ProductUCenterController extends UcenterControllerBase {
 
 
 
-    @UCenterMenu(text = "产品评论", groupId = "comment", order = 0, icon = "<i class=\"fas fa-comment\"></i>")
+    @UCenterMenu(text = "Product review", groupId = "comment", order = 0, icon = "<i class=\"fas fa-comment\"></i>")
     public void comment() {
         Page<ProductComment> page = commentService._paginateByUserId(getPagePara(), 10, getLoginedUser().getId());
         setAttr("page", page);
@@ -62,7 +62,7 @@ public class ProductUCenterController extends UcenterControllerBase {
         }
 
         if (notLoginedUserModel(comment)){
-            renderFailJson("非法操作");
+            renderFailJson("Illegal operation");
             return;
         }
 

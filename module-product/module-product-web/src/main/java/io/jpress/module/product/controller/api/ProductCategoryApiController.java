@@ -31,32 +31,32 @@ import io.jpress.web.base.ApiControllerBase;
 import javax.validation.constraints.NotNull;
 
 @RequestMapping("/api/product/category")
-@Api("产品分类相关 API")
+@Api("Product classification API")
 public class ProductCategoryApiController extends ApiControllerBase {
 
     @Inject
     private ProductCategoryService productCategoryService;
 
 
-    @ApiOper(value = "获取商品分类详情", paraNotes = "id 和 slug 必须传入一个值")
-    public Ret detail(@ApiPara("产品ID") Long id, @ApiPara("产品固定连接") String slug) {
+    @ApiOper(value = "Get product classification details", paraNotes = "ID and slug must be passed into a value")
+    public Ret detail(@ApiPara("Product ID") Long id, @ApiPara("Product fixed connection") String slug) {
         return Ret.ok();//.set("detail", product);
     }
 
-    @ApiOper("删除产品分类")
-    public Ret doDelete(@ApiPara("产品分类ID") @NotNull Long id) {
+    @ApiOper("Delete product classification")
+    public Ret doDelete(@ApiPara("Product classification ID") @NotNull Long id) {
         productCategoryService.deleteById(id);
         return Rets.OK;
     }
 
-    @ApiOper(value = "创建新的产品分类", contentType = ContentType.JSON)
-    public Ret doCreate(@ApiPara("产品分类的 JSON 信息") @JsonBody ProductCategory productCategory) {
+    @ApiOper(value = "Create a new product classification", contentType = ContentType.JSON)
+    public Ret doCreate(@ApiPara("Product classification JSON information") @JsonBody ProductCategory productCategory) {
         Object id = productCategoryService.save(productCategory);
         return Ret.ok().set("id", id);
     }
 
-    @ApiOper(value = "更新产品分类", contentType = ContentType.JSON)
-    public Ret doUpdate(@ApiPara("产品分类的 JSON 信息") @JsonBody ProductCategory productCategory) {
+    @ApiOper(value = "Update product classification", contentType = ContentType.JSON)
+    public Ret doUpdate(@ApiPara("Product classification JSON information") @JsonBody ProductCategory productCategory) {
         productCategoryService.update(productCategory);
         return Rets.OK;
     }

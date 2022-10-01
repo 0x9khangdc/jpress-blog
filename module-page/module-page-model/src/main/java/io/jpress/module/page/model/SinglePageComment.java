@@ -26,9 +26,9 @@ public class SinglePageComment extends BaseSinglePageComment<SinglePageComment> 
     private static final Map<String, String> statusStrings = new HashMap<>();
 
     static {
-        statusStrings.put(STATUS_NORMAL, "正常");
-        statusStrings.put(STATUS_UNAUDITED, "待审核");
-        statusStrings.put(STATUS_TRASH, "垃圾箱");
+        statusStrings.put(STATUS_NORMAL, "normal");
+        statusStrings.put(STATUS_UNAUDITED, "toBeReviewed");
+        statusStrings.put(STATUS_TRASH, "Garbage");
     }
 
 
@@ -46,7 +46,7 @@ public class SinglePageComment extends BaseSinglePageComment<SinglePageComment> 
 
     public String getStatusString() {
         String string = statusStrings.get(getStatus());
-        return string == null ? "未知状态" : string;
+        return string == null ? "Unknown state" : string;
     }
 
     @Override

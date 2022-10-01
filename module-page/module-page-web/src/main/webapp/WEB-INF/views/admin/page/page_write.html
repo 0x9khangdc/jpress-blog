@@ -115,7 +115,7 @@
             shadeClose: true,
             shade: 0.3,
             area: ['90%', '90%'],
-            content: jpress.cpath + '/admin/attachment/browse?uititle=附件',
+            content: jpress.cpath + '/admin/attachment/browse?uititle=appendix',
             end: function () {
                 if (layer.data.src != null) {
 
@@ -259,7 +259,7 @@
 
                     var formName = layer.data.name;
 
-                    let html = '<div><div class="jpress-form-card" contenteditable="false" data-form-id=' + formUUID + '>' + formName + '（表单）</div></div><br />'
+                    let html = '<div><div class="jpress-form-card" contenteditable="false" data-form-id=' + formUUID + '>' + formName + '(Form)</div></div><br />'
 
                     insertHtmlToEditor(html);
 

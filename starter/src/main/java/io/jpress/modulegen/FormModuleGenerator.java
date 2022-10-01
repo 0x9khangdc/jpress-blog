@@ -4,7 +4,7 @@ import io.jpress.codegen.ModuleGenerator;
 
 /**
  * @program: JobModuleGenerator
- * @description: job模块构建
+ * @description: JOB module construction
  * @create: 2022/6/22 10:39
  **/
 public class FormModuleGenerator {

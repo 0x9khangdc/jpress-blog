@@ -48,7 +48,7 @@ public class _PreviewPageController extends TemplateControllerBase {
 
         render404If(page == null );
 
-        page.setTitle("（预览中...）" + page.getTitle());
+        page.setTitle("(Preview ...）" + page.getTitle());
 
         //设置页面的seo信息
         setSeoInfos(page);

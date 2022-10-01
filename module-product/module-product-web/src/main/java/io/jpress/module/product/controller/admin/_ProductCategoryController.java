@@ -41,7 +41,7 @@ public class _ProductCategoryController extends AdminControllerBase {
     @Inject
     private MenuService menuService;
 
-    @AdminMenu(text = "分类", groupId = "product", order = 2)
+    @AdminMenu(text = "Classification", groupId = "product", order = 2)
     public void index() {
         List<ProductCategory> categories = productCategoryService.findListByType(ProductCategory.TYPE_CATEGORY);
         SortKit.toLayer(categories);
@@ -81,7 +81,7 @@ public class _ProductCategoryController extends AdminControllerBase {
 
     private void saveCategory(ProductCategory category) {
         if (!validateSlug(category)) {
-            renderJson(Ret.fail("message", "固定连接不能以数字结尾"));
+            renderJson(Ret.fail("message", "Fixed connection cannot end with numbers"));
             return;
         }
 

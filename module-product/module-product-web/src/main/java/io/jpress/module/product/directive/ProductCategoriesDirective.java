@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * @author Michael Yang （fuhai999@gmail.com）
  * @version V1.0
- * @Title: 产品分类：分类、标签等
+ * @Title: Product classification: classification, label, etc.
  */
 @JFinalDirective("productCategories")
 public class ProductCategoriesDirective extends JbootDirectiveBase {

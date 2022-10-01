@@ -63,7 +63,7 @@ public class _ProductController extends AdminControllerBase {
 
 
 
-    @AdminMenu(text = "商品列表", groupId = "product", order = 1)
+    @AdminMenu(text = "Product list", groupId = "product", order = 1)
     public void list() {
         Integer status = getParaToInt("status");
         String title = getPara("title");
@@ -172,8 +172,8 @@ public class _ProductController extends AdminControllerBase {
     }
 
     @EmptyValidate({
-            @Form(name = "product.title", message = "产品标题不能为空"),
-            @Form(name = "product.price", message = "产品的销售价格不能为空")
+            @Form(name = "product.title", message = "The product title cannot be empty"),
+            @Form(name = "product.price", message = "The sales price of the product cannot be empty")
     })
     public void doSave() {
         Product product = getModel(Product.class, "product");
@@ -183,7 +183,7 @@ public class _ProductController extends AdminControllerBase {
         }
 
         if (!validateSlug(product)) {
-            renderJson(Ret.fail("message", "固定连接不能以数字结尾"));
+            renderJson(Ret.fail("message", "Fixed connection cannot end with numbers"));
             return;
         }
 
@@ -191,7 +191,7 @@ public class _ProductController extends AdminControllerBase {
         if (StrUtil.isNotBlank(product.getSlug())) {
             Product existModel = productService.findFirstBySlug(product.getSlug());
             if (existModel != null && !existModel.getId().equals(product.getId())) {
-                renderJson(Ret.fail("message", "该固定链接已经存在"));
+                renderJson(Ret.fail("message", "This fixed link already exists"));
                 return;
             }
         }
@@ -305,7 +305,7 @@ public class _ProductController extends AdminControllerBase {
         renderOkJson();
     }
 
-    @AdminMenu(text = "设置", groupId = "product", order = 99)
+    @AdminMenu(text = "set up", groupId = "product", order = 99)
     public void setting() {
         render("product/setting.html");
     }

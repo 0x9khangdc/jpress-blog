@@ -43,7 +43,7 @@ public class _ProductTagController extends AdminControllerBase {
     @Inject
     private MenuService menuService;
 
-    @AdminMenu(text = "标签", groupId = "product", order = 3)
+    @AdminMenu(text = "Label", groupId = "product", order = 3)
     public void index() {
         Page<ProductCategory> page = productCategoryService.paginateByType(getPagePara(), 10, ProductCategory.TYPE_TAG);
         setAttr("page", page);
@@ -70,7 +70,7 @@ public class _ProductTagController extends AdminControllerBase {
     }
 
 
-    @EmptyValidate({@Form(name = "category.title", message = "标签名称不能为空")})
+    @EmptyValidate({@Form(name = "category.title", message = "The label name cannot be empty")})
     public void doSave() {
 
         ProductCategory tag = getModel(ProductCategory.class, "category");
@@ -83,7 +83,7 @@ public class _ProductTagController extends AdminControllerBase {
         if (tag.getId() == null) {
             ProductCategory indbTag = productCategoryService.findFirstByTypeAndSlug(ProductCategory.TYPE_TAG, slug);
             if (indbTag != null) {
-                renderJson(Ret.fail().set("message", "该标签已经存在，不能新增。"));
+                renderJson(Ret.fail().set("message", "The label already exists and cannot be added."));
                 return;
             }
         }
@@ -95,7 +95,7 @@ public class _ProductTagController extends AdminControllerBase {
 
     private void saveCategory(ProductCategory category) {
         if (!validateSlug(category)) {
-            renderJson(Ret.fail("message", "固定连接不能以数字结尾"));
+            renderJson(Ret.fail("message", "Fixed connection cannot end with numbers"));
             return;
         }
 

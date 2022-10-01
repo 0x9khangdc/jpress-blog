@@ -59,7 +59,7 @@ public class PagesDirective extends JbootDirectiveBase {
             singlePages = pageService.findListByFlag(flag);
         }
 
-        //根据分类的 flag 进行查询
+        //Inquiry according to the classified flag
         else if (StrUtil.isNotBlank(categroyFlag)) {
             SinglePageCategory category = categoryService.findFirstByColumns(Columns.create("flag", categroyFlag));
             if (category != null) {
@@ -67,7 +67,7 @@ public class PagesDirective extends JbootDirectiveBase {
             }
         }
 
-        //获取相同分类的页面
+        //Get the same classification page
         else if (withSameCategory) {
             SinglePage currentPage = JbootControllerContext.get().getAttr("page");
             if (currentPage != null && currentPage.getCategoryId() != null) {
@@ -75,7 +75,7 @@ public class PagesDirective extends JbootDirectiveBase {
             }
         }
 
-        //获取相同 tag 的页面
+        //Get the same tag page
         else if (withSameFlag) {
             SinglePage currentPage = JbootControllerContext.get().getAttr("page");
             if (currentPage != null && StrUtil.isNotBlank(currentPage.getFlag())) {
@@ -89,7 +89,7 @@ public class PagesDirective extends JbootDirectiveBase {
 
         singlePages.stream().filter(singlePage -> singlePage.isNormal());
 
-        //设置页面高亮
+        //Set the page highlight
         doFlagIsActiveByCurrentPage(singlePages);
 
         scope.setLocal("pages", singlePages);
@@ -106,7 +106,7 @@ public class PagesDirective extends JbootDirectiveBase {
     private void doFlagIsActiveByCurrentPage(List<SinglePage> pages) {
         SinglePage currentPage = JbootControllerContext.get().getAttr("page");
 
-        //当前url并不是页面详情
+        //The current url is not a page details
         if (currentPage == null) {
             return;
         }

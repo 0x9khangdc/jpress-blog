@@ -34,16 +34,16 @@ public class _PreviewProductController extends TemplateControllerBase {
 
         render404If(product == null );
 
-        product.setTitle("（预览中...）" + product.getTitle());
+        product.setTitle("(Preview ...）" + product.getTitle());
 
-        //设置页面的seo信息
+        //Set the seo information of the page
         setSeoInfos(product);
 
 
-        //设置菜单高亮
+        //Set the menu highlight
         doFlagMenuActive(product);
 
-        //记录当前浏览量
+        //Record the current browsing volume
         productService.doIncProductViewCount(product.getId());
 
         setAttr("product", product);

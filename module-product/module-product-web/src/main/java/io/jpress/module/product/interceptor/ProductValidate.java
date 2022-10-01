@@ -52,7 +52,7 @@ public class ProductValidate implements Interceptor {
 
         if (product == null || !product.isNormal()) {
             if (RequestUtil.isAjaxRequest(c.getRequest())) {
-                c.renderJson(Ret.fail().set("code", "2").set("message", "商品不存在或已下架。"));
+                c.renderJson(Ret.fail().set("code", "2").set("message", "Products do not exist or have been removed."));
             } else {
                 c.renderError(404);
             }
@@ -65,7 +65,7 @@ public class ProductValidate implements Interceptor {
             if (RequestUtil.isAjaxRequest(c.getRequest())) {
                 c.renderJson(Ret.fail()
                         .set("code", 1)
-                        .set("message", "用户未登录")
+                        .set("message", "User not logging in")
                         .set("gotoUrl", JFinal.me().getContextPath() + "/user/login?gotoUrl=" + product.getUrl()));
             } else {
                 c.redirect("/user/login?gotoUrl=" + product.getUrl());
